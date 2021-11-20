@@ -22,15 +22,14 @@ const MdxLayout: React.FC<MDXRendererProps> = (props) => {
             <Navbar />
             <section className='section'>
                 <div className='container'>
+                  <div className='content'>
                     <MDXProvider
                         components={{
-                            h1: props => <h1 {...props} className='title is-3' />,
-                            h2: props => <h2 {...props} className='title is-4' />,
-                            h3: props => <h3 {...props} className='title is-5' />,
                         }}
                     >
                         {props.children}
                     </MDXProvider>
+                  </div>
                 </div>
             </section>
         </>
