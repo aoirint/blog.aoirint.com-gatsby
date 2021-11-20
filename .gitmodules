@@ -1,0 +1,3 @@
+[submodule "src/pages/entry"]
+	path = src/pages/entry
+	url = https://github.com/aoirint/blog.aoirint.com-contents.git
