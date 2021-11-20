@@ -17,6 +17,10 @@ module.exports = {
         defaultLayouts: {
           default: require.resolve("./src/components/MdxLayout.tsx"),
         },
+        extensions: [
+          '.mdx',
+          '.md',
+        ],
       },
     },
     {
