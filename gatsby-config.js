@@ -1,17 +1,9 @@
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://www.yourdomain.tld",
+    siteUrl: "https://blog.aoirint.com",
     title: "Eyamigusa",
   },
   plugins: [
-    "gatsby-plugin-sass",
-    {
-      resolve: "gatsby-plugin-google-analytics",
-      options: {
-        trackingId: "UA-157155944-5",
-      },
-    },
-    "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
     {
       resolve: "gatsby-plugin-manifest",
@@ -19,7 +11,14 @@ module.exports = {
         icon: "src/images/icon.png",
       },
     },
-    "gatsby-plugin-mdx",
+    {
+      resolve: "gatsby-plugin-mdx",
+      options: {
+        defaultLayouts: {
+          default: require.resolve("./src/components/MdxLayout.tsx"),
+        },
+      },
+    },
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -28,5 +27,14 @@ module.exports = {
       },
       __key: "pages",
     },
+    {
+      resolve: "gatsby-plugin-google-analytics",
+      options: {
+        trackingId: "UA-157155944-5",
+        head: true,
+      },
+    },
+    "gatsby-plugin-sass",
+    "gatsby-plugin-react-helmet",
   ],
 };
