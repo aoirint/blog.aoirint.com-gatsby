@@ -27,15 +27,17 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const posts = result.data.allMdx.edges
 
-  posts.forEach(({ node }, index) => {
-    const sourceInstanceName = node.parent.sourceInstanceName
-    const pathPrefix = sourceInstanceName !== 'pages' ? `/${sourceInstanceName}/` : '/'
-    createPage({
-      path: `${pathPrefix}${node.slug}`,
-      component: path.resolve(`./src/components/MdxLayout.tsx`),
-      context: {
-        id: node.id,
-      },
-    })
+  posts
+    .filter(({ node }) => node.parent.sourceInstanceName !== 'pages')
+    .forEach(({ node }, index) => {
+      const sourceInstanceName = node.parent.sourceInstanceName
+      const pathPrefix = `/${sourceInstanceName}/`
+      createPage({
+        path: `${pathPrefix}${node.slug}`,
+        component: path.resolve(`./src/components/MdxLayout.tsx`),
+        context: {
+          id: node.id,
+        },
+      })
   })
 }
