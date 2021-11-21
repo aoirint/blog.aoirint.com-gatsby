@@ -25,6 +25,7 @@ const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
     <>
       <Helmet>
         <title>えやみぐさ</title>
+        <script async src="https://cse.google.com/cse.js?cx=4b57e8a4ef2a8c489"></script>
       </Helmet>
       <Navbar />
       <section className='section'>
@@ -42,6 +43,10 @@ const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
               </p>
             </div>
           </div>
+          <h2 className='title is-5 mb-3'>
+            Search
+          </h2>
+          <div className="gcse-search"></div>
           <h2 className='title is-5 mb-3'>
             Recent Posts
           </h2>
