@@ -44,27 +44,27 @@ const CodeBlock: React.FC<MDXRendererProps> = (props) => {
 }
 
 const MdxLayout: React.FC<MDXRendererProps> = (props) => {
-    return (
-        <>
-            <Helmet>
-                <title>{props.pageContext.frontmatter.title}</title>
-            </Helmet>
-            <Navbar />
-            <section className='section'>
-                <div className='container'>
-                  <div className='content'>
-                    <MDXProvider
-                      components={{
-                        pre: CodeBlock,
-                      }}
-                    >
-                        {props.children}
-                    </MDXProvider>
-                  </div>
-                </div>
-            </section>
-        </>
-    )
+  return (
+    <>
+      <Helmet>
+        <title>{props.pageContext.frontmatter.title}</title>
+      </Helmet>
+      <Navbar />
+      <section className='section'>
+        <div className='container'>
+          <div className='content'>
+            <MDXProvider
+              components={{
+                pre: CodeBlock,
+              }}
+            >
+              {props.children}
+            </MDXProvider>
+          </div>
+        </div>
+      </section>
+    </>
+  )
 }
 
 export default MdxLayout

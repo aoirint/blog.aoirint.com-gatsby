@@ -21,6 +21,9 @@ module.exports = {
           '.mdx',
           '.md',
         ],
+        gatsbyRemarkPlugins: [
+          "gatsby-remark-autolink-headers",
+        ],
       },
     },
     {
