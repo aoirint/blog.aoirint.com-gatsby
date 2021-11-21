@@ -78,7 +78,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
   )
 }
 
-const MdxLayout: React.FC<PageProps> = ({
+const MdxPageComponentLayout: React.FC<PageProps> = ({
   data,
   ...props
 }) => {
@@ -140,4 +140,4 @@ export const pageQuery = graphql`
   }
 `
 
-export default MdxLayout
+export default MdxPageComponentLayout

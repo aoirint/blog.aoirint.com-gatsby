@@ -34,7 +34,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       const pathPrefix = `/${sourceInstanceName}/`
       createPage({
         path: `${pathPrefix}${node.slug}`,
-        component: path.resolve(`./src/components/MdxLayout.tsx`),
+        component: path.resolve(`./src/components/MdxPageComponentLayout.tsx`),
         context: {
           id: node.id,
         },
