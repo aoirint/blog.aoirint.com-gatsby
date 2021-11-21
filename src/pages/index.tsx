@@ -2,13 +2,25 @@ import * as React from "react"
 import Helmet from 'react-helmet'
 import '../styles/main.scss'
 
+import dayjs from 'dayjs'
+
+import {
+  graphql,
+  PageProps,
+} from 'gatsby'
+
 import icon from '../images/icon.png'
 import {
   Navbar,
 } from '../components'
 
+import {
+  GetPostsQuery
+} from '../../generated/graphql-types'
+
 // markup
-const IndexPage: React.FC<{}> = () => {
+const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
+  const data = props.data
   return (
     <>
       <Helmet>
@@ -30,10 +42,132 @@ const IndexPage: React.FC<{}> = () => {
               </p>
             </div>
           </div>
+          <h2 className='title is-5 mb-3'>
+            Recent Posts
+          </h2>
+          <ul className='mt-4 mb-5'>
+            {data.posts.edges.slice(0, 10).map(({ node }) => {
+              const sourceInstanceName = 'sourceInstanceName' in node.parent ? node.parent.sourceInstanceName : 'pages'
+              const pathPrefix = sourceInstanceName !== 'pages' ? `/${sourceInstanceName}/` : '/'
+              return (
+                <li>
+                  <a href={`${pathPrefix}${node.slug}`}>
+                    {node.frontmatter?.title}
+                  </a>
+                  {' '}
+                  <small>
+                    ({dayjs(node.frontmatter?.date).format('YYYY-MM-DD')})
+                  </small>
+                </li>
+              )
+            })}
+          </ul>
+          <h2 className='title is-5 mb-3'>
+            Category Index
+          </h2>
+          <div className='columns is-multiline'>
+            {data.posts.categories.map((category) => (
+              <div className='column is-one-quarter'>
+                <div className='m-1'>
+                  <h2 className='title is-5 my-1'>{category.fieldValue}</h2>
+                  {category.edges.map(({ node }) => {
+                    const sourceInstanceName = 'sourceInstanceName' in node.parent ? node.parent.sourceInstanceName : 'pages'
+                    const pathPrefix = sourceInstanceName !== 'pages' ? `/${sourceInstanceName}/` : '/'
+                    return (
+                      <li>
+                        <a href={`${pathPrefix}${node.slug}`}>
+                          {node.frontmatter?.title}
+                        </a>
+                        {' '}
+                        <small>
+                          ({dayjs(node.frontmatter?.date).format('YYYY-MM-DD')})
+                        </small>
+                      </li>
+                    )
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </>
   )
 }
+
+export const pageQuery = graphql`
+  query GetPosts {
+    posts: allMdx(
+      filter: {
+        frontmatter: {
+          draft: {
+            eq: false
+          }
+        }
+      }
+      sort: {
+        fields: frontmatter___date
+        order: DESC
+      }
+    ) {
+      edges {
+        node {
+          id
+          slug
+          parent {
+            ... on File {
+              sourceInstanceName
+            }
+          }
+          frontmatter {
+            title
+            date
+            updated
+          }
+        }
+      }
+
+      categories: group(field: frontmatter___category) {
+        fieldValue
+        edges {
+          node {
+            id
+            slug
+            parent {
+              ... on File {
+                sourceInstanceName
+              }
+            }
+            frontmatter {
+              title
+              date
+              updated
+            }
+          }
+        }
+      }
+
+      tags: group(field: frontmatter___tags) {
+        fieldValue
+        edges {
+          node {
+            id
+            slug
+            parent {
+              ... on File {
+                sourceInstanceName
+              }
+            }
+            frontmatter {
+              title
+              date
+              updated
+            }
+          }
+        }
+      }
+    }
+  }
+`
 
 export default IndexPage

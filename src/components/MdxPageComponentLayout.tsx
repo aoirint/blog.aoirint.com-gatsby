@@ -30,7 +30,7 @@ import {
 const CodeBlock: React.FC<MDXRendererProps> = (props) => {
   const codeProps = props.children.props
   const codeString = codeProps.children.trim()
-  const language = /language-(\w+)/.exec(codeProps.className)[1]
+  const language = /language-(\w+)/.exec(codeProps.className)?.[1]
   return (
     <Highlight {...defaultProps} code={codeString} language={language} theme={vsDark}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
