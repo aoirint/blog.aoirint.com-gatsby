@@ -62,8 +62,8 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
 }) => {
   return (
     <ul>
-      {items.map((item) => (
-        <li>
+      {items?.map((item, index) => (
+        <li key={index}>
           <a href={item.url}>
             {item.title}
           </a>

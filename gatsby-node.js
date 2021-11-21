@@ -10,6 +10,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           node {
             id
             slug
+            parent {
+              ... on File {
+                sourceInstanceName
+              }
+            }
           }
         }
       }
@@ -23,8 +28,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const posts = result.data.allMdx.edges
 
   posts.forEach(({ node }, index) => {
+    const sourceInstanceName = node.parent.sourceInstanceName
+    const pathPrefix = sourceInstanceName !== 'pages' ? `/${sourceInstanceName}/` : '/'
     createPage({
-      path: `/entry/${node.slug}`,
+      path: `${pathPrefix}${node.slug}`,
       component: path.resolve(`./src/components/MdxLayout.tsx`),
       context: {
         id: node.id,
