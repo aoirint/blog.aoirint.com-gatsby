@@ -1,5 +1,6 @@
 import React from 'react'
 import icon from '../images/icon.png'
+import '../styles/main.scss'
 
 const Navbar: React.FC<{}> = () => {
     const [active, setActive] = React.useState<boolean>(false)

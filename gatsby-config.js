@@ -14,9 +14,9 @@ module.exports = {
     {
       resolve: "gatsby-plugin-mdx",
       options: {
-        defaultLayouts: {
-          default: require.resolve("./src/components/MdxLayout.tsx"),
-        },
+        // defaultLayouts: {
+        //   default: require.resolve("./src/components/MdxLayout.tsx"),
+        // },
         extensions: [
           '.mdx',
           '.md',
@@ -35,6 +35,14 @@ module.exports = {
       __key: "pages",
     },
     {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "entry",
+        path: "./src/entry/",
+      },
+      __key: "entry",
+    },
+    {
       resolve: "gatsby-plugin-google-analytics",
       options: {
         trackingId: "UA-157155944-5",
@@ -43,5 +51,11 @@ module.exports = {
     },
     "gatsby-plugin-sass",
     "gatsby-plugin-react-helmet",
+    {
+      resolve: "gatsby-plugin-graphql-codegen",
+      options: {
+        fileName: "generated/graphql-types.ts",
+      },
+    },
   ],
 };

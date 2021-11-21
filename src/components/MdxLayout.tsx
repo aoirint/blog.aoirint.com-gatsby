@@ -12,11 +12,16 @@ import '../styles/main.scss'
 import Highlight, { defaultProps } from "prism-react-renderer"
 import vsDark from 'prism-react-renderer/themes/vsDark'
 import {
-    MDXProvider
+  MDXProvider,
 } from '@mdx-js/react'
 import {
-    MDXRendererProps,
+  MDXRenderer,
+  MDXRendererProps,
 } from 'gatsby-plugin-mdx'
+import {
+  graphql,
+  PageProps,
+} from 'gatsby'
 
 import {
   Navbar,
@@ -43,22 +48,67 @@ const CodeBlock: React.FC<MDXRendererProps> = (props) => {
   )
 }
 
-const MdxLayout: React.FC<MDXRendererProps> = (props) => {
+interface TableOfContentsItem {
+  url: string
+  title: string
+  items?: TableOfContentsItem[]
+}
+interface TableOfContentsProps {
+  items:TableOfContentsItem[]
+}
+
+const TableOfContents: React.FC<TableOfContentsProps> = ({
+  items
+}) => {
+  return (
+    <ul>
+      {items.map((item) => (
+        <li>
+          <a href={item.url}>
+            {item.title}
+          </a>
+          {item.items != null ? (
+            <TableOfContents
+              items={item.items}
+            />
+          ) : ''}
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+const MdxLayout: React.FC<PageProps> = ({
+  data,
+  ...props
+}) => {
+  const mdx = data.mdx
+  const frontmatter = mdx.frontmatter
+  const rawBody = mdx.body
+  const tableOfContents = mdx.tableOfContents
+
   return (
     <>
       <Helmet>
-        <title>{props.pageContext.frontmatter.title}</title>
+        <title>{frontmatter.title}</title>
       </Helmet>
       <Navbar />
       <section className='section'>
         <div className='container'>
           <div className='content'>
+            <TableOfContents
+              items={tableOfContents.items}
+            />
             <MDXProvider
               components={{
                 pre: CodeBlock,
               }}
             >
-              {props.children}
+              <MDXRenderer
+                frontmatter={frontmatter}
+              >
+                {rawBody}
+              </MDXRenderer>
             </MDXProvider>
           </div>
         </div>
@@ -66,5 +116,28 @@ const MdxLayout: React.FC<MDXRendererProps> = (props) => {
     </>
   )
 }
+
+export const pageQuery = graphql`
+  query GetMdx(
+    $id: String
+  ) {
+    mdx(
+      id: {
+        eq: $id
+      }
+    ) {
+      id
+      slug
+      body
+      tableOfContents
+      frontmatter {
+        title
+        date
+        category
+        tags
+      }
+    }
+  }
+`
 
 export default MdxLayout
