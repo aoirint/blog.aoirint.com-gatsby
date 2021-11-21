@@ -50,7 +50,7 @@ const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
               const sourceInstanceName = 'sourceInstanceName' in node.parent ? node.parent.sourceInstanceName : 'pages'
               const pathPrefix = sourceInstanceName !== 'pages' ? `/${sourceInstanceName}/` : '/'
               return (
-                <li>
+                <li key={node.id}>
                   <a href={`${pathPrefix}${node.slug}`}>
                     {node.frontmatter?.title}
                   </a>
@@ -67,14 +67,14 @@ const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
           </h2>
           <div className='columns is-multiline'>
             {data.posts.categories.map((category) => (
-              <div className='column is-one-quarter'>
+              <div key={category.fieldValue} className='column is-one-quarter'>
                 <div className='m-1'>
                   <h2 className='title is-5 my-1'>{category.fieldValue}</h2>
                   {category.edges.map(({ node }) => {
                     const sourceInstanceName = 'sourceInstanceName' in node.parent ? node.parent.sourceInstanceName : 'pages'
                     const pathPrefix = sourceInstanceName !== 'pages' ? `/${sourceInstanceName}/` : '/'
                     return (
-                      <li>
+                      <li key={node.id}>
                         <a href={`${pathPrefix}${node.slug}`}>
                           {node.frontmatter?.title}
                         </a>
