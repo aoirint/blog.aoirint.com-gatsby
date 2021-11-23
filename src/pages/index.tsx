@@ -48,7 +48,7 @@ const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
           </h2>
           <div className="gcse-search"></div>
           <h2 className='title is-5 mb-3'>
-            Recent Posts
+            Recent Notes
           </h2>
           <ul className='mt-4 mb-5'>
             {data.posts.edges.slice(0, 10).map(({ node }) => {
