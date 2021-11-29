@@ -9,7 +9,10 @@ import '../styles/main.scss'
 //   number: 'prism--number',
 // })
 
+import './PrismCustom'
 import Highlight, { defaultProps } from "prism-react-renderer"
+
+
 import vsDark from 'prism-react-renderer/themes/vsDark'
 import {
   MDXProvider,
