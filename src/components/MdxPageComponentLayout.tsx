@@ -24,6 +24,10 @@ import {
 } from 'gatsby'
 
 import {
+  GetMdxQuery,
+} from '../../generated/graphql-types'
+
+import {
   Navbar,
 } from '../components'
 
@@ -54,7 +58,7 @@ interface TableOfContentsItem {
   items?: TableOfContentsItem[]
 }
 interface TableOfContentsProps {
-  items:TableOfContentsItem[]
+  items: TableOfContentsItem[]
 }
 
 const TableOfContents: React.FC<TableOfContentsProps> = ({
@@ -78,7 +82,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
   )
 }
 
-const MdxPageComponentLayout: React.FC<PageProps> = ({
+const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
   data,
   ...props
 }) => {
