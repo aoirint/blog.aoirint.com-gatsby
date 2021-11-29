@@ -97,6 +97,8 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
   const updated = frontmatter?.updated != null ? dayjs(frontmatter?.updated).format('YYYY-MM-DD') : ''
   const dateString = (date !== '' || updated !== '' ? '[' : '') + date + (date !== '' && updated !== '' ? ' / ' : '') + updated + (date !== '' || updated !== '' ? ']' : '')
 
+  const slug = mdx.slug.charAt(-1) === '/' ? mdx.slug.slice(0, -1) : mdx.slug
+
   return (
     <>
       <Helmet>
@@ -125,6 +127,13 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
                   {tag}
                 </Link>
               ))}
+            </div>
+            <div className='is-size-7'>
+              <a href={`https://github.com/aoirint/blog.aoirint.com-contents/edit/main/${slug}/index.md`}>編集</a>
+              {' '}
+              <a href={`https://github.com/aoirint/blog.aoirint.com-contents/tree/main/${slug}/index.md`}>ソース</a>
+              {' '}
+              <a href={`https://github.com/aoirint/blog.aoirint.com-contents/commits/main/${slug}/index.md`}>履歴</a>
             </div>
             <TableOfContents
               items={tableOfContents.items}
