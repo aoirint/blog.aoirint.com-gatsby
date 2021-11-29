@@ -2679,12 +2679,26 @@ export type MdxSortInput = {
   order?: InputMaybe<Array<InputMaybe<SortOrderEnum>>>;
 };
 
+export type GetCategorySearchQueryVariables = Exact<{
+  category: Scalars['String'];
+}>;
+
+
+export type GetCategorySearchQuery = { posts: { edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: any | null | undefined, updated?: any | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }> } };
+
 export type GetMdxQueryVariables = Exact<{
   id?: InputMaybe<Scalars['String']>;
 }>;
 
 
 export type GetMdxQuery = { mdx?: { id: string, slug?: string | null | undefined, body: string, tableOfContents?: any | null | undefined, frontmatter?: { title: string, date?: any | null | undefined, updated?: any | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } | null | undefined };
+
+export type GetTagSearchQueryVariables = Exact<{
+  tag: Scalars['String'];
+}>;
+
+
+export type GetTagSearchQuery = { posts: { edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: any | null | undefined, updated?: any | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }> } };
 
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 

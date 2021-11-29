@@ -63,7 +63,7 @@ const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
             {data.posts.categories.map((category) => (
               <div key={category.fieldValue} className='column is-one-quarter'>
                 <div className='m-1'>
-                  <h2 className='title is-5 my-1'>{category.fieldValue}</h2>
+                  <h2 className='title is-5 my-2'>{category.fieldValue}</h2>
                   <ul>
                     {category.edges.map(({ node }) => (
                       <PostListItem post={node} />
