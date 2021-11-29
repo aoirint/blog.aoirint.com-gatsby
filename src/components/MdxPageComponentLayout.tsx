@@ -108,6 +108,23 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
             <div className='is-size-7'>
               {dateString}
             </div>
+            <div className='is-size-7'>
+              {frontmatter?.category != null ? (
+                <>
+                  <a href={`/category/${frontmatter?.category}/`} className='mr-2'>
+                    {frontmatter?.category}
+                  </a>
+                  <span className='mr-2'>
+                    |
+                  </span>
+                </>
+              ) : ''}
+              {frontmatter?.tags?.map((tag) => (
+                <a href={`/tags/${tag}/`} className='mr-2'>
+                  {tag}
+                </a>
+              ))}
+            </div>
             <TableOfContents
               items={tableOfContents.items}
             />

@@ -107,6 +107,7 @@ export const pageQuery = graphql`
             title
             date
             updated
+            category
             tags
           }
         }
@@ -127,6 +128,7 @@ export const pageQuery = graphql`
               title
               date
               updated
+              category
               tags
             }
           }
@@ -148,6 +150,7 @@ export const pageQuery = graphql`
               title
               date
               updated
+              category
               tags
             }
           }
