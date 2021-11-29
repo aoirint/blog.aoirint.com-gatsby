@@ -21,7 +21,8 @@ const CategorySearch: React.FC<PageProps<GetCategorySearchQuery>> = ({
     return (
         <>
             <Helmet>
-                <title>えやみぐさ | Category: {category}</title>
+                <title>Category: {category} - えやみぐさ</title>
+                <meta name="robots" content="noindex" />
             </Helmet>
             <Navbar />
             <section className='section'>

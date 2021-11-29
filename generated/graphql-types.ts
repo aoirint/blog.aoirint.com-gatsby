@@ -2691,7 +2691,7 @@ export type GetMdxQueryVariables = Exact<{
 }>;
 
 
-export type GetMdxQuery = { mdx?: { id: string, slug?: string | null | undefined, body: string, tableOfContents?: any | null | undefined, frontmatter?: { title: string, date?: any | null | undefined, updated?: any | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } | null | undefined };
+export type GetMdxQuery = { mdx?: { id: string, slug?: string | null | undefined, body: string, excerpt: string, tableOfContents?: any | null | undefined, frontmatter?: { title: string, date?: any | null | undefined, updated?: any | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } | null | undefined };
 
 export type GetTagSearchQueryVariables = Exact<{
   tag: Scalars['String'];

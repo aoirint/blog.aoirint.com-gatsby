@@ -33,6 +33,9 @@ import {
   Navbar,
 } from '../components'
 
+import icon from '../images/icon.png'
+import Ogp from './Ogp'
+
 const CodeBlock: React.FC<MDXRendererProps> = (props) => {
   const codeProps = props.children.props
   const codeString = codeProps.children.trim()
@@ -97,13 +100,12 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
   const updated = frontmatter?.updated != null ? dayjs(frontmatter?.updated).format('YYYY-MM-DD') : ''
   const dateString = (date !== '' || updated !== '' ? '[' : '') + date + (date !== '' && updated !== '' ? ' / ' : '') + updated + (date !== '' || updated !== '' ? ']' : '')
 
-  const slug = mdx.slug.charAt(-1) === '/' ? mdx.slug.slice(0, -1) : mdx.slug
-
   return (
     <>
       <Helmet>
-        <title>{frontmatter.title}</title>
+        <title>{frontmatter.title} - えやみぐさ</title>
       </Helmet>
+      <Ogp post={mdx} />
       <Navbar />
       <section className='section'>
         <div className='container'>
@@ -129,11 +131,11 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
               ))}
             </div>
             <div className='is-size-7'>
-              <a href={`https://github.com/aoirint/blog.aoirint.com-contents/edit/main/${slug}/index.md`}>編集</a>
+              <a href={`https://github.com/aoirint/blog.aoirint.com-contents/edit/main/${mdx.slug}index.md`}>編集</a>
               {' '}
-              <a href={`https://github.com/aoirint/blog.aoirint.com-contents/tree/main/${slug}/index.md`}>ソース</a>
+              <a href={`https://github.com/aoirint/blog.aoirint.com-contents/tree/main/${mdx.slug}index.md`}>ソース</a>
               {' '}
-              <a href={`https://github.com/aoirint/blog.aoirint.com-contents/commits/main/${slug}/index.md`}>履歴</a>
+              <a href={`https://github.com/aoirint/blog.aoirint.com-contents/commits/main/${mdx.slug}index.md`}>履歴</a>
             </div>
             <TableOfContents
               items={tableOfContents.items}
@@ -168,6 +170,7 @@ export const pageQuery = graphql`
       id
       slug
       body
+      excerpt
       tableOfContents
       frontmatter {
         title

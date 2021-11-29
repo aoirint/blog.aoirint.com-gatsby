@@ -17,7 +17,8 @@ const TagSearch: React.FC<PageProps<GetTagSearchQuery>> = ({
     return (
         <>
             <Helmet>
-                <title>えやみぐさ | Tag: {tag}</title>
+                <title>Tag: {tag} - えやみぐさ</title>
+                <meta name="robots" content="noindex" />
             </Helmet>
             <Navbar />
             <section className='section'>
