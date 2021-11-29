@@ -133,13 +133,13 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
                 </Link>
               ))}
             </div>
-            <div className='is-size-7'>
+            {/* <div className='is-size-7'>
               <a href={`https://github.com/aoirint/blog.aoirint.com-contents/edit/main/${mdx.slug}index.md`}>編集</a>
               {' '}
               <a href={`https://github.com/aoirint/blog.aoirint.com-contents/tree/main/${mdx.slug}index.md`}>ソース</a>
               {' '}
               <a href={`https://github.com/aoirint/blog.aoirint.com-contents/commits/main/${mdx.slug}index.md`}>履歴</a>
-            </div>
+            </div> */}
             <TableOfContents
               items={tableOfContents.items}
             />
