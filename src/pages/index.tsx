@@ -17,6 +17,7 @@ import {
 import {
   GetPostsQuery
 } from '../../generated/graphql-types'
+import PostListItem from "../components/PostListItem"
 
 // markup
 const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
@@ -51,21 +52,9 @@ const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
             Recent Notes
           </h2>
           <ul className='mt-4 mb-5'>
-            {data.posts.edges.slice(0, 10).map(({ node }) => {
-              const sourceInstanceName = 'sourceInstanceName' in node.parent ? node.parent.sourceInstanceName : 'pages'
-              const pathPrefix = sourceInstanceName !== 'pages' ? `/${sourceInstanceName}/` : '/'
-              return (
-                <li key={node.id}>
-                  <a href={`${pathPrefix}${node.slug}`}>
-                    {node.frontmatter?.title}
-                  </a>
-                  {' '}
-                  <small>
-                    ({dayjs(node.frontmatter?.date).format('YYYY-MM-DD')})
-                  </small>
-                </li>
-              )
-            })}
+            {data.posts.edges.slice(0, 10).map(({ node }) => (
+              <PostListItem post={node} />
+            ))}
           </ul>
           <h2 className='title is-5 mb-3'>
             Category Index
@@ -75,21 +64,11 @@ const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
               <div key={category.fieldValue} className='column is-one-quarter'>
                 <div className='m-1'>
                   <h2 className='title is-5 my-1'>{category.fieldValue}</h2>
-                  {category.edges.map(({ node }) => {
-                    const sourceInstanceName = 'sourceInstanceName' in node.parent ? node.parent.sourceInstanceName : 'pages'
-                    const pathPrefix = sourceInstanceName !== 'pages' ? `/${sourceInstanceName}/` : '/'
-                    return (
-                      <li key={node.id}>
-                        <a href={`${pathPrefix}${node.slug}`}>
-                          {node.frontmatter?.title}
-                        </a>
-                        {' '}
-                        <small>
-                          ({dayjs(node.frontmatter?.date).format('YYYY-MM-DD')})
-                        </small>
-                      </li>
-                    )
-                  })}
+                  <ul>
+                    {category.edges.map(({ node }) => (
+                      <PostListItem post={node} />
+                    ))}
+                  </ul>
                 </div>
               </div>
             ))}
@@ -128,6 +107,7 @@ export const pageQuery = graphql`
             title
             date
             updated
+            tags
           }
         }
       }
@@ -147,6 +127,7 @@ export const pageQuery = graphql`
               title
               date
               updated
+              tags
             }
           }
         }
@@ -167,6 +148,7 @@ export const pageQuery = graphql`
               title
               date
               updated
+              tags
             }
           }
         }

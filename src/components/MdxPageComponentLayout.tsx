@@ -22,6 +22,7 @@ import {
   graphql,
   PageProps,
 } from 'gatsby'
+import dayjs from 'dayjs'
 
 import {
   GetMdxQuery,
@@ -91,6 +92,10 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
   const rawBody = mdx.body
   const tableOfContents = mdx.tableOfContents
 
+  const date = frontmatter?.date != null ? dayjs(frontmatter?.date).format('YYYY-MM-DD') : ''
+  const updated = frontmatter?.updated != null ? dayjs(frontmatter?.updated).format('YYYY-MM-DD') : ''
+  const dateString = (date !== '' || updated !== '' ? '[' : '') + date + (date !== '' && updated !== '' ? ' / ' : '') + updated + (date !== '' || updated !== '' ? ']' : '')
+
   return (
     <>
       <Helmet>
@@ -100,6 +105,9 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
       <section className='section'>
         <div className='container'>
           <div className='content'>
+            <div className='is-size-7'>
+              {dateString}
+            </div>
             <TableOfContents
               items={tableOfContents.items}
             />
@@ -137,6 +145,7 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date
+        updated
         category
         tags
       }
