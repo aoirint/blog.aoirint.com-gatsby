@@ -4,6 +4,9 @@ module.exports = {
     title: "Eyamigusa",
   },
   plugins: [
+    "gatsby-plugin-sass",
+    "gatsby-plugin-image",
+    "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
     {
       resolve: "gatsby-plugin-manifest",
@@ -26,6 +29,8 @@ module.exports = {
         ],
       },
     },
+    "gatsby-plugin-sharp",
+    "gatsby-transformer-sharp",
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -49,8 +54,6 @@ module.exports = {
         head: true,
       },
     },
-    "gatsby-plugin-sass",
-    "gatsby-plugin-react-helmet",
     {
       resolve: "gatsby-plugin-graphql-codegen",
       options: {
@@ -108,6 +111,6 @@ module.exports = {
           },
         ],
       },
-    }
+    },
   ],
 };
