@@ -34,6 +34,21 @@ const Navbar: React.FC<{}> = () => {
             <Link to='/' className="navbar-item">
               Home
             </Link>
+            
+            <div className="navbar-item has-dropdown is-hoverable">
+              <a className="navbar-link">
+                More
+              </a>
+
+              <div className="navbar-dropdown">
+                <a className="navbar-item" href="https://twitter.com/aoirint" target='_blank'>
+                  Twitter
+                </a>
+                <a className="navbar-item" href="https://github.com/aoirint" target='_blank'>
+                  GitHub
+                </a>
+              </div>
+            </div>
           </div>
 
           <div className="navbar-end" />
