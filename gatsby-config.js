@@ -1,3 +1,5 @@
+const dayjs = require("dayjs");
+
 module.exports = {
   siteMetadata: {
     siteUrl: "https://blog.aoirint.com",
@@ -82,9 +84,16 @@ module.exports = {
                 return Object.assign({}, node.frontmatter, {
                   description: node.excerpt,
                   date: node.frontmatter.date,
-                  url: site.siteMetadata.siteUrl + '/' + node.slug,
-                  guid: site.siteMetadata.siteUrl + '/' + node.slug,
-                  custom_elements: [{ "content:encoded": node.html }],
+                  url: site.siteMetadata.siteUrl + '/entry/' + node.slug,
+                  guid: site.siteMetadata.siteUrl + '/entry/' + node.slug,
+                  custom_elements: [
+                    {
+                      "content:encoded": node.html,
+                    },
+                    node.frontmatter.updated ? {
+                      "atom:updated": dayjs(node.frontmatter.updated).toString(),
+                    } : {},
+                  ],
                 })
               })
             },
@@ -100,13 +109,14 @@ module.exports = {
                     frontmatter {
                       title
                       date
+                      updated
                     }
                   }
                 }
               }
             `,
-            output: "/atom.xml",
-            title: "えやみぐさ's Atom Feed",
+            output: "/rss.xml",
+            title: "えやみぐさ's RSS Feed",
             match: "^/entry/",
           },
         ],
