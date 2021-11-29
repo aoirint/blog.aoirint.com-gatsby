@@ -109,7 +109,7 @@ module.exports = {
               {
                 allMdx(
                   sort: { order: DESC, fields: [frontmatter___date] }
-                  limit: 20
+                  limit: 10
                 ) {
                   nodes {
                     excerpt
