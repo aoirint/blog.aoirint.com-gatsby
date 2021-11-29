@@ -1,5 +1,6 @@
 import React from 'react'
 import dayjs from 'dayjs'
+import { Link } from 'gatsby'
 
 export interface Parent {
     sourceInstanceName: string
@@ -42,27 +43,27 @@ const PostListItem: React.FC<PostListItemProps> = ({
     return (
         <li key={id} className='mb-2'>
           <div className=''>
-            <a href={`${pathPrefix}${slug}`}>
+            <Link to={`${pathPrefix}${slug}`}>
               {frontmatter?.title}
-            </a>
+            </Link>
             <div className='is-size-7'>
               {dateString}
             </div>
             <div className='is-size-7'>
               {frontmatter?.category != null ? (
                 <>
-                  <a href={`/category/${frontmatter?.category}/`} className='mr-2'>
+                  <Link to={`/category/${frontmatter?.category}/`} className='mr-2'>
                     {frontmatter?.category}
-                  </a>
+                  </Link>
                   <span className='mr-2'>
                     |
                   </span>
                 </>
               ) : ''}
               {frontmatter?.tags?.map((tag) => (
-                <a href={`/tags/${tag}/`} className='mr-2'>
+                <Link to={`/tags/${tag}/`} className='mr-2'>
                   {tag}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
