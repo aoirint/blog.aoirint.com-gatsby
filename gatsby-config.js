@@ -80,12 +80,20 @@ module.exports = {
         feeds: [
           {
             serialize: ({ query: { site, allMdx } }) => {
-              return allMdx.nodes.map(node => {
+              return allMdx.nodes.filter(node => {
+                const parent = node.parent
+                const sourceInstanceName = 'sourceInstanceName' in parent ? parent.sourceInstanceName : 'pages'
+                return sourceInstanceName === 'entry'
+              }).map(node => {
+                const parent = node.parent
+                const sourceInstanceName = 'sourceInstanceName' in parent ? parent.sourceInstanceName : 'pages'
+                const pathPrefix = sourceInstanceName !== 'pages' ? `/${sourceInstanceName}/` : '/'
+
                 return Object.assign({}, node.frontmatter, {
                   description: node.excerpt,
                   date: node.frontmatter.date,
-                  url: site.siteMetadata.siteUrl + '/entry/' + node.slug,
-                  guid: site.siteMetadata.siteUrl + '/entry/' + node.slug,
+                  url: site.siteMetadata.siteUrl + pathPrefix + node.slug,
+                  guid: site.siteMetadata.siteUrl + pathPrefix + node.slug,
                   custom_elements: [
                     {
                       "content:encoded": node.html,
@@ -100,7 +108,8 @@ module.exports = {
             query: `
               {
                 allMdx(
-                  sort: { order: DESC, fields: [frontmatter___date] },
+                  sort: { order: DESC, fields: [frontmatter___date] }
+                  limit: 20
                 ) {
                   nodes {
                     excerpt
@@ -111,13 +120,17 @@ module.exports = {
                       date
                       updated
                     }
+                    parent {
+                      ... on File {
+                        sourceInstanceName
+                      }
+                    }
                   }
                 }
               }
             `,
             output: "/rss.xml",
             title: "えやみぐさ's RSS Feed",
-            match: "^/entry/",
           },
         ],
       },
