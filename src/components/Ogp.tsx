@@ -49,7 +49,7 @@ const Ogp: React.FC<OgpProps> = ({
             <meta property="og:url" content={`https://blog.aoirint.com/entry/${post.slug}`} />
             <meta property="og:locale" content="ja-JP" />
             <meta property="og:type" content="article" />
-            <meta property="og:title" content={`${post.frontmatter?.title} - えやみぐさ`} />
+            <meta property="og:title" content={`${post.frontmatter?.title} · えやみぐさ`} />
 
             {description != null ? (
                 <meta name="description" content={description} />

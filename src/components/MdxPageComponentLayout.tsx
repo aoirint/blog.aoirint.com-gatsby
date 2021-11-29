@@ -103,7 +103,7 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
   return (
     <>
       <Helmet>
-        <title>{frontmatter.title} - えやみぐさ</title>
+        <title>{frontmatter.title} · えやみぐさ</title>
       </Helmet>
       <Ogp post={mdx} />
       <Navbar />
