@@ -88,13 +88,7 @@ const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
 export const pageQuery = graphql`
   query GetPosts {
     posts: allMdx(
-      filter: {
-        frontmatter: {
-          draft: {
-            eq: false
-          }
-        }
-      }
+      filter: {fields: {draft: {eq: false}}}
       sort: {
         fields: frontmatter___date
         order: DESC

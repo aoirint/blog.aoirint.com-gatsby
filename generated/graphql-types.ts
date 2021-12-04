@@ -249,9 +249,6 @@ export type Site = Node & {
   siteMetadata?: Maybe<SiteSiteMetadata>;
   port?: Maybe<Scalars['Int']>;
   host?: Maybe<Scalars['String']>;
-  polyfill?: Maybe<Scalars['Boolean']>;
-  pathPrefix?: Maybe<Scalars['String']>;
-  jsxRuntime?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   parent?: Maybe<Node>;
   children: Array<Node>;
@@ -409,6 +406,7 @@ export type Mdx = Node & {
   tableOfContents?: Maybe<Scalars['JSON']>;
   timeToRead?: Maybe<Scalars['Int']>;
   wordCount?: Maybe<MdxWordCount>;
+  fields?: Maybe<MdxFields>;
   id: Scalars['ID'];
   parent?: Maybe<Node>;
   children: Array<Node>;
@@ -429,6 +427,10 @@ export type MdxHeadingsArgs = {
 
 export type MdxTableOfContentsArgs = {
   maxDepth?: InputMaybe<Scalars['Int']>;
+};
+
+export type MdxFields = {
+  draft?: Maybe<Scalars['Boolean']>;
 };
 
 export type ImageFormat =
@@ -808,9 +810,6 @@ export type QuerySiteArgs = {
   siteMetadata?: InputMaybe<SiteSiteMetadataFilterInput>;
   port?: InputMaybe<IntQueryOperatorInput>;
   host?: InputMaybe<StringQueryOperatorInput>;
-  polyfill?: InputMaybe<BooleanQueryOperatorInput>;
-  pathPrefix?: InputMaybe<StringQueryOperatorInput>;
-  jsxRuntime?: InputMaybe<StringQueryOperatorInput>;
   id?: InputMaybe<StringQueryOperatorInput>;
   parent?: InputMaybe<NodeFilterInput>;
   children?: InputMaybe<NodeFilterListInput>;
@@ -927,6 +926,7 @@ export type QueryMdxArgs = {
   tableOfContents?: InputMaybe<JsonQueryOperatorInput>;
   timeToRead?: InputMaybe<IntQueryOperatorInput>;
   wordCount?: InputMaybe<MdxWordCountFilterInput>;
+  fields?: InputMaybe<MdxFieldsFilterInput>;
   id?: InputMaybe<StringQueryOperatorInput>;
   parent?: InputMaybe<NodeFilterInput>;
   children?: InputMaybe<NodeFilterListInput>;
@@ -1021,6 +1021,7 @@ export type MdxFilterInput = {
   tableOfContents?: InputMaybe<JsonQueryOperatorInput>;
   timeToRead?: InputMaybe<IntQueryOperatorInput>;
   wordCount?: InputMaybe<MdxWordCountFilterInput>;
+  fields?: InputMaybe<MdxFieldsFilterInput>;
   id?: InputMaybe<StringQueryOperatorInput>;
   parent?: InputMaybe<NodeFilterInput>;
   children?: InputMaybe<NodeFilterListInput>;
@@ -1066,6 +1067,10 @@ export type MdxWordCountFilterInput = {
   paragraphs?: InputMaybe<IntQueryOperatorInput>;
   sentences?: InputMaybe<IntQueryOperatorInput>;
   words?: InputMaybe<IntQueryOperatorInput>;
+};
+
+export type MdxFieldsFilterInput = {
+  draft?: InputMaybe<BooleanQueryOperatorInput>;
 };
 
 export type NodeFilterInput = {
@@ -1262,6 +1267,7 @@ export type FileFieldsEnum =
   | 'childrenMdx___wordCount___paragraphs'
   | 'childrenMdx___wordCount___sentences'
   | 'childrenMdx___wordCount___words'
+  | 'childrenMdx___fields___draft'
   | 'childrenMdx___id'
   | 'childrenMdx___parent___id'
   | 'childrenMdx___parent___parent___id'
@@ -1322,6 +1328,7 @@ export type FileFieldsEnum =
   | 'childMdx___wordCount___paragraphs'
   | 'childMdx___wordCount___sentences'
   | 'childMdx___wordCount___words'
+  | 'childMdx___fields___draft'
   | 'childMdx___id'
   | 'childMdx___parent___id'
   | 'childMdx___parent___parent___id'
@@ -1989,9 +1996,6 @@ export type SiteFieldsEnum =
   | 'siteMetadata___siteUrl'
   | 'port'
   | 'host'
-  | 'polyfill'
-  | 'pathPrefix'
-  | 'jsxRuntime'
   | 'id'
   | 'parent___id'
   | 'parent___parent___id'
@@ -2125,9 +2129,6 @@ export type SiteFilterInput = {
   siteMetadata?: InputMaybe<SiteSiteMetadataFilterInput>;
   port?: InputMaybe<IntQueryOperatorInput>;
   host?: InputMaybe<StringQueryOperatorInput>;
-  polyfill?: InputMaybe<BooleanQueryOperatorInput>;
-  pathPrefix?: InputMaybe<StringQueryOperatorInput>;
-  jsxRuntime?: InputMaybe<StringQueryOperatorInput>;
   id?: InputMaybe<StringQueryOperatorInput>;
   parent?: InputMaybe<NodeFilterInput>;
   children?: InputMaybe<NodeFilterListInput>;
@@ -3045,6 +3046,7 @@ export type MdxFieldsEnum =
   | 'wordCount___paragraphs'
   | 'wordCount___sentences'
   | 'wordCount___words'
+  | 'fields___draft'
   | 'id'
   | 'parent___id'
   | 'parent___parent___id'

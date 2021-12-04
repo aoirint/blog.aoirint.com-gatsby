@@ -50,6 +50,14 @@ module.exports = {
       __key: "entry",
     },
     {
+      resolve: 'gatsby-plugin-draft',
+      options: {
+        nodeType: 'Mdx',
+        timezone: 'Asia/Tokyo',
+        // publishDraft: process.env.NODE_ENV !== 'production',
+      },
+    },
+    {
       resolve: "gatsby-plugin-google-analytics",
       options: {
         trackingId: "UA-157155944-5",
@@ -110,6 +118,7 @@ module.exports = {
                 allMdx(
                   sort: { order: DESC, fields: [frontmatter___date] }
                   limit: 10
+                  filter: {fields: {draft: {eq: false}}}
                 ) {
                   nodes {
                     excerpt
