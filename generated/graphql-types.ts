@@ -249,6 +249,9 @@ export type Site = Node & {
   siteMetadata?: Maybe<SiteSiteMetadata>;
   port?: Maybe<Scalars['Int']>;
   host?: Maybe<Scalars['String']>;
+  polyfill?: Maybe<Scalars['Boolean']>;
+  pathPrefix?: Maybe<Scalars['String']>;
+  jsxRuntime?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   parent?: Maybe<Node>;
   children: Array<Node>;
@@ -350,20 +353,12 @@ export type GatsbyImagePlaceholder =
 
 export type MdxFrontmatter = {
   title: Scalars['String'];
-  date?: Maybe<Scalars['Date']>;
+  date?: Maybe<Scalars['String']>;
   draft?: Maybe<Scalars['Boolean']>;
   category?: Maybe<Scalars['String']>;
   tags?: Maybe<Array<Maybe<Scalars['String']>>>;
   updated?: Maybe<Scalars['Date']>;
   og_description?: Maybe<Scalars['String']>;
-};
-
-
-export type MdxFrontmatterDateArgs = {
-  formatString?: InputMaybe<Scalars['String']>;
-  fromNow?: InputMaybe<Scalars['Boolean']>;
-  difference?: InputMaybe<Scalars['String']>;
-  locale?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -810,6 +805,9 @@ export type QuerySiteArgs = {
   siteMetadata?: InputMaybe<SiteSiteMetadataFilterInput>;
   port?: InputMaybe<IntQueryOperatorInput>;
   host?: InputMaybe<StringQueryOperatorInput>;
+  polyfill?: InputMaybe<BooleanQueryOperatorInput>;
+  pathPrefix?: InputMaybe<StringQueryOperatorInput>;
+  jsxRuntime?: InputMaybe<StringQueryOperatorInput>;
   id?: InputMaybe<StringQueryOperatorInput>;
   parent?: InputMaybe<NodeFilterInput>;
   children?: InputMaybe<NodeFilterListInput>;
@@ -1030,7 +1028,7 @@ export type MdxFilterInput = {
 
 export type MdxFrontmatterFilterInput = {
   title?: InputMaybe<StringQueryOperatorInput>;
-  date?: InputMaybe<DateQueryOperatorInput>;
+  date?: InputMaybe<StringQueryOperatorInput>;
   draft?: InputMaybe<BooleanQueryOperatorInput>;
   category?: InputMaybe<StringQueryOperatorInput>;
   tags?: InputMaybe<StringQueryOperatorInput>;
@@ -1996,6 +1994,9 @@ export type SiteFieldsEnum =
   | 'siteMetadata___siteUrl'
   | 'port'
   | 'host'
+  | 'polyfill'
+  | 'pathPrefix'
+  | 'jsxRuntime'
   | 'id'
   | 'parent___id'
   | 'parent___parent___id'
@@ -2129,6 +2130,9 @@ export type SiteFilterInput = {
   siteMetadata?: InputMaybe<SiteSiteMetadataFilterInput>;
   port?: InputMaybe<IntQueryOperatorInput>;
   host?: InputMaybe<StringQueryOperatorInput>;
+  polyfill?: InputMaybe<BooleanQueryOperatorInput>;
+  pathPrefix?: InputMaybe<StringQueryOperatorInput>;
+  jsxRuntime?: InputMaybe<StringQueryOperatorInput>;
   id?: InputMaybe<StringQueryOperatorInput>;
   parent?: InputMaybe<NodeFilterInput>;
   children?: InputMaybe<NodeFilterListInput>;
@@ -3396,26 +3400,26 @@ export type GetCategorySearchQueryVariables = Exact<{
 }>;
 
 
-export type GetCategorySearchQuery = { posts: { edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: any | null | undefined, updated?: any | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }> } };
+export type GetCategorySearchQuery = { posts: { edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: any | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }> } };
 
 export type GetMdxQueryVariables = Exact<{
   id?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type GetMdxQuery = { mdx?: { id: string, slug?: string | null | undefined, body: string, excerpt: string, tableOfContents?: any | null | undefined, frontmatter?: { title: string, date?: any | null | undefined, updated?: any | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } | null | undefined };
+export type GetMdxQuery = { mdx?: { id: string, slug?: string | null | undefined, body: string, excerpt: string, tableOfContents?: any | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: any | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } | null | undefined };
 
 export type GetTagSearchQueryVariables = Exact<{
   tag: Scalars['String'];
 }>;
 
 
-export type GetTagSearchQuery = { posts: { edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: any | null | undefined, updated?: any | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }> } };
+export type GetTagSearchQuery = { posts: { edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: any | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }> } };
 
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPostsQuery = { posts: { edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: any | null | undefined, updated?: any | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }>, categories: Array<{ fieldValue?: string | null | undefined, edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: any | null | undefined, updated?: any | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }> }>, tags: Array<{ fieldValue?: string | null | undefined, edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: any | null | undefined, updated?: any | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }> }> } };
+export type GetPostsQuery = { posts: { edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: any | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }>, categories: Array<{ fieldValue?: string | null | undefined, edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: any | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }> }>, tags: Array<{ fieldValue?: string | null | undefined, edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: any | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }> }> } };
 
 export type GatsbyImageSharpFixedFragment = { base64?: string | null | undefined, width: number, height: number, src: string, srcSet: string };
 

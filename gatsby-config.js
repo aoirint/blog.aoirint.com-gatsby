@@ -54,7 +54,7 @@ module.exports = {
       options: {
         nodeType: 'Mdx',
         timezone: 'Asia/Tokyo',
-        // publishDraft: process.env.NODE_ENV !== 'production',
+        publishDraft: process.env.NODE_ENV !== 'production',
       },
     },
     {
