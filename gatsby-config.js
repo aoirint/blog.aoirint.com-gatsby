@@ -29,6 +29,8 @@ module.exports = {
         ],
         gatsbyRemarkPlugins: [
           "gatsby-remark-autolink-headers",
+          "gatsby-remark-relative-images",
+          "gatsby-remark-images",
         ],
       },
     },
