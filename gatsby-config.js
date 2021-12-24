@@ -8,7 +8,6 @@ module.exports = {
   plugins: [
     "gatsby-plugin-sass",
     "gatsby-plugin-image",
-    "gatsby-plugin-twitter",
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sitemap",
     {
@@ -67,6 +66,7 @@ module.exports = {
         head: true,
       },
     },
+    "gatsby-plugin-twitter",
     {
       resolve: "gatsby-plugin-graphql-codegen",
       options: {
