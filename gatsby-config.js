@@ -66,7 +66,15 @@ module.exports = {
         head: true,
       },
     },
-    "gatsby-plugin-twitter",
+    // workaround: fail to auto reload if enabled
+    ...(process.env.NODE_ENV !== 'production' ? (
+      [
+      ]
+    ) : (
+      [
+        "gatsby-plugin-twitter",
+      ]
+    )),
     {
       resolve: "gatsby-plugin-graphql-codegen",
       options: {
