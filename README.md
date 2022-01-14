@@ -1,5 +1,14 @@
 # blog.aoirint.com-gatsby
 
+## Dependencies
+
+- Node 14
+- npm 6
+
+```shell
+npm ci
+```
+
 ## Preview
 
 ```shell
