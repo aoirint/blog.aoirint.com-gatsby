@@ -9,7 +9,7 @@ const Navbar: React.FC<{}> = () => {
     return (
       <nav className="navbar" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
-          <Link to='/' className="navbar-item"x>
+          <Link to='/' className="navbar-item">
             <img src={icon} alt="Logo image" width="28" height="28" />
           </Link>
 
