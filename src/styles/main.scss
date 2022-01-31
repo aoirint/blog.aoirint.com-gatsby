@@ -19,3 +19,17 @@
 .content {
   word-break: break-word;
 }
+
+@media(max-width: 767px) {
+  .columns.is-wrap-reverse-mobile {
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+  }
+}
+
+@media(min-width: 768px) {
+  .is-w300-desktop {
+    width: 300px !important;
+  }
+}
