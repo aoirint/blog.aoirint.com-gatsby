@@ -7,10 +7,13 @@ const Navbar: React.FC<{}> = () => {
     const [active, setActive] = React.useState<boolean>(false)
 
     return (
-      <nav className="navbar" role="navigation" aria-label="main navigation">
+      <nav className="navbar has-shadow" role="navigation" aria-label="main navigation">
         <div className="navbar-brand">
           <Link to='/' className="navbar-item">
             <img src={icon} alt="Logo image" width="28" height="28" />
+            <div className='has-text-weight-bold ml-2'>
+              えやみぐさ
+            </div>
           </Link>
 
           <a
@@ -34,24 +37,16 @@ const Navbar: React.FC<{}> = () => {
             <Link to='/' className="navbar-item">
               Home
             </Link>
-            
-            <div className="navbar-item has-dropdown is-hoverable">
-              <a className="navbar-link">
-                More
-              </a>
-
-              <div className="navbar-dropdown">
-                <a className="navbar-item" href="https://twitter.com/aoirint" target='_blank'>
-                  Twitter
-                </a>
-                <a className="navbar-item" href="https://github.com/aoirint" target='_blank'>
-                  GitHub
-                </a>
-              </div>
-            </div>
           </div>
 
-          <div className="navbar-end" />
+          <div className="navbar-end">
+            <a className="navbar-item" href="https://twitter.com/aoirint" target='_blank'>
+              Twitter
+            </a>
+            <a className="navbar-item" href="https://github.com/aoirint" target='_blank'>
+              GitHub
+            </a>
+          </div>
         </div>
       </nav>
     )
