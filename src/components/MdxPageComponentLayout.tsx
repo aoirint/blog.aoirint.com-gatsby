@@ -147,9 +147,14 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
             </div> */}
           </aside>
           <hr className='my-2' />
-          <div className='columns mt-2 is-wrap-reverse-touch'>
-            <div className='column'>
-              <article className='content' data-label='article'>
+          <div className='mt-2'>
+            <nav className='is-hidden-desktop menu'>
+              <TableOfContents
+                items={tableOfContents.items}
+              />
+            </nav>
+            <div className='is-flex'>
+              <article className='content is-rest-w300-desktop' data-label='article'>
                 <MDXProvider
                   components={{
                     pre: CodeBlock,
@@ -162,12 +167,12 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
                   </MDXRenderer>
                 </MDXProvider>
               </article>
+              <nav className='is-hidden-touch is-w300-desktop menu'>
+                <TableOfContents
+                  items={tableOfContents.items}
+                />
+              </nav>
             </div>
-            <nav className='column is-narrow is-w300-desktop menu'>
-              <TableOfContents
-                items={tableOfContents.items}
-              />
-            </nav>
           </div>
         </main>
       </div>
