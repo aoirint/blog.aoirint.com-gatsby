@@ -153,7 +153,7 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
                 items={tableOfContents.items}
               />
             </nav>
-            <div className='is-flex mt-4'>
+            <div className='is-flex-desktop mt-4'>
               <article className='content is-rest-w300-desktop' data-label='article'>
                 <MDXProvider
                   components={{
