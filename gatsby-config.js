@@ -13,7 +13,18 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
+        name: 'えやみぐさ',
+        short_name: 'えやみぐさ',
+        start_url: '/',
+        background_color: '#79ad79',
+        theme_color: '#9079ad',
+        display: 'standalone',
         icon: "src/images/icon.png",
+      },
+    },
+    {
+      resolve: "gatsby-plugin-offline",
+      options: {
       },
     },
     {
