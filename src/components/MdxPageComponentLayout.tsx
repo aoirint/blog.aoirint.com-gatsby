@@ -109,9 +109,9 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
       </Helmet>
       <Ogp post={mdx} />
       <Navbar />
-      <section className='section'>
-        <div className='container'>
-          <div data-label='meta'>
+      <div className='section'>
+        <main className='container'>
+          <aside data-label='meta'>
             {date || updated ? (
               <div className='is-size-7' data-label='dateString'>
                 [
@@ -145,11 +145,11 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
               {' '}
               <a href={`https://github.com/aoirint/blog.aoirint.com-contents/commits/main/${mdx.slug}index.md`}>履歴</a>
             </div> */}
-          </div>
+          </aside>
           <hr className='my-2' />
           <div className='columns mt-2 is-wrap-reverse-touch'>
             <div className='column'>
-              <div className='content' data-label='article'>
+              <article className='content' data-label='article'>
                 <MDXProvider
                   components={{
                     pre: CodeBlock,
@@ -161,16 +161,16 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
                     {rawBody}
                   </MDXRenderer>
                 </MDXProvider>
-              </div>
+              </article>
             </div>
-            <div className='column is-narrow is-w300-desktop menu'>
+            <nav className='column is-narrow is-w300-desktop menu'>
               <TableOfContents
                 items={tableOfContents.items}
               />
-            </div>
+            </nav>
           </div>
-        </div>
-      </section>
+        </main>
+      </div>
     </>
   )
 }
