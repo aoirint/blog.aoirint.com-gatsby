@@ -73,3 +73,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     })
   })
 }
+
+exports.createResolvers = ({ createResolvers }) => {
+  const resolvers = {
+    MdxFrontmatter: {
+      lastModified: {
+        type: 'String',
+        resolve: (source) => source.updated ? source.updated : source.date
+      }
+    }
+  }
+  createResolvers(resolvers)
+}
