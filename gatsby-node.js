@@ -1,4 +1,9 @@
 const path = require("path")
+const dayjs = require("dayjs")
+const utc = require("dayjs/plugin/utc")
+const timezone = require("dayjs/plugin/timezone")
+dayjs.extend(utc)
+dayjs.extend(timezone)
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
@@ -74,12 +79,32 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   })
 }
 
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
+
+  createTypes(`
+    type MdxFrontmatter {
+      date: String
+      updated: String
+      lastModified: String
+    }
+  `)
+}
+
 exports.createResolvers = ({ createResolvers }) => {
   const resolvers = {
     MdxFrontmatter: {
+      date: {
+        type: 'String',
+        resolve: (source) => source.date ? dayjs(source.date).tz('Asia/Tokyo').toISOString() : null
+      },
+      updated: {
+        type: 'String',
+        resolve: (source) => source.updated ? dayjs(source.updated).tz('Asia/Tokyo').toISOString() : null
+      },
       lastModified: {
         type: 'String',
-        resolve: (source) => source.updated ? source.updated : source.date
+        resolve: (source) => source.updated ? dayjs(source.updated).tz('Asia/Tokyo').toISOString() : (source.date ? dayjs(source.date).tz('Asia/Tokyo').toISOString() : null)
       }
     }
   }

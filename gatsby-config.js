@@ -127,7 +127,7 @@ module.exports = {
             query: `
               {
                 allMdx(
-                  sort: { order: DESC, fields: [frontmatter___date] }
+                  sort: { order: DESC, fields: [frontmatter___lastModified] }
                   limit: 10
                   filter: {fields: {draft: {eq: false}}}
                 ) {
