@@ -45,7 +45,7 @@ const PostListItem: React.FC<PostListItemProps> = ({
               {frontmatter?.title}
             </Link>
             {date || updated ? (
-              <div className='is-size-7'>
+              <div className='is-size-7' data-label='dateString'>
                 [
                 <span data-label='dateCreated'>{date}</span>
                 {date && updated ? ' / ' : ''}

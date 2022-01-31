@@ -113,7 +113,7 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
         <div className='container'>
           <div className='content'>
             {date || updated ? (
-              <div className='is-size-7'>
+              <div className='is-size-7' data-label='dateString'>
                 [
                 <span data-label='dateCreated'>{date}</span>
                 {date && updated ? ' / ' : ''}
