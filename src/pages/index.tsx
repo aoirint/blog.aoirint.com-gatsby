@@ -27,7 +27,6 @@ const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
       <Helmet>
         <title>えやみぐさ</title>
         <script async src="https://cse.google.com/cse.js?cx=4b57e8a4ef2a8c489"></script>
-        <script async src="https://platform.twitter.com/widgets.js"></script>
       </Helmet>
       <Navbar />
       <section className='section'>
