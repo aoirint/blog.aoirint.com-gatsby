@@ -146,7 +146,8 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
               <a href={`https://github.com/aoirint/blog.aoirint.com-contents/commits/main/${mdx.slug}index.md`}>履歴</a>
             </div> */}
           </div>
-          <div className='columns mt-4 is-wrap-reverse-touch'>
+          <hr className='my-2' />
+          <div className='columns mt-2 is-wrap-reverse-touch'>
             <div className='column'>
               <div className='content' data-label='article'>
                 <MDXProvider
