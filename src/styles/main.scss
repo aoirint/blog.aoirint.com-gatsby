@@ -20,15 +20,15 @@
   word-break: break-word;
 }
 
-@media(max-width: 767px) {
-  .columns.is-wrap-reverse-mobile {
+@media(max-width: 1215px) {
+  .columns.is-wrap-reverse-touch {
     display: flex;
     flex-direction: column-reverse;
     flex-wrap: wrap;
   }
 }
 
-@media(min-width: 768px) {
+@media(min-width: 1216px) {
   .is-w300-desktop {
     width: 300px !important;
   }

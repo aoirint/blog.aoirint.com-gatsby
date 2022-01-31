@@ -73,7 +73,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
   items
 }) => {
   return (
-    <ul data-label='tableOfContents'>
+    <ul className='menu-list' data-label='tableOfContents'>
       {items?.map((item, index) => (
         <li key={index} data-label='tableOfContentsItem'>
           <Link to={item.url}>
@@ -111,63 +111,61 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
       <Navbar />
       <section className='section'>
         <div className='container'>
-          <div className='content'>
-            <div data-label='meta'>
-              {date || updated ? (
-                <div className='is-size-7' data-label='dateString'>
-                  [
-                  <span data-label='dateCreated'>{date}</span>
-                  {date && updated ? ' / ' : ''}
-                  <span data-label='dateUpdated'>{updated}</span>
-                  ]
-                </div>
-              ) : ''}
-              <div className='is-size-7' data-label='tags'>
-                {frontmatter?.category != null ? (
-                  <>
-                    <Link to={`/category/${frontmatter?.category}/`} className='mr-2' data-label='category'>
-                      {frontmatter?.category}
-                    </Link>
-                    <span className='mr-2'>
-                      |
-                    </span>
-                  </>
-                ) : ''}
-                {frontmatter?.tags?.map((tag) => (
-                  <Link key={tag} to={`/tags/${tag}/`} className='mr-2' data-label='tag'>
-                    {tag}
+          <div data-label='meta'>
+            {date || updated ? (
+              <div className='is-size-7' data-label='dateString'>
+                [
+                <span data-label='dateCreated'>{date}</span>
+                {date && updated ? ' / ' : ''}
+                <span data-label='dateUpdated'>{updated}</span>
+                ]
+              </div>
+            ) : ''}
+            <div className='is-size-7' data-label='tags'>
+              {frontmatter?.category != null ? (
+                <>
+                  <Link to={`/category/${frontmatter?.category}/`} className='mr-2' data-label='category'>
+                    {frontmatter?.category}
                   </Link>
-                ))}
-              </div>
-              {/* <div className='is-size-7'>
-                <a href={`https://github.com/aoirint/blog.aoirint.com-contents/edit/main/${mdx.slug}index.md`}>編集</a>
-                {' '}
-                <a href={`https://github.com/aoirint/blog.aoirint.com-contents/tree/main/${mdx.slug}index.md`}>ソース</a>
-                {' '}
-                <a href={`https://github.com/aoirint/blog.aoirint.com-contents/commits/main/${mdx.slug}index.md`}>履歴</a>
-              </div> */}
+                  <span className='mr-2'>
+                    |
+                  </span>
+                </>
+              ) : ''}
+              {frontmatter?.tags?.map((tag) => (
+                <Link key={tag} to={`/tags/${tag}/`} className='mr-2' data-label='tag'>
+                  {tag}
+                </Link>
+              ))}
             </div>
-            <div className='columns is-wrap-reverse-mobile'>
-              <div className='column'>
-                <div data-label='article'>
-                  <MDXProvider
-                    components={{
-                      pre: CodeBlock,
-                    }}
+            {/* <div className='is-size-7'>
+              <a href={`https://github.com/aoirint/blog.aoirint.com-contents/edit/main/${mdx.slug}index.md`}>編集</a>
+              {' '}
+              <a href={`https://github.com/aoirint/blog.aoirint.com-contents/tree/main/${mdx.slug}index.md`}>ソース</a>
+              {' '}
+              <a href={`https://github.com/aoirint/blog.aoirint.com-contents/commits/main/${mdx.slug}index.md`}>履歴</a>
+            </div> */}
+          </div>
+          <div className='columns mt-4 is-wrap-reverse-touch'>
+            <div className='column'>
+              <div className='content' data-label='article'>
+                <MDXProvider
+                  components={{
+                    pre: CodeBlock,
+                  }}
+                >
+                  <MDXRenderer
+                    frontmatter={frontmatter}
                   >
-                    <MDXRenderer
-                      frontmatter={frontmatter}
-                    >
-                      {rawBody}
-                    </MDXRenderer>
-                  </MDXProvider>
-                </div>
+                    {rawBody}
+                  </MDXRenderer>
+                </MDXProvider>
               </div>
-              <div className='column is-narrow is-w300-desktop'>
-                <TableOfContents
-                  items={tableOfContents.items}
-                />
-              </div>
+            </div>
+            <div className='column is-narrow is-w300-desktop menu'>
+              <TableOfContents
+                items={tableOfContents.items}
+              />
             </div>
           </div>
         </div>
