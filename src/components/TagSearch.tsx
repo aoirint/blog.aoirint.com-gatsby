@@ -26,11 +26,14 @@ const TagSearch: React.FC<PageProps<GetTagSearchQuery>> = ({
                     <h2 className='title is-4 mb-4'>
                         Tag: {tag}
                     </h2>
-                    <ul>
+                    <div>
                         {data.posts.edges.map(({ node }) => (
-                            <PostListItem post={node} />
+                            <div key={node.id}>
+                                <PostListItem post={node} />
+                                <hr className='my-1' />
+                            </div>
                         ))}
-                    </ul>
+                    </div>
                 </div>
             </section>
         </>
