@@ -37,27 +37,26 @@ const PostListItem: React.FC<PostListItemProps> = ({
 
     const date = frontmatter?.date != null ? dayjs(frontmatter?.date).format('YYYY-MM-DD') : ''
     const updated = frontmatter?.updated != null ? dayjs(frontmatter?.updated).format('YYYY-MM-DD') : ''
-    const dateString = (date !== '' || updated !== '' ? '[' : '') + date + (date !== '' && updated !== '' ? ' / ' : '') + updated + (date !== '' || updated !== '' ? ']' : '')
 
     return (
         <div className='mb-2'>
           <div className=''>
-            <Link to={`${pathPrefix}${slug}`}>
+            <Link to={`${pathPrefix}${slug}`} data-label='title'>
               {frontmatter?.title}
             </Link>
             {date || updated ? (
               <div className='is-size-7'>
                 [
-                <span className='dateCreated'>{date}</span>
+                <span data-label='dateCreated'>{date}</span>
                 {date && updated ? ' / ' : ''}
-                <span className='dateUpdated'>{updated}</span>
+                <span data-label='dateUpdated'>{updated}</span>
                 ]
               </div>
             ) : ''}
-            <div className='is-size-7'>
+            <div className='is-size-7' data-label='tags'>
               {frontmatter?.category != null ? (
                 <>
-                  <Link to={`/category/${frontmatter?.category}/`} className='mr-2'>
+                  <Link to={`/category/${frontmatter?.category}/`} className='mr-2' data-label='category'>
                     {frontmatter?.category}
                   </Link>
                   <span className='mr-2'>
@@ -66,7 +65,7 @@ const PostListItem: React.FC<PostListItemProps> = ({
                 </>
               ) : ''}
               {frontmatter?.tags?.map((tag) => (
-                <Link key={tag} to={`/tags/${tag}/`} className='mr-2'>
+                <Link key={tag} to={`/tags/${tag}/`} className='mr-2' data-label='tag'>
                   {tag}
                 </Link>
               ))}

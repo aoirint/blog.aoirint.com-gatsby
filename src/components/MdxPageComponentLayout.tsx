@@ -73,9 +73,9 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
   items
 }) => {
   return (
-    <ul>
+    <ul data-label='tableOfContents'>
       {items?.map((item, index) => (
-        <li key={index}>
+        <li key={index} data-label='tableOfContentsItem'>
           <Link to={item.url}>
             {item.title}
           </Link>
@@ -101,7 +101,6 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
 
   const date = frontmatter?.date != null ? dayjs(frontmatter?.date).format('YYYY-MM-DD') : ''
   const updated = frontmatter?.updated != null ? dayjs(frontmatter?.updated).format('YYYY-MM-DD') : ''
-  const dateString = (date !== '' || updated !== '' ? '[' : '') + date + (date !== '' && updated !== '' ? ' / ' : '') + updated + (date !== '' || updated !== '' ? ']' : '')
 
   return (
     <>
@@ -113,13 +112,19 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
       <section className='section'>
         <div className='container'>
           <div className='content'>
-            <div className='is-size-7'>
-              {dateString}
-            </div>
-            <div className='is-size-7'>
+            {date || updated ? (
+              <div className='is-size-7'>
+                [
+                <span data-label='dateCreated'>{date}</span>
+                {date && updated ? ' / ' : ''}
+                <span data-label='dateUpdated'>{updated}</span>
+                ]
+              </div>
+            ) : ''}
+            <div className='is-size-7' data-label='tags'>
               {frontmatter?.category != null ? (
                 <>
-                  <Link to={`/category/${frontmatter?.category}/`} className='mr-2'>
+                  <Link to={`/category/${frontmatter?.category}/`} className='mr-2' data-label='category'>
                     {frontmatter?.category}
                   </Link>
                   <span className='mr-2'>
@@ -128,7 +133,7 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
                 </>
               ) : ''}
               {frontmatter?.tags?.map((tag) => (
-                <Link key={tag} to={`/tags/${tag}/`} className='mr-2'>
+                <Link key={tag} to={`/tags/${tag}/`} className='mr-2' data-label='tag'>
                   {tag}
                 </Link>
               ))}
@@ -143,17 +148,19 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
             <TableOfContents
               items={tableOfContents.items}
             />
-            <MDXProvider
-              components={{
-                pre: CodeBlock,
-              }}
-            >
-              <MDXRenderer
-                frontmatter={frontmatter}
+            <div data-label='article'>
+              <MDXProvider
+                components={{
+                  pre: CodeBlock,
+                }}
               >
-                {rawBody}
-              </MDXRenderer>
-            </MDXProvider>
+                <MDXRenderer
+                  frontmatter={frontmatter}
+                >
+                  {rawBody}
+                </MDXRenderer>
+              </MDXProvider>
+            </div>
           </div>
         </div>
       </section>
