@@ -45,9 +45,15 @@ const PostListItem: React.FC<PostListItemProps> = ({
             <Link to={`${pathPrefix}${slug}`}>
               {frontmatter?.title}
             </Link>
-            <div className='is-size-7'>
-              {dateString}
-            </div>
+            {date || updated ? (
+              <div className='is-size-7'>
+                [
+                <span className='dateCreated'>{date}</span>
+                {date && updated ? ' / ' : ''}
+                <span className='dateUpdated'>{updated}</span>
+                ]
+              </div>
+            ) : ''}
             <div className='is-size-7'>
               {frontmatter?.category != null ? (
                 <>
