@@ -16,7 +16,7 @@ module.exports = {
         name: 'えやみぐさ',
         short_name: 'えやみぐさ',
         start_url: '/',
-        background_color: '#79ad79',
+        background_color: '#9079ad',
         theme_color: '#9079ad',
         display: 'standalone',
         icon: "src/images/icon.png",
