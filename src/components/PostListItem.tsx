@@ -27,7 +27,6 @@ export interface PostListItemProps {
 
 const PostListItem: React.FC<PostListItemProps> = ({
     post: {
-      id,
       slug,
       parent,
       frontmatter,
@@ -41,7 +40,7 @@ const PostListItem: React.FC<PostListItemProps> = ({
     const dateString = (date !== '' || updated !== '' ? '[' : '') + date + (date !== '' && updated !== '' ? ' / ' : '') + updated + (date !== '' || updated !== '' ? ']' : '')
 
     return (
-        <li key={id} className='mb-2'>
+        <div className='mb-2'>
           <div className=''>
             <Link to={`${pathPrefix}${slug}`}>
               {frontmatter?.title}
@@ -61,13 +60,13 @@ const PostListItem: React.FC<PostListItemProps> = ({
                 </>
               ) : ''}
               {frontmatter?.tags?.map((tag) => (
-                <Link to={`/tags/${tag}/`} className='mr-2'>
+                <Link key={tag} to={`/tags/${tag}/`} className='mr-2'>
                   {tag}
                 </Link>
               ))}
             </div>
           </div>
-        </li>
+        </div>
     )
 }
 

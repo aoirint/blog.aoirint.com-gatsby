@@ -107,6 +107,7 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
     <>
       <Helmet>
         <title>{frontmatter.title} · えやみぐさ</title>
+        <script async src="https://platform.twitter.com/widgets.js"></script>
       </Helmet>
       <Ogp post={mdx} />
       <Navbar />

@@ -39,8 +39,14 @@ module.exports = {
         ],
         gatsbyRemarkPlugins: [
           "gatsby-remark-autolink-headers",
-          "gatsby-remark-relative-images",
-          "gatsby-remark-images",
+          // "gatsby-remark-relative-images",
+          {
+            resolve: "gatsby-remark-images",
+            options: {
+              maxWidth: 650,
+            },
+          },
+          "gatsby-remark-copy-linked-files",
         ],
       },
     },

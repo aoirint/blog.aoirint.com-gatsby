@@ -52,14 +52,14 @@ const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
           <h2 className='title is-5 mb-3'>
             Recent Notes
           </h2>
-          <ul className='mt-4 mb-5'>
+          <div className='mt-4 mb-5'>
             {data.posts.edges.slice(0, 10).map(({ node }) => (
-              <>
+              <div key={node.id}>
                 <PostListItem post={node} />
                 <hr className='my-1' />
-              </>
+              </div>
             ))}
-          </ul>
+          </div>
           <h2 className='title is-5 mb-3'>
             Category Index
           </h2>
@@ -68,14 +68,14 @@ const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
               <div key={category.fieldValue} className='column is-one-quarter'>
                 <div className='m-1'>
                   <h2 className='title is-5 my-2'>{category.fieldValue}</h2>
-                  <ul>
+                  <div>
                     {category.edges.map(({ node }) => (
-                      <>
+                      <div key={node.id}>
                         <PostListItem post={node} />
                         <hr className='my-1' />
-                      </>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               </div>
             ))}
