@@ -129,7 +129,7 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
                 </>
               ) : ''}
               {frontmatter?.tags?.map((tag) => (
-                <Link to={`/tags/${tag}/`} className='mr-2'>
+                <Link key={tag} to={`/tags/${tag}/`} className='mr-2'>
                   {tag}
                 </Link>
               ))}
