@@ -30,9 +30,10 @@ jobs:
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
           images: |
-            ghcr.io/${{ github.repository }}:main
+            ghcr.io/${{ github.repository }}
 
       - name: Build and push Docker images
+        id: docker-build
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
@@ -49,7 +50,7 @@ jobs:
           key: ${{ runner.os }}-gatsby-v1
 
       - name: Build
-        run: docker run --rm -v "$PWD/public:/work/public" -v "$PWD/.cache:/work/.cache" ghcr.io/${{ github.repository }}:main npm run build
+        run: docker run --rm -v "$PWD/public:/work/public" -v "$PWD/.cache:/work/.cache" ${{ steps.docker-build.outputs.digest }} npm run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
