@@ -30,7 +30,9 @@ jobs:
           path: |
             ./public
             ./.cache
-          key: ${{ runner.os }}-gatsby-v1
+          key: ${{ runner.os }}-gatsby-build-cache-v1-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-gatsby-build-cache-v1-
 
       - name: Build
         run: npm run build
