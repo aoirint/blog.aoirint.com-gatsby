@@ -26,6 +26,7 @@ jobs:
  
       - name: Cache
         uses: actions/cache@v2
+        with:
           path: |
             ./public
             ./.cache
