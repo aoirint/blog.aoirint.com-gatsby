@@ -38,14 +38,13 @@ jobs:
           images: |
             ghcr.io/${{ github.repository }}
 
-      - name: Build and push Docker images
+      - name: Build and load Docker images
         id: docker-build
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
           load: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          tags: ghcr.io/${{ github.repository }}:main
           cache-from: type=registry,ref=ghcr.io/${{ github.repository }}:buildcache
           cache-to: type=registry,ref=ghcr.io/${{ github.repository }}:buildcache,mode=max
 
@@ -58,7 +57,7 @@ jobs:
           key: ${{ runner.os }}-gatsby-v1
 
       - name: Build
-        run: docker run --rm -v "$PWD/public:/work/public" -v "$PWD/.cache:/work/.cache" ${{ steps.docker-build.outputs.digest }} npm run build
+        run: docker run --rm -v "$PWD/public:/work/public" -v "$PWD/.cache:/work/.cache" ghcr.io/${{ github.repository }}:main npm run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
