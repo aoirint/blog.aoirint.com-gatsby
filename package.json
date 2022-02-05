@@ -25,7 +25,7 @@
     "bulma": "^0.9.3",
     "dayjs": "^1.10.7",
     "gatsby": "^4.6.0",
-    "gatsby-plugin-draft": "^0.2.0",
+    "gatsby-plugin-draft": "github:aoirint/gatsby-plugin-draft#0.2.0+aoirint.0",
     "gatsby-plugin-feed": "^4.4.0",
     "gatsby-plugin-google-analytics": "^4.4.0",
     "gatsby-plugin-graphql-codegen": "^3.1.0",
