@@ -34,9 +34,9 @@ const Navbar: React.FC<{}> = () => {
 
         <div id="navbarBasicExample" className={`navbar-menu ${active ? 'is-active' : ''}`}>
           <div className="navbar-start">
-            <Link to='/' className="navbar-item">
+            {/* <Link to='/' className="navbar-item">
               Home
-            </Link>
+            </Link> */}
           </div>
 
           <div className="navbar-end">
