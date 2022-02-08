@@ -40,13 +40,13 @@ const Navbar: React.FC<{}> = () => {
           </div>
 
           <div className="navbar-end">
-            <a className="navbar-item" href="https://twitter.com/aoirint" target='_blank'>
+            <a className="navbar-item" href="https://twitter.com/aoirint">
               Twitter
             </a>
-            <a className="navbar-item" href="https://github.com/aoirint" target='_blank'>
+            <a className="navbar-item" href="https://github.com/aoirint">
               GitHub
             </a>
-            <a className="navbar-item" href="https://aoirint.com" target='_blank'>
+            <a className="navbar-item" href="https://aoirint.com">
               Profile
             </a>
           </div>
