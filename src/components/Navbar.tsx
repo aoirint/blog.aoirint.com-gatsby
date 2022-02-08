@@ -46,6 +46,9 @@ const Navbar: React.FC<{}> = () => {
             <a className="navbar-item" href="https://github.com/aoirint" target='_blank'>
               GitHub
             </a>
+            <a className="navbar-item" href="https://aoirint.com" target='_blank'>
+              Profile
+            </a>
           </div>
         </div>
       </nav>
