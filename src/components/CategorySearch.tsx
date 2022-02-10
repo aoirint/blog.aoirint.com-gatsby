@@ -32,7 +32,10 @@ const CategorySearch: React.FC<PageProps<GetCategorySearchQuery>> = ({
                     </h2>
                     <ul>
                         {data.posts.edges.map(({ node }) => (
-                            <PostListItem post={node} />
+                            <div key={node.id}>
+                                <PostListItem post={node} />
+                                <hr className='my-1' />
+                            </div>
                         ))}
                     </ul>
                 </div>
