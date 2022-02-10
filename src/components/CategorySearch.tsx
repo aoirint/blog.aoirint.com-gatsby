@@ -52,6 +52,7 @@ export const pageQuery = graphql`
                         eq: $category
                     }
                 }
+                fields: {draft: {eq: false}}
             }
         ) {
             edges {

@@ -51,6 +51,7 @@ export const pageQuery = graphql`
                         in: [$tag]
                     }
                 }
+                fields: {draft: {eq: false}}
             }
         ) {
             edges {
