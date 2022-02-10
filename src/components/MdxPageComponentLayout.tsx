@@ -112,15 +112,24 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
       <div className='section'>
         <main className='container'>
           <aside data-label='meta'>
-            {date || updated ? (
-              <div className='is-size-7' data-label='dateString'>
-                [
-                <span data-label='dateCreated'>{date}</span>
-                {date && updated ? ' / ' : ''}
-                <span data-label='dateUpdated'>{updated}</span>
-                ]
+            <div className='columns m-0'>
+              <div className='column m-0 p-0 is-size-7' data-label='dateString'>
+                {date || updated ? (
+                    <>
+                      [
+                      <span data-label='dateCreated'>{date}</span>
+                      {date && updated ? ' / ' : ''}
+                      <span data-label='dateUpdated'>{updated}</span>
+                      ]
+                    </>
+                ) : ''}
               </div>
-            ) : ''}
+              <div className='column m-0 p-0 is-size-7 has-text-right'>
+                <a href={`https://github.com/aoirint/blog.aoirint.com-contents/edit/main/${mdx.slug}index.md`} className='mx-1'>編集</a>
+                <a href={`https://github.com/aoirint/blog.aoirint.com-contents/tree/main/${mdx.slug}index.md`} className='mx-1'>ソース</a>
+                <a href={`https://github.com/aoirint/blog.aoirint.com-contents/commits/main/${mdx.slug}index.md`} className='mx-1'>履歴</a>
+              </div>
+            </div>
             <div className='is-size-7' data-label='tags'>
               {frontmatter?.category != null ? (
                 <>
@@ -137,11 +146,6 @@ const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
                   {tag}
                 </Link>
               ))}
-            </div>
-            <div className='is-size-7 my-2 has-text-right'>
-              <a href={`https://github.com/aoirint/blog.aoirint.com-contents/edit/main/${mdx.slug}index.md`} className='mx-1'>編集</a>
-              <a href={`https://github.com/aoirint/blog.aoirint.com-contents/tree/main/${mdx.slug}index.md`} className='mx-1'>ソース</a>
-              <a href={`https://github.com/aoirint/blog.aoirint.com-contents/commits/main/${mdx.slug}index.md`} className='mx-1'>履歴</a>
             </div>
           </aside>
           <hr className='my-2' />
