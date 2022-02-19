@@ -114,6 +114,7 @@ module.exports = {
           }
         `,
         feeds: [
+          // グローバルフィード
           {
             serialize: ({ query: { site, allMdx } }) => {
               return allMdx.nodes.filter(node => {
@@ -144,9 +145,9 @@ module.exports = {
             query: `
               {
                 allMdx(
+                  filter: {fields: {draft: {eq: false}}}
                   sort: { order: DESC, fields: [frontmatter___lastModified] }
                   limit: 10
-                  filter: {fields: {draft: {eq: false}}}
                 ) {
                   nodes {
                     excerpt
