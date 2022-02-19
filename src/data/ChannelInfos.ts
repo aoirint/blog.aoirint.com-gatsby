@@ -7,10 +7,10 @@ export const ChannelInfos = [
     'topPostCount': true,
   },
   {
-    'key': 'スクラップ',
-    'description': 'メモ書き',
+    'key': '作業ログ',
+    'description': 'スクラップ、メモ書き',
     'indexNoIndex': false,
-    'indexCategoryIndex': true,
+    'indexCategoryIndex': false,
     'topPostCount': true,
   },
   {

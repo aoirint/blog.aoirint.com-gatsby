@@ -106,6 +106,9 @@ const EntryPageLayout: React.FC<PageProps<GetMdxQuery>> = ({
     <>
       <Helmet>
         <title>{frontmatter.title} · えやみぐさ</title>
+        {frontmatter?.noindex ? (
+          <meta name="robots" content="noindex" />
+        ) : ''}
       </Helmet>
       <Ogp post={mdx} />
       <Navbar />
@@ -200,6 +203,7 @@ export const pageQuery = graphql`
         title
         date
         updated
+        noindex
         channel
         category
         tags

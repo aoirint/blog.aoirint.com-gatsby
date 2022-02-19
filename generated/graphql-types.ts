@@ -357,6 +357,7 @@ export type MdxFrontmatter = {
   updated?: Maybe<Scalars['String']>;
   lastModified?: Maybe<Scalars['String']>;
   draft?: Maybe<Scalars['Boolean']>;
+  noindex?: Maybe<Scalars['Boolean']>;
   channel?: Maybe<Scalars['String']>;
   category?: Maybe<Scalars['String']>;
   tags?: Maybe<Array<Maybe<Scalars['String']>>>;
@@ -1026,6 +1027,7 @@ export type MdxFrontmatterFilterInput = {
   updated?: InputMaybe<StringQueryOperatorInput>;
   lastModified?: InputMaybe<StringQueryOperatorInput>;
   draft?: InputMaybe<BooleanQueryOperatorInput>;
+  noindex?: InputMaybe<BooleanQueryOperatorInput>;
   channel?: InputMaybe<StringQueryOperatorInput>;
   category?: InputMaybe<StringQueryOperatorInput>;
   tags?: InputMaybe<StringQueryOperatorInput>;
@@ -1246,6 +1248,7 @@ export type FileFieldsEnum =
   | 'childrenMdx___frontmatter___updated'
   | 'childrenMdx___frontmatter___lastModified'
   | 'childrenMdx___frontmatter___draft'
+  | 'childrenMdx___frontmatter___noindex'
   | 'childrenMdx___frontmatter___channel'
   | 'childrenMdx___frontmatter___category'
   | 'childrenMdx___frontmatter___tags'
@@ -1309,6 +1312,7 @@ export type FileFieldsEnum =
   | 'childMdx___frontmatter___updated'
   | 'childMdx___frontmatter___lastModified'
   | 'childMdx___frontmatter___draft'
+  | 'childMdx___frontmatter___noindex'
   | 'childMdx___frontmatter___channel'
   | 'childMdx___frontmatter___category'
   | 'childMdx___frontmatter___tags'
@@ -3035,6 +3039,7 @@ export type MdxFieldsEnum =
   | 'frontmatter___updated'
   | 'frontmatter___lastModified'
   | 'frontmatter___draft'
+  | 'frontmatter___noindex'
   | 'frontmatter___channel'
   | 'frontmatter___category'
   | 'frontmatter___tags'
@@ -3432,7 +3437,7 @@ export type GetMdxQueryVariables = Exact<{
 }>;
 
 
-export type GetMdxQuery = { mdx?: { id: string, slug?: string | null | undefined, body: string, excerpt: string, tableOfContents?: any | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: string | null | undefined, channel?: string | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } | null | undefined };
+export type GetMdxQuery = { mdx?: { id: string, slug?: string | null | undefined, body: string, excerpt: string, tableOfContents?: any | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: string | null | undefined, noindex?: boolean | null | undefined, channel?: string | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } | null | undefined };
 
 export type GetTagSearchQueryVariables = Exact<{
   tag: Scalars['String'];
