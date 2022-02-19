@@ -146,7 +146,7 @@ const EntryPageLayout: React.FC<PageProps<GetMdxQuery>> = ({
               ) : ''}
               {frontmatter?.category != null ? (
                 <>
-                  <Link to={`/category/${frontmatter?.category}/`} className='mr-2' data-label='category'>
+                  <Link to={`/channel/${frontmatter?.channel}/category/${frontmatter?.category}/`} className='mr-2' data-label='category'>
                     {frontmatter?.category}
                   </Link>
                   <span className='mr-2'>
@@ -155,7 +155,7 @@ const EntryPageLayout: React.FC<PageProps<GetMdxQuery>> = ({
                 </>
               ) : ''}
               {frontmatter?.tags?.map((tag) => (
-                <Link key={tag} to={`/tags/${tag}/`} className='mr-2' data-label='tag'>
+                <Link key={tag} to={`/channel/${frontmatter?.channel}/tags/${tag}/`} className='mr-2' data-label='tag'>
                   {tag}
                 </Link>
               ))}
