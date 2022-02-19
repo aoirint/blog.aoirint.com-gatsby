@@ -1,6 +1,108 @@
 import { GatsbyConfig } from 'gatsby'
 import dayjs from 'dayjs'
 
+import { ChannelInfos } from './src/data'
+
+const commonFeedNodeSerialzier = (site, node) => {
+  const parent = node.parent
+  const sourceInstanceName = 'sourceInstanceName' in parent ? parent.sourceInstanceName : 'pages'
+  const pathPrefix = sourceInstanceName !== 'pages' ? `/${sourceInstanceName}/` : '/'
+
+  return Object.assign({}, node.frontmatter, {
+    description: node.excerpt,
+    date: node.frontmatter.date,
+    url: site.siteMetadata.siteUrl + pathPrefix + node.slug,
+    guid: site.siteMetadata.siteUrl + pathPrefix + node.slug,
+    custom_elements: [
+      {
+        "content:encoded": node.html,
+      },
+      node.frontmatter.updated ? {
+        "atom:updated": dayjs(node.frontmatter.updated).toString(),
+      } : {},
+    ],
+  })
+}
+
+const commonFeedNodeFilter = (site, node) => {
+  const parent = node.parent
+  const sourceInstanceName = 'sourceInstanceName' in parent ? parent.sourceInstanceName : 'pages'
+  return sourceInstanceName === 'entry'
+}
+
+const globalFeed = {
+  serialize: ({ query: { site, allMdx} }) => (
+    allMdx.nodes
+      .filter(node => commonFeedNodeFilter(site, node))
+      .map(node => commonFeedNodeSerialzier(site, node))
+  ),
+  query: `
+    {
+      allMdx(
+        filter: {fields: {draft: {eq: false}}}
+        sort: { order: DESC, fields: [frontmatter___lastModified] }
+        limit: 10
+      ) {
+        nodes {
+          excerpt
+          html
+          slug
+          frontmatter {
+            title
+            date
+            updated
+          }
+          parent {
+            ... on File {
+              sourceInstanceName
+            }
+          }
+        }
+      }
+    }
+  `,
+  output: "/rss.xml",
+  title: "えやみぐさ RSS Feed",
+}
+
+const channelFeeds = ChannelInfos.map((channelInfo) => ({
+  serialize: ({ query: { site, allMdx} }) => (
+    allMdx.nodes
+      .filter(node => commonFeedNodeFilter(site, node))
+      .filter(node => node.frontmatter.channel === channelInfo.key)
+      .map(node => commonFeedNodeSerialzier(site, node))
+  ),
+  query: `
+    {
+      allMdx(
+        filter: {fields: {draft: {eq: false}}}
+        sort: { order: DESC, fields: [frontmatter___lastModified] }
+        limit: 10
+      ) {
+        nodes {
+          excerpt
+          html
+          slug
+          frontmatter {
+            channel
+            title
+            date
+            updated
+          }
+          parent {
+            ... on File {
+              sourceInstanceName
+            }
+          }
+        }
+      }
+    }
+  `,
+  output: `/channel/${channelInfo.key}/rss.xml`,
+  title: `えやみぐさ ${channelInfo.key} RSS Feed`,
+  description: channelInfo.description,
+}))
+
 const config: GatsbyConfig = {
   siteMetadata: {
     siteUrl: "https://blog.aoirint.com",
@@ -115,62 +217,8 @@ const config: GatsbyConfig = {
           }
         `,
         feeds: [
-          // グローバルフィード
-          {
-            serialize: ({ query: { site, allMdx } }) => {
-              return allMdx.nodes.filter(node => {
-                const parent = node.parent
-                const sourceInstanceName = 'sourceInstanceName' in parent ? parent.sourceInstanceName : 'pages'
-                return sourceInstanceName === 'entry'
-              }).map(node => {
-                const parent = node.parent
-                const sourceInstanceName = 'sourceInstanceName' in parent ? parent.sourceInstanceName : 'pages'
-                const pathPrefix = sourceInstanceName !== 'pages' ? `/${sourceInstanceName}/` : '/'
-
-                return Object.assign({}, node.frontmatter, {
-                  description: node.excerpt,
-                  date: node.frontmatter.date,
-                  url: site.siteMetadata.siteUrl + pathPrefix + node.slug,
-                  guid: site.siteMetadata.siteUrl + pathPrefix + node.slug,
-                  custom_elements: [
-                    {
-                      "content:encoded": node.html,
-                    },
-                    node.frontmatter.updated ? {
-                      "atom:updated": dayjs(node.frontmatter.updated).toString(),
-                    } : {},
-                  ],
-                })
-              })
-            },
-            query: `
-              {
-                allMdx(
-                  filter: {fields: {draft: {eq: false}}}
-                  sort: { order: DESC, fields: [frontmatter___lastModified] }
-                  limit: 10
-                ) {
-                  nodes {
-                    excerpt
-                    html
-                    slug
-                    frontmatter {
-                      title
-                      date
-                      updated
-                    }
-                    parent {
-                      ... on File {
-                        sourceInstanceName
-                      }
-                    }
-                  }
-                }
-              }
-            `,
-            output: "/rss.xml",
-            title: "えやみぐさ's RSS Feed",
-          },
+          globalFeed,
+          ...channelFeeds,
         ],
       },
     },

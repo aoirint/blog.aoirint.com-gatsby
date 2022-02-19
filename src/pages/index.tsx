@@ -10,14 +10,11 @@ import {
 } from 'gatsby'
 
 import icon from '../images/icon.png'
-import {
-  Navbar,
-  ChannelInfos,
-} from '../components'
 
-import {
-  GetPostsQuery
-} from '../../generated/graphql-types'
+import { Navbar } from '../components'
+import { ChannelInfos } from '../data'
+
+import { GetPostsQuery } from '../../generated/graphql-types'
 import PostListItem from "../components/PostListItem"
 
 // markup
