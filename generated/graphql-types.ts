@@ -357,11 +357,11 @@ export type MdxFrontmatter = {
   updated?: Maybe<Scalars['String']>;
   lastModified?: Maybe<Scalars['String']>;
   draft?: Maybe<Scalars['Boolean']>;
-  noindex?: Maybe<Scalars['Boolean']>;
   channel?: Maybe<Scalars['String']>;
   category?: Maybe<Scalars['String']>;
   tags?: Maybe<Array<Maybe<Scalars['String']>>>;
   og_description?: Maybe<Scalars['String']>;
+  noindex?: Maybe<Scalars['Boolean']>;
 };
 
 export type MdxHeadingMdx = {
@@ -1027,11 +1027,11 @@ export type MdxFrontmatterFilterInput = {
   updated?: InputMaybe<StringQueryOperatorInput>;
   lastModified?: InputMaybe<StringQueryOperatorInput>;
   draft?: InputMaybe<BooleanQueryOperatorInput>;
-  noindex?: InputMaybe<BooleanQueryOperatorInput>;
   channel?: InputMaybe<StringQueryOperatorInput>;
   category?: InputMaybe<StringQueryOperatorInput>;
   tags?: InputMaybe<StringQueryOperatorInput>;
   og_description?: InputMaybe<StringQueryOperatorInput>;
+  noindex?: InputMaybe<BooleanQueryOperatorInput>;
 };
 
 export type BooleanQueryOperatorInput = {
@@ -1248,11 +1248,11 @@ export type FileFieldsEnum =
   | 'childrenMdx___frontmatter___updated'
   | 'childrenMdx___frontmatter___lastModified'
   | 'childrenMdx___frontmatter___draft'
-  | 'childrenMdx___frontmatter___noindex'
   | 'childrenMdx___frontmatter___channel'
   | 'childrenMdx___frontmatter___category'
   | 'childrenMdx___frontmatter___tags'
   | 'childrenMdx___frontmatter___og_description'
+  | 'childrenMdx___frontmatter___noindex'
   | 'childrenMdx___slug'
   | 'childrenMdx___body'
   | 'childrenMdx___excerpt'
@@ -1312,11 +1312,11 @@ export type FileFieldsEnum =
   | 'childMdx___frontmatter___updated'
   | 'childMdx___frontmatter___lastModified'
   | 'childMdx___frontmatter___draft'
-  | 'childMdx___frontmatter___noindex'
   | 'childMdx___frontmatter___channel'
   | 'childMdx___frontmatter___category'
   | 'childMdx___frontmatter___tags'
   | 'childMdx___frontmatter___og_description'
+  | 'childMdx___frontmatter___noindex'
   | 'childMdx___slug'
   | 'childMdx___body'
   | 'childMdx___excerpt'
@@ -3039,11 +3039,11 @@ export type MdxFieldsEnum =
   | 'frontmatter___updated'
   | 'frontmatter___lastModified'
   | 'frontmatter___draft'
-  | 'frontmatter___noindex'
   | 'frontmatter___channel'
   | 'frontmatter___category'
   | 'frontmatter___tags'
   | 'frontmatter___og_description'
+  | 'frontmatter___noindex'
   | 'slug'
   | 'body'
   | 'excerpt'
