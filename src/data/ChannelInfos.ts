@@ -1,7 +1,14 @@
 export const ChannelInfos = [
   {
     'key': '技術ノート',
-    'description': '技術に関する記事、メモ書き',
+    'description': '技術に関する記事',
+    'indexNoIndex': false,
+    'indexCategoryIndex': true,
+    'topPostCount': true,
+  },
+  {
+    'key': 'スクラップ',
+    'description': 'メモ書き',
     'indexNoIndex': false,
     'indexCategoryIndex': true,
     'topPostCount': true,
