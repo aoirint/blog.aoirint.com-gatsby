@@ -25,6 +25,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           }
         }
 
+        channels: group(field: frontmatter___channel) {
+          fieldValue
+        }
+
         categories: group(field: frontmatter___category) {
           fieldValue
         }
@@ -52,6 +56,48 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           id: node.id,
         },
       })
+  })
+
+  result.data.posts.channels.forEach(({
+    fieldValue,
+  }) => {
+    createPage({
+      path: `channel/${fieldValue}`,
+      component: path.resolve(`./src/components/ChannelSearch.tsx`),
+      context: {
+        channel: fieldValue,
+      },
+    })
+  })
+
+  result.data.posts.channels.forEach(({
+    fieldValue: channel,
+  }) => {
+    result.data.posts.categories.forEach(({
+      fieldValue: category,
+    }) => {
+      createPage({
+        path: `channel/${channel}/category/${category}`,
+        component: path.resolve(`./src/components/ChannelCategorySearch.tsx`),
+        context: {
+          channel: channel,
+          category: category,
+        },
+      })
+    })
+
+    result.data.posts.tags.forEach(({
+      fieldValue: tag,
+    }) => {
+      createPage({
+        path: `channel/${channel}/tags/${tag}`,
+        component: path.resolve(`./src/components/ChannelTagSearch.tsx`),
+        context: {
+          channel: channel,
+          tag: tag,
+        },
+      })
+    })
   })
 
   result.data.posts.categories.forEach(({

@@ -71,6 +71,7 @@ export const pageQuery = graphql`
                         title
                         date
                         updated
+                        channel
                         category
                         tags
                     }

@@ -10,6 +10,7 @@ export interface Frontmatter {
     title: string
     date?: string
     updated?: string
+    channel?: string
     category?: string
     tags?: string[]
 }
@@ -56,7 +57,7 @@ const PostListItem: React.FC<PostListItemProps> = ({
             <div className='is-size-7' data-label='tags'>
               {frontmatter?.category != null ? (
                 <>
-                  <Link to={`/category/${frontmatter?.category}/`} className='mr-2' data-label='category'>
+                  <Link to={`/channel/${frontmatter?.channel}/category/${frontmatter?.category}/`} className='mr-2' data-label='category'>
                     {frontmatter?.category}
                   </Link>
                   <span className='mr-2'>
@@ -65,7 +66,7 @@ const PostListItem: React.FC<PostListItemProps> = ({
                 </>
               ) : ''}
               {frontmatter?.tags?.map((tag) => (
-                <Link key={tag} to={`/tags/${tag}/`} className='mr-2' data-label='tag'>
+                <Link key={tag} to={`/channel/${frontmatter?.channel}/tags/${tag}/`} className='mr-2' data-label='tag'>
                   {tag}
                 </Link>
               ))}

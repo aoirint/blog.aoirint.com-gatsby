@@ -357,6 +357,7 @@ export type MdxFrontmatter = {
   updated?: Maybe<Scalars['String']>;
   lastModified?: Maybe<Scalars['String']>;
   draft?: Maybe<Scalars['Boolean']>;
+  channel?: Maybe<Scalars['String']>;
   category?: Maybe<Scalars['String']>;
   tags?: Maybe<Array<Maybe<Scalars['String']>>>;
   og_description?: Maybe<Scalars['String']>;
@@ -1025,6 +1026,7 @@ export type MdxFrontmatterFilterInput = {
   updated?: InputMaybe<StringQueryOperatorInput>;
   lastModified?: InputMaybe<StringQueryOperatorInput>;
   draft?: InputMaybe<BooleanQueryOperatorInput>;
+  channel?: InputMaybe<StringQueryOperatorInput>;
   category?: InputMaybe<StringQueryOperatorInput>;
   tags?: InputMaybe<StringQueryOperatorInput>;
   og_description?: InputMaybe<StringQueryOperatorInput>;
@@ -1244,6 +1246,7 @@ export type FileFieldsEnum =
   | 'childrenMdx___frontmatter___updated'
   | 'childrenMdx___frontmatter___lastModified'
   | 'childrenMdx___frontmatter___draft'
+  | 'childrenMdx___frontmatter___channel'
   | 'childrenMdx___frontmatter___category'
   | 'childrenMdx___frontmatter___tags'
   | 'childrenMdx___frontmatter___og_description'
@@ -1306,6 +1309,7 @@ export type FileFieldsEnum =
   | 'childMdx___frontmatter___updated'
   | 'childMdx___frontmatter___lastModified'
   | 'childMdx___frontmatter___draft'
+  | 'childMdx___frontmatter___channel'
   | 'childMdx___frontmatter___category'
   | 'childMdx___frontmatter___tags'
   | 'childMdx___frontmatter___og_description'
@@ -3031,6 +3035,7 @@ export type MdxFieldsEnum =
   | 'frontmatter___updated'
   | 'frontmatter___lastModified'
   | 'frontmatter___draft'
+  | 'frontmatter___channel'
   | 'frontmatter___category'
   | 'frontmatter___tags'
   | 'frontmatter___og_description'
@@ -3397,26 +3402,49 @@ export type GetCategorySearchQueryVariables = Exact<{
 }>;
 
 
-export type GetCategorySearchQuery = { posts: { edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: string | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }> } };
+export type GetCategorySearchQuery = { posts: { edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: string | null | undefined, channel?: string | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }> } };
+
+export type GetChannelCategorySearchQueryVariables = Exact<{
+  channel: Scalars['String'];
+  category: Scalars['String'];
+}>;
+
+
+export type GetChannelCategorySearchQuery = { posts: { edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: string | null | undefined, channel?: string | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }> } };
+
+export type GetChannelSearchQueryVariables = Exact<{
+  channel: Scalars['String'];
+}>;
+
+
+export type GetChannelSearchQuery = { recentPosts: { edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: string | null | undefined, channel?: string | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }> }, posts: { edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: string | null | undefined, channel?: string | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }>, categories: Array<{ fieldValue?: string | null | undefined, edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: string | null | undefined, channel?: string | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }> }> } };
+
+export type GetChannelTagSearchQueryVariables = Exact<{
+  channel: Scalars['String'];
+  tag: Scalars['String'];
+}>;
+
+
+export type GetChannelTagSearchQuery = { posts: { edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: string | null | undefined, channel?: string | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }> } };
 
 export type GetMdxQueryVariables = Exact<{
   id?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type GetMdxQuery = { mdx?: { id: string, slug?: string | null | undefined, body: string, excerpt: string, tableOfContents?: any | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: string | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } | null | undefined };
+export type GetMdxQuery = { mdx?: { id: string, slug?: string | null | undefined, body: string, excerpt: string, tableOfContents?: any | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: string | null | undefined, channel?: string | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } | null | undefined };
 
 export type GetTagSearchQueryVariables = Exact<{
   tag: Scalars['String'];
 }>;
 
 
-export type GetTagSearchQuery = { posts: { edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: string | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }> } };
+export type GetTagSearchQuery = { posts: { edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: string | null | undefined, channel?: string | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }> } };
 
 export type GetPostsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPostsQuery = { posts: { edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: string | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }>, categories: Array<{ fieldValue?: string | null | undefined, edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: string | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }> }>, tags: Array<{ fieldValue?: string | null | undefined, edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: string | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }> }> } };
+export type GetPostsQuery = { posts: { edges: Array<{ node: { id: string, slug?: string | null | undefined, parent?: { sourceInstanceName: string } | {} | null | undefined, frontmatter?: { title: string, date?: string | null | undefined, updated?: string | null | undefined, channel?: string | null | undefined, category?: string | null | undefined, tags?: Array<string | null | undefined> | null | undefined } | null | undefined } }>, channels: Array<{ fieldValue?: string | null | undefined, totalCount: number }> } };
 
 export type GatsbyImageSharpFixedFragment = { base64?: string | null | undefined, width: number, height: number, src: string, srcSet: string };
 

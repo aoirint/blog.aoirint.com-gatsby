@@ -12,6 +12,7 @@ import {
 import icon from '../images/icon.png'
 import {
   Navbar,
+  ChannelInfos,
 } from '../components'
 
 import {
@@ -49,35 +50,32 @@ const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
           </h2>
           <div className="gcse-search"></div>
           <h2 className='title is-5 mb-3'>
-            Recent Notes
+            チャンネル
           </h2>
-          <div className='mt-4 mb-5'>
-            {data.posts.edges.slice(0, 10).map(({ node }) => (
-              <div key={node.id}>
-                <PostListItem post={node} />
-                <hr className='my-1' />
-              </div>
-            ))}
-          </div>
-          <h2 className='title is-5 mb-3'>
-            Category Index
-          </h2>
-          <div className='columns is-multiline'>
-            {data.posts.categories.map((category) => (
-              <div key={category.fieldValue} className='column is-one-quarter'>
-                <div className='m-1'>
-                  <h2 className='title is-5 my-2'>{category.fieldValue}</h2>
-                  <div>
-                    {category.edges.map(({ node }) => (
-                      <div key={node.id}>
-                        <PostListItem post={node} />
-                        <hr className='my-1' />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div className="content">
+            <dl>
+              {ChannelInfos.map((channelInfo, index) => {
+                const channelData = data.posts.channels.find((channelData) => channelData.fieldValue === channelInfo.key)
+                return (
+                  <>
+                    <dt className={index > 0 ? 'mt-4' : ''}>
+                      {channelData?.totalCount > 0 ? (
+                        <a href={`/channel/${channelInfo.key}/`}>
+                          {channelInfo.key} {channelInfo.topPostCount ? `(${channelData?.totalCount})` : ''}
+                        </a>
+                      ) : (
+                        <>
+                          {channelInfo.key} {channelInfo.topPostCount ? '(0)' : ''}
+                        </>
+                      )}
+                    </dt>
+                    <dd>
+                      {channelInfo.description}
+                    </dd>
+                  </>
+                )
+              })}
+            </dl>
           </div>
         </div>
       </section>
@@ -88,7 +86,9 @@ const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
 export const pageQuery = graphql`
   query GetPosts {
     posts: allMdx(
-      filter: {fields: {draft: {eq: false}}}
+      filter: {
+        fields: {draft: {eq: false}}
+      }
       sort: {
         fields: [frontmatter___lastModified]
         order: DESC
@@ -107,54 +107,16 @@ export const pageQuery = graphql`
             title
             date
             updated
+            channel
             category
             tags
           }
         }
       }
 
-      categories: group(field: frontmatter___category) {
+      channels: group(field: frontmatter___channel) {
         fieldValue
-        edges {
-          node {
-            id
-            slug
-            parent {
-              ... on File {
-                sourceInstanceName
-              }
-            }
-            frontmatter {
-              title
-              date
-              updated
-              category
-              tags
-            }
-          }
-        }
-      }
-
-      tags: group(field: frontmatter___tags) {
-        fieldValue
-        edges {
-          node {
-            id
-            slug
-            parent {
-              ... on File {
-                sourceInstanceName
-              }
-            }
-            frontmatter {
-              title
-              date
-              updated
-              category
-              tags
-            }
-          }
-        }
+        totalCount
       }
     }
   }
