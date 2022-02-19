@@ -43,7 +43,7 @@ const PostListItem: React.FC<PostListItemProps> = ({
     <div className='mb-2'>
       <div className=''>
         <Link to={`${pathPrefix}${slug}`} data-label='title'>
-          {frontmatter?.title}
+          {frontmatter?.title ? frontmatter.title : 'No title'}
         </Link>
         {date || updated ? (
           <div className='is-size-7' data-label='dateString'>
