@@ -134,6 +134,16 @@ const EntryPageLayout: React.FC<PageProps<GetMdxQuery>> = ({
               </div>
             </div>
             <div className='is-size-7' data-label='tags'>
+              {frontmatter?.channel != null ? (
+                <>
+                  <Link to={`/channel/${frontmatter?.channel}/`} className='mr-2' data-label='channel'>
+                    {frontmatter?.channel}
+                  </Link>
+                  <span className='mr-2'>
+                    |
+                  </span>
+                </>
+              ) : ''}
               {frontmatter?.category != null ? (
                 <>
                   <Link to={`/category/${frontmatter?.category}/`} className='mr-2' data-label='category'>
