@@ -41,40 +41,40 @@ const TagSearchPageLayout: React.FC<PageProps<GetTagSearchQuery>> = ({
 }
 
 export const pageQuery = graphql`
-    query GetTagSearch(
-        $tag: String!
-    ) {
-        posts: allMdx(
-            filter: {
-                frontmatter: {
-                    tags: {
-                        in: [$tag]
-                    }
-                }
-                fields: {draft: {eq: false}}
-            }
-        ) {
-            edges {
-                node {
-                    id
-                    slug
-                    parent {
-                        ... on File {
-                            sourceInstanceName
-                        }
-                    }
-                    frontmatter {
-                        title
-                        date
-                        updated
-                        channel
-                        category
-                        tags
-                    }
+  query GetTagSearch(
+    $tag: String!
+  ) {
+    posts: allMdx(
+        filter: {
+            frontmatter: {
+                tags: {
+                    in: [$tag]
                 }
             }
+            fields: {draft: {eq: false}}
         }
+    ) {
+      edges {
+        node {
+          id
+          slug
+          parent {
+            ... on File {
+              sourceInstanceName
+            }
+          }
+          frontmatter {
+            title
+            date
+            updated
+            channel
+            category
+            tags
+          }
+        }
+      }
     }
+  }
 `
 
 export default TagSearchPageLayout
