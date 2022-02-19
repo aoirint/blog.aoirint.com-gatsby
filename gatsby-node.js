@@ -51,7 +51,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       const pathPrefix = `/${sourceInstanceName}/`
       createPage({
         path: `${pathPrefix}${node.slug}`,
-        component: path.resolve(`./src/components/MdxPageComponentLayout.tsx`),
+        component: path.resolve(`./src/layouts/EntryPageLayout.tsx`),
         context: {
           id: node.id,
         },
@@ -63,7 +63,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }) => {
     createPage({
       path: `channel/${fieldValue}`,
-      component: path.resolve(`./src/components/ChannelSearch.tsx`),
+      component: path.resolve(`./src/layouts/ChannelSearchPageLayout.tsx`),
       context: {
         channel: fieldValue,
       },
@@ -78,7 +78,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     }) => {
       createPage({
         path: `channel/${channel}/category/${category}`,
-        component: path.resolve(`./src/components/ChannelCategorySearch.tsx`),
+        component: path.resolve(`./src/layouts/ChannelCategorySearchPageLayout.tsx`),
         context: {
           channel: channel,
           category: category,
@@ -91,7 +91,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     }) => {
       createPage({
         path: `channel/${channel}/tags/${tag}`,
-        component: path.resolve(`./src/components/ChannelTagSearch.tsx`),
+        component: path.resolve(`./src/layouts/ChannelTagSearchPageLayout.tsx`),
         context: {
           channel: channel,
           tag: tag,
@@ -105,7 +105,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }) => {
     createPage({
       path: `category/${fieldValue}`,
-      component: path.resolve(`./src/components/CategorySearch.tsx`),
+      component: path.resolve(`./src/layouts/CategorySearchPageLayout.tsx`),
       context: {
         category: fieldValue,
       },
@@ -117,7 +117,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }) => {
     createPage({
       path: `tags/${fieldValue}`,
-      component: path.resolve(`./src/components/TagSearch.tsx`),
+      component: path.resolve(`./src/layouts/TagSearchPageLayout.tsx`),
       context: {
         tag: fieldValue,
       },

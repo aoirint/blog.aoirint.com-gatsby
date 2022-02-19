@@ -10,9 +10,9 @@ import {
 import {
     GetCategorySearchQuery
 } from '../../generated/graphql-types'
-import PostListItem from './PostListItem'
+import PostListItem from '../components/PostListItem'
 
-const CategorySearch: React.FC<PageProps<GetCategorySearchQuery>> = ({
+const CategorySearchPageLayout: React.FC<PageProps<GetCategorySearchQuery>> = ({
     pageContext,
     data,
 }) => {
@@ -81,4 +81,4 @@ export const pageQuery = graphql`
     }
 `
 
-export default CategorySearch
+export default CategorySearchPageLayout

@@ -10,10 +10,10 @@ import {
 import {
   GetChannelSearchQuery
 } from '../../generated/graphql-types'
-import PostListItem from './PostListItem'
-import ChannelInfos from './ChannelInfos'
+import PostListItem from '../components/PostListItem'
+import ChannelInfos from '../components/ChannelInfos'
 
-const ChannelSearch: React.FC<PageProps<GetChannelSearchQuery>> = ({
+const ChannelSearchPageLayout: React.FC<PageProps<GetChannelSearchQuery>> = ({
   pageContext,
   data,
 }) => {
@@ -187,4 +187,4 @@ export const pageQuery = graphql`
   }
 `
 
-export default ChannelSearch
+export default ChannelSearchPageLayout

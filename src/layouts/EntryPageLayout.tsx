@@ -9,7 +9,7 @@ import '../styles/main.scss'
 //   number: 'prism--number',
 // })
 
-import './PrismCustom'
+import '../components/PrismCustom'
 import Highlight, { defaultProps } from "prism-react-renderer"
 
 
@@ -37,7 +37,7 @@ import {
 } from '../components'
 
 import icon from '../images/icon.png'
-import Ogp from './Ogp'
+import Ogp from '../components/Ogp'
 
 const CodeBlock: React.FC<MDXRendererProps> = (props) => {
   const codeProps = props.children.props
@@ -90,7 +90,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
   )
 }
 
-const MdxPageComponentLayout: React.FC<PageProps<GetMdxQuery>> = ({
+const EntryPageLayout: React.FC<PageProps<GetMdxQuery>> = ({
   data,
   ...props
 }) => {
@@ -208,4 +208,4 @@ export const pageQuery = graphql`
   }
 `
 
-export default MdxPageComponentLayout
+export default EntryPageLayout

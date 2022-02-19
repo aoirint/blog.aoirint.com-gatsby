@@ -5,10 +5,10 @@ import {
     GetTagSearchQuery
 } from '../../generated/graphql-types'
 import { Helmet } from 'react-helmet'
-import { Navbar } from '.'
-import PostListItem from './PostListItem'
+import { Navbar } from '../components'
+import PostListItem from '../components/PostListItem'
 
-const TagSearch: React.FC<PageProps<GetTagSearchQuery>> = ({
+const TagSearchPageLayout: React.FC<PageProps<GetTagSearchQuery>> = ({
     pageContext,
     data,
 }) => {
@@ -77,4 +77,4 @@ export const pageQuery = graphql`
     }
 `
 
-export default TagSearch
+export default TagSearchPageLayout

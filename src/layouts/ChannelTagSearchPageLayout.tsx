@@ -8,21 +8,21 @@ import {
 } from '../components'
 
 import {
-  GetChannelCategorySearchQuery
+  GetChannelTagSearchQuery
 } from '../../generated/graphql-types'
-import PostListItem from './PostListItem'
+import PostListItem from '../components/PostListItem'
 
-const ChannelCategorySearch: React.FC<PageProps<GetChannelCategorySearchQuery>> = ({
+const ChannelTagSearchPageLayout: React.FC<PageProps<GetChannelTagSearchQuery>> = ({
   pageContext,
   data,
 }) => {
   const channel = 'channel' in pageContext ? String(pageContext['channel']) : ''
-  const category = 'category' in pageContext ? String(pageContext['category']) : ''
+  const tag = 'tag' in pageContext ? String(pageContext['tag']) : ''
 
   return (
     <>
       <Helmet>
-        <title>{channel}/category/{category} · えやみぐさ</title>
+        <title>{channel}/tags/{tag} · えやみぐさ</title>
         <meta name="robots" content="noindex" />
       </Helmet>
       <Navbar />
@@ -34,7 +34,7 @@ const ChannelCategorySearch: React.FC<PageProps<GetChannelCategorySearchQuery>> 
             </a>
           </h1>
           <h2 className='title is-4 mb-4'>
-            カテゴリ: {category}
+            タグ: {tag}
           </h2>
           <ul>
             {data.posts.edges.map(({ node }) => (
@@ -51,15 +51,15 @@ const ChannelCategorySearch: React.FC<PageProps<GetChannelCategorySearchQuery>> 
 }
 
 export const pageQuery = graphql`
-  query GetChannelCategorySearch(
+  query GetChannelTagSearch(
     $channel: String!
-    $category: String!
+    $tag: String!
   ) {
     posts: allMdx(
       filter: {
         frontmatter: {
           channel: {eq: $channel}
-          category: {eq: $category}
+          tags: {in: [$tag]}
         }
         fields: {draft: {eq: false}}
       }
@@ -91,4 +91,4 @@ export const pageQuery = graphql`
   }
 `
 
-export default ChannelCategorySearch
+export default ChannelTagSearchPageLayout
