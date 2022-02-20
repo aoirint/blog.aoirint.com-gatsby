@@ -1,4 +1,5 @@
 import { GatsbyConfig } from 'gatsby'
+import fs from 'fs'
 import dayjs from 'dayjs'
 
 import { ChannelInfos } from './src/data'
@@ -103,6 +104,17 @@ const channelFeeds = ChannelInfos.map((channelInfo) => ({
   description: channelInfo.description,
 }))
 
+const contentsPlugin = fs.existsSync('./contents/') ? [
+  {
+    resolve: "gatsby-source-filesystem",
+    options: {
+      name: "entry",
+      path: "./contents/",
+    },
+    __key: "entry",
+  }
+] : []
+
 const config: GatsbyConfig = {
   siteMetadata: {
     siteUrl: "https://blog.aoirint.com",
@@ -171,6 +183,7 @@ const config: GatsbyConfig = {
       },
       __key: "entry",
     },
+    ...contentsPlugin,
     {
       resolve: 'gatsby-plugin-draft',
       options: {
