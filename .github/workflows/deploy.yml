@@ -17,8 +17,8 @@ jobs:
           github-token: ${{ secrets.GH_PAT }}
           script: |
             await github.rest.actions.createWorkflowDispatch({
-              'aoirint-web',
-              'blog.aoirint.com',
-              'workflows/deploy.yml',
-              'main',
+              owner: 'aoirint-web',
+              repo: 'blog.aoirint.com',
+              workflow_id: 'workflows/deploy.yml',
+              ref: 'main',
             })
