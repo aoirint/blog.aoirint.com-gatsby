@@ -14,6 +14,7 @@ jobs:
       - name: Dispatch deploy workflow
         uses: actions/github-script@v6
         with:
+          github-token: ${{ secrets.GH_PAT }}
           script: |
             await github.rest.actions.createWorkflowDispatch({
               'aoirint-web',
