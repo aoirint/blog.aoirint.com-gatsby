@@ -1,21 +1,21 @@
 export const ChannelInfos = [
   {
     'key': '技術ノート',
-    'description': '技術に関する記事',
+    'description': '技術に関するメモ書き',
     'indexNoIndex': false,
     'indexCategoryIndex': true,
     'topPostCount': true,
   },
   {
     'key': '作業ログ',
-    'description': 'スクラップ、メモ書き',
+    'description': 'スクラップ、下書き',
     'indexNoIndex': false,
     'indexCategoryIndex': false,
     'topPostCount': true,
   },
   {
     'key': 'レポート',
-    'description': '報告やアナウンス',
+    'description': '報告、アナウンス、管理情報、リリースノート',
     'indexNoIndex': false,
     'indexCategoryIndex': false,
     'topPostCount': true,
