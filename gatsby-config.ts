@@ -38,7 +38,7 @@ const articleFeeds = {
   serialize: ({ query: { site, allMdx} }) => (
     allMdx.nodes
       .filter(node => commonFeedNodeFilter(site, node))
-      .filter(node => node.frontmatter.channel in ['技術ノート','レポート'])
+      .filter(node => node.frontmatter.channel === '技術ノート' || node.frontmatter.channel === 'レポート')
       .map(node => commonFeedNodeSerialzier(site, node))
   ),
   query: `
