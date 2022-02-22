@@ -34,7 +34,44 @@ const commonFeedNodeFilter = (site, node) => {
   return sourceInstanceName === 'entry'
 }
 
-const globalFeed = {
+const articleFeeds = {
+  serialize: ({ query: { site, allMdx} }) => (
+    allMdx.nodes
+      .filter(node => commonFeedNodeFilter(site, node))
+      .filter(node => node.frontmatter.channel in ['技術ノート','レポート'])
+      .map(node => commonFeedNodeSerialzier(site, node))
+  ),
+  query: `
+    {
+      allMdx(
+        filter: {fields: {draft: {eq: false}}}
+        sort: { order: DESC, fields: [frontmatter___lastModified] }
+        limit: 10
+      ) {
+        nodes {
+          excerpt
+          html
+          slug
+          frontmatter {
+            channel
+            title
+            date
+            updated
+          }
+          parent {
+            ... on File {
+              sourceInstanceName
+            }
+          }
+        }
+      }
+    }
+  `,
+  output: `/rss.xml`,
+  title: `えやみぐさ Article RSS Feed`,
+}
+
+const allFeed = {
   serialize: ({ query: { site, allMdx} }) => (
     allMdx.nodes
       .filter(node => commonFeedNodeFilter(site, node))
@@ -65,7 +102,7 @@ const globalFeed = {
       }
     }
   `,
-  output: "/rss.xml",
+  output: "/rss/all.xml",
   title: "えやみぐさ RSS Feed",
 }
 
@@ -238,7 +275,8 @@ const config: GatsbyConfig = {
           }
         `,
         feeds: [
-          globalFeed,
+          articleFeeds,
+          allFeed,
           ...channelFeeds,
         ],
       },
