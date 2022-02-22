@@ -68,7 +68,7 @@ const articleFeeds = {
     }
   `,
   output: `/rss.xml`,
-  title: `えやみぐさ Article RSS Feed`,
+  title: `えやみぐさ RSS Feed`,
 }
 
 const allFeed = {
@@ -103,7 +103,7 @@ const allFeed = {
     }
   `,
   output: "/rss/all.xml",
-  title: "えやみぐさ RSS Feed",
+  title: "えやみぐさ All RSS Feed",
 }
 
 const channelFeeds = ChannelInfos.map((channelInfo) => ({
