@@ -15,7 +15,7 @@ export const ChannelInfos = [
   },
   {
     'key': 'レポート',
-    'description': '報告、アナウンス、管理情報、リリースノート',
+    'description': '報告、アナウンス、近況、管理情報、リリースノート',
     'indexNoIndex': false,
     'indexCategoryIndex': false,
     'topPostCount': true,
