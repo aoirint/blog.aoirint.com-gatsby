@@ -2,6 +2,9 @@ import { GatsbyConfig } from 'gatsby'
 import fs from 'fs'
 import dayjs from 'dayjs'
 
+import remarkMath from 'remark-math'
+import remarkHtmlKatex from 'remark-html-katex'
+
 import { ChannelInfos } from './src/data'
 
 const commonFeedNodeSerialzier = (site, node) => {
@@ -162,7 +165,12 @@ const config: GatsbyConfig = {
             },
           },
           "gatsby-remark-copy-linked-files",
+          "gatsby-remark-mathjax-ssr",
         ],
+        remarkPlugins: [
+          remarkMath,
+          remarkHtmlKatex,
+        ]
       },
     },
     "gatsby-plugin-sharp",
