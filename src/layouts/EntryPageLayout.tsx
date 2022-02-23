@@ -163,12 +163,7 @@ const EntryPageLayout: React.FC<PageProps<GetMdxQuery>> = ({
           </aside>
           <hr className='my-2' />
           <div className='mt-2'>
-            <nav className='is-hidden-desktop menu' style={{
-              position: 'sticky',
-              top: '64px',
-              maxHeight: 'calc(100vh - 64px)',
-              overflowY: 'auto',
-            }}>
+            <nav className='is-hidden-desktop menu'>
               <TableOfContents
                 items={tableOfContents.items}
               />
@@ -187,7 +182,12 @@ const EntryPageLayout: React.FC<PageProps<GetMdxQuery>> = ({
                   </MDXRenderer>
                 </MDXProvider>
               </article>
-              <nav className='is-hidden-touch is-w300-desktop menu'>
+              <nav className='is-hidden-touch is-w300-desktop menu' style={{
+                position: 'sticky',
+                top: '64px',
+                maxHeight: 'calc(100vh - 64px)',
+                overflowY: 'auto',
+              }}>
                 <TableOfContents
                   items={tableOfContents.items}
                 />
