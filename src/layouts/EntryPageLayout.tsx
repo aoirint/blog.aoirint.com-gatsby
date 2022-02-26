@@ -107,7 +107,10 @@ const EntryPageLayout: React.FC<PageProps<GetMdxQuery>> = ({
       <Helmet>
         <title>{frontmatter.title} · えやみぐさ</title>
         {frontmatter?.noindex ? (
+          <>
           <meta name="robots" content="noindex" />
+          <meta name="referrer" content="no-referrer" />
+          </>
         ) : ''}
       </Helmet>
       <Ogp post={mdx} />
