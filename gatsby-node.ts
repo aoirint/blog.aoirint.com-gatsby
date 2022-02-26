@@ -52,7 +52,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
       const sourceInstanceName = node.parent.sourceInstanceName
       const pathPrefix = `/${sourceInstanceName}/`
       createPage({
-        path: `${pathPrefix}${node.slug}`,
+        path: decodeURIComponent(`${pathPrefix}${node.slug}`),
         component: path.resolve(`./src/layouts/EntryPageLayout.tsx`),
         context: {
           id: node.id,
