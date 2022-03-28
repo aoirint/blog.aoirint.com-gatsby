@@ -244,7 +244,7 @@ const config: GatsbyConfig = {
       resolve: "gatsby-plugin-google-gtag",
       options: {
         trackingIds: [
-          "G-STE0958LN0",
+          "G-33TXF7WL2L",
         ],
         pluginConfig: {
           head: true,
