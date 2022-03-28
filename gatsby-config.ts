@@ -241,10 +241,15 @@ const config: GatsbyConfig = {
       },
     },
     {
-      resolve: "gatsby-plugin-google-analytics",
+      resolve: "gatsby-plugin-google-gtag",
       options: {
-        trackingId: "G-STE0958LN0",
-        head: true,
+        trackingIds: [
+          "G-STE0958LN0",
+        ],
+        pluginConfig: {
+          head: true,
+          respectDNT: true,
+        },
       },
     },
     // workaround: fail to auto reload if enabled

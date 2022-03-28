@@ -27,7 +27,7 @@
     "gatsby": "^4.8.0",
     "gatsby-plugin-draft": "github:aoirint/gatsby-plugin-draft#0.2.0+aoirint.0",
     "gatsby-plugin-feed": "^4.8.0",
-    "gatsby-plugin-google-analytics": "^4.8.0",
+    "gatsby-plugin-google-gtag": "^4.10.0",
     "gatsby-plugin-graphql-codegen": "^3.1.1",
     "gatsby-plugin-image": "^2.8.0",
     "gatsby-plugin-manifest": "^4.8.0",
