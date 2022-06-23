@@ -18,6 +18,11 @@
   margin: inherit;
 }
 
+// fix no margin between details and .prism-code
+.prism-code {
+  margin-top: 1em;
+}
+
 .content {
   word-break: break-word;
 }
