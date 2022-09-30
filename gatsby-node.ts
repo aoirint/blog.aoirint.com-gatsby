@@ -1,4 +1,4 @@
-import { GatsbyNode } from 'gatsby'
+import type { GatsbyNode } from 'gatsby'
 import path from 'path'
 
 import dayjs from 'dayjs'
@@ -43,6 +43,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
   `)
 
   if (result.errors) {
+    console.error(result.errors)
     reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query')
   }
 
