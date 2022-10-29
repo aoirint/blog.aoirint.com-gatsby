@@ -24,4 +24,4 @@ ADD ./gatsby-config.ts ./gatsby-node.ts /work/
 ADD ./static /work/static
 ADD ./src /work/src
 
-CMD [ "npm", "run", "build" ]
+CMD [ "gosu", "user", "npm", "run", "build" ]
