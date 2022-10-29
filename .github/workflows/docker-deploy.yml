@@ -1,4 +1,4 @@
-name: Build and Deploy to Docker registry
+name: Build Docker and Dispatch Deploy
 
 on:
   push:
@@ -15,7 +15,7 @@ env:
   IMAGE_TAG: ${{ github.event.release.tag_name != '' && github.event.release.tag_name || 'latest' }}
 
 jobs:
-  docker-build-and-deploy:
+  docker-build-and-push:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -43,3 +43,20 @@ jobs:
           tags: ${{ env.IMAGE_NAME_AND_TAG }}
           cache-from: type=registry,ref=${{ env.IMAGE_NAME_AND_TAG }}-buildcache
           cache-to: type=registry,ref=${{ env.IMAGE_NAME_AND_TAG }}-buildcache,mode=max
+
+  dispatch-deploy:
+    needs: [docker-build-and-push]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Dispatch deploy workflow
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GH_PAT }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: 'aoirint',
+              repo: 'blog.aoirint.com-deploy',
+              workflow_id: 'docker-deploy.yml',
+              ref: 'patch-docker',
+            })
