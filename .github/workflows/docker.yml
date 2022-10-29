@@ -1,4 +1,4 @@
-name: Push to Docker registry
+name: Build and Deploy to Docker registry
 
 on:
   push:
