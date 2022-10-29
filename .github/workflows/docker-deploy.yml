@@ -58,5 +58,5 @@ jobs:
               owner: 'aoirint',
               repo: 'blog.aoirint.com-deploy',
               workflow_id: 'docker-deploy.yml',
-              ref: 'patch-docker',
+              ref: 'main',
             })
