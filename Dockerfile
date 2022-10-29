@@ -21,6 +21,7 @@ ADD ./package.json ./package-lock.json ./.npmrc /work/
 RUN gosu user npm ci
 
 ADD ./gatsby-config.ts ./gatsby-node.ts /work/
-ADD ./static ./src /work/
+ADD ./static /work/static
+ADD ./src /work/src
 
 CMD [ "npm", "run", "build" ]
