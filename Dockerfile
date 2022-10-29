@@ -14,6 +14,9 @@ EOF
 RUN <<EOF
   groupadd -o -g 1000 user
   useradd -o -u 1000 -g user -m user
+
+  mkdir -p /work
+  chown -R user:user /work
 EOF
 
 WORKDIR /work
