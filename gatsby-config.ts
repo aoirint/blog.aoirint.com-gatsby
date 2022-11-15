@@ -162,6 +162,7 @@ const config: GatsbyConfig = {
     title: "Eyamigusa",
   },
   trailingSlash: 'always',
+  graphqlTypegen: true,
   plugins: [
     "gatsby-plugin-sass",
     "gatsby-plugin-image",
@@ -265,12 +266,6 @@ const config: GatsbyConfig = {
         "gatsby-plugin-twitter",
       ]
     )),
-    {
-      resolve: "gatsby-plugin-graphql-codegen",
-      options: {
-        fileName: "generated/graphql-types.ts",
-      },
-    },
     {
       resolve: `gatsby-plugin-feed`,
       options: {
