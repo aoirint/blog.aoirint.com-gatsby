@@ -213,7 +213,9 @@ export const pageQuery = graphql`
       }
     ) {
       id
-      slug
+      fields {
+        slug
+      }
       body
       excerpt
       tableOfContents

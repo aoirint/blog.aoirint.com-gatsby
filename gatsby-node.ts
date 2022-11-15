@@ -18,7 +18,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
         edges {
           node {
             id
-            slug
+            fields {
+              slug
+            }
             parent {
               ... on File {
                 sourceInstanceName

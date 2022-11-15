@@ -15,8 +15,8 @@ const commonFeedNodeSerialzier = (site, node) => {
   return Object.assign({}, node.frontmatter, {
     description: node.excerpt,
     date: node.frontmatter.date,
-    url: site.siteMetadata.siteUrl + pathPrefix + node.slug,
-    guid: site.siteMetadata.siteUrl + pathPrefix + node.slug,
+    url: site.siteMetadata.siteUrl + pathPrefix + node.fields.slug,
+    guid: site.siteMetadata.siteUrl + pathPrefix + node.fields.slug,
     custom_elements: [
       {
         "content:encoded": node.html,
@@ -51,7 +51,9 @@ const articleFeeds = {
         nodes {
           excerpt
           html
-          slug
+          fields {
+            slug
+          }
           frontmatter {
             channel
             title
@@ -87,7 +89,9 @@ const allFeed = {
         nodes {
           excerpt
           html
-          slug
+          fields {
+            slug
+          }
           frontmatter {
             title
             date
@@ -123,7 +127,9 @@ const channelFeeds = ChannelInfos.map((channelInfo) => ({
         nodes {
           excerpt
           html
-          slug
+          fields {
+            slug
+          }
           frontmatter {
             channel
             title

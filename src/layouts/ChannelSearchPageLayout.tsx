@@ -114,7 +114,9 @@ export const pageQuery = graphql`
       edges {
         node {
           id
-          slug
+          fields {
+            slug
+          }
           parent {
             ... on File {
               sourceInstanceName
@@ -145,7 +147,9 @@ export const pageQuery = graphql`
       edges {
         node {
           id
-          slug
+          fields {
+            slug
+          }
           parent {
             ... on File {
               sourceInstanceName
@@ -167,7 +171,9 @@ export const pageQuery = graphql`
         edges {
           node {
             id
-            slug
+            fields {
+              slug
+            }
             parent {
               ... on File {
                 sourceInstanceName
