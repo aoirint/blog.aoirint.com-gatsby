@@ -205,12 +205,14 @@ const config: GatsbyConfig = {
           },
           "gatsby-remark-copy-linked-files",
         ],
-        remarkPlugins: [
-          remarkMath,
-        ],
-        rehypePlugins: [
-          rehypeKatex,
-        ],
+        mdxOptions: {
+          remarkPlugins: [
+            remarkMath,
+          ],
+          rehypePlugins: [
+            rehypeKatex,
+          ],
+        },
       },
     },
     "gatsby-plugin-sharp",
