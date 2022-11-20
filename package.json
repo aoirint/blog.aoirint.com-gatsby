@@ -21,7 +21,6 @@
   "dependencies": {
     "@mdx-js/mdx": "^2.1.5",
     "@mdx-js/react": "^2.1.5",
-    "@sindresorhus/slugify": "^1.1.2",
     "@types/react-helmet": "^6.1.5",
     "bulma": "^0.9.4",
     "dayjs": "^1.11.6",
