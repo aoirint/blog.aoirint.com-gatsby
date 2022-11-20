@@ -17,7 +17,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = ({ node, actions, getNod
     createNodeField({
       node,
       name: 'slug',
-      value: slug
+      value: slugify(slug)
     })
   }
 }
