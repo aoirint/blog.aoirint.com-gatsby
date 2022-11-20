@@ -1,7 +1,6 @@
 import type { GatsbyNode } from 'gatsby'
 import { createFilePath } from 'gatsby-source-filesystem'
 import path from 'path'
-import slugify from '@sindresorhus/slugify'
 
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
@@ -17,7 +16,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({ node, actions, 
     createNodeField({
       node,
       name: 'slug',
-      value: slugify(slug)
+      value: slug
     })
   }
 }
