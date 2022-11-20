@@ -1,11 +1,26 @@
 import type { GatsbyNode } from 'gatsby'
+import { createFilePath } from 'gatsby-source-filesystem'
 import path from 'path'
+import slugify from '@sindresorhus/slugify'
 
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'
 dayjs.extend(utc)
 dayjs.extend(timezone)
+
+export const onCreateNode: GatsbyNode['onCreateNode'] = ({ node, actions, getNode }) => {
+  const { createNodeField } = actions
+  if (node.internal.type === 'Mdx') {
+    const slug = createFilePath({ node, getNode, basePath: 'pages', trailingSlash: true})
+
+    createNodeField({
+      node,
+      name: 'slug',
+      value: slug
+    })
+  }
+}
 
 export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
