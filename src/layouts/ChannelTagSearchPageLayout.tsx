@@ -64,8 +64,7 @@ export const pageQuery = graphql`
         fields: {draft: {eq: false}}
       }
       sort: {
-        fields: [frontmatter___lastModified]
-        order: DESC
+        frontmatter: {lastModified: DESC}
       }
     ) {
       edges {
