@@ -27,9 +27,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 
   const result = await graphql(`
     query {
-      posts: allMdx(
-        filter: {fields: {draft: {eq: false}}}
-      ) {
+      posts: allMdx(filter: {fields: {draft: {eq: false}}}) {
         edges {
           node {
             id
@@ -43,16 +41,13 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
             }
           }
         }
-
-        channels: group(field: frontmatter___channel) {
+        channels: group(field: {frontmatter: {channel: SELECT}}) {
           fieldValue
         }
-
-        categories: group(field: frontmatter___category) {
+        categories: group(field: {frontmatter: {category: SELECT}}) {
           fieldValue
         }
-
-        tags: group(field: frontmatter___tags) {
+        tags: group(field: {frontmatter: {tags: SELECT}}) {
           fieldValue
         }
       }
