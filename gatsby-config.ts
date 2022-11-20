@@ -82,7 +82,7 @@ const allFeed = {
     {
       allMdx(
         filter: {fields: {draft: {eq: false}}}
-        sort: { order: DESC, fields: [frontmatter___lastModified] }
+        sort: {frontmatter: {lastModified: DESC}}
         limit: 10
       ) {
         nodes {
@@ -91,6 +91,7 @@ const allFeed = {
             slug
           }
           frontmatter {
+            channel
             title
             date
             updated
