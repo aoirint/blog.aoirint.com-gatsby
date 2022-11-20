@@ -19,7 +19,7 @@ const commonFeedNodeSerialzier = (site, node) => {
     guid: site.siteMetadata.siteUrl + pathPrefix + node.fields.slug,
     custom_elements: [
       {
-        "content:encoded": node.html,
+        "content:encoded": node.excerpt, // Gatsby 5 removed node.html: https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/#v3-to-v4-breaking-changes
       },
       node.frontmatter.updated ? {
         "atom:updated": dayjs(node.frontmatter.updated).toString(),
@@ -50,7 +50,6 @@ const articleFeeds = {
       ) {
         nodes {
           excerpt
-          html
           fields {
             slug
           }
@@ -88,7 +87,6 @@ const allFeed = {
       ) {
         nodes {
           excerpt
-          html
           fields {
             slug
           }
@@ -126,7 +124,6 @@ const channelFeeds = ChannelInfos.map((channelInfo) => ({
       ) {
         nodes {
           excerpt
-          html
           fields {
             slug
           }
