@@ -42,7 +42,7 @@ const articleFeeds = {
       .map(node => commonFeedNodeSerialzier(site, node))
   ),
   query: `
-    {
+    query GetArticleFeedPosts {
       allMdx(
         filter: {fields: {draft: {eq: false}}}
         sort: {frontmatter: {lastModified: DESC}}
@@ -79,7 +79,7 @@ const allFeed = {
       .map(node => commonFeedNodeSerialzier(site, node))
   ),
   query: `
-    {
+    query GetAllFeedPosts {
       allMdx(
         filter: {fields: {draft: {eq: false}}}
         sort: {frontmatter: {lastModified: DESC}}
@@ -117,7 +117,7 @@ const channelFeeds = ChannelInfos.map((channelInfo) => ({
       .map(node => commonFeedNodeSerialzier(site, node))
   ),
   query: `
-    {
+    query GetChannelFeedPosts {
       allMdx(
         filter: {fields: {draft: {eq: false}}}
         sort: {frontmatter: {lastModified: DESC}}
