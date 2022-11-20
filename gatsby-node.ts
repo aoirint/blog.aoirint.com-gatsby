@@ -11,7 +11,7 @@ dayjs.extend(timezone)
 export const onCreateNode: GatsbyNode['onCreateNode'] = async ({ node, actions, getNode }) => {
   const { createNodeField } = actions
   if (node.internal.type === 'Mdx') {
-    const slug = createFilePath({ node, getNode, basePath: 'pages', trailingSlash: true})
+    const slug = createFilePath({ node, getNode, trailingSlash: true})
 
     createNodeField({
       node,
