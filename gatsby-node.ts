@@ -53,7 +53,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
       const sourceInstanceName = node.parent.sourceInstanceName
       const pathPrefix = `/${sourceInstanceName}/`
       createPage({
-        path: decodeURIComponent(`${pathPrefix}${node.slug}/`),
+        path: decodeURIComponent(`${pathPrefix}${node.slug}`),
         component: path.resolve(`./src/layouts/EntryPageLayout.tsx`),
         context: {
           id: node.id,
@@ -65,7 +65,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
     fieldValue,
   }) => {
     createPage({
-      path: decodeURIComponent(`channel/${fieldValue}/`),
+      path: decodeURIComponent(`channel/${fieldValue}`),
       component: path.resolve(`./src/layouts/ChannelSearchPageLayout.tsx`),
       context: {
         channel: fieldValue,
@@ -80,7 +80,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
       fieldValue: category,
     }) => {
       createPage({
-        path: decodeURIComponent(`channel/${channel}/category/${category}/`),
+        path: decodeURIComponent(`channel/${channel}/category/${category}`),
         component: path.resolve(`./src/layouts/ChannelCategorySearchPageLayout.tsx`),
         context: {
           channel: channel,
@@ -93,7 +93,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
       fieldValue: tag,
     }) => {
       createPage({
-        path: decodeURIComponent(`channel/${channel}/tags/${tag}/`),
+        path: decodeURIComponent(`channel/${channel}/tags/${tag}`),
         component: path.resolve(`./src/layouts/ChannelTagSearchPageLayout.tsx`),
         context: {
           channel: channel,
@@ -107,7 +107,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
     fieldValue,
   }) => {
     createPage({
-      path: decodeURIComponent(`category/${fieldValue}/`),
+      path: decodeURIComponent(`category/${fieldValue}`),
       component: path.resolve(`./src/layouts/CategorySearchPageLayout.tsx`),
       context: {
         category: fieldValue,
@@ -119,7 +119,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
     fieldValue,
   }) => {
     createPage({
-      path: decodeURIComponent(`tags/${fieldValue}/`),
+      path: decodeURIComponent(`tags/${fieldValue}`),
       component: path.resolve(`./src/layouts/TagSearchPageLayout.tsx`),
       context: {
         tag: fieldValue,
