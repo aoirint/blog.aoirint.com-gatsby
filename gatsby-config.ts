@@ -161,7 +161,6 @@ const config: GatsbyConfig = {
     siteUrl: "https://blog.aoirint.com",
     title: "Eyamigusa",
   },
-  trailingSlash: 'always',
   plugins: [
     "gatsby-plugin-sass",
     "gatsby-plugin-image",
