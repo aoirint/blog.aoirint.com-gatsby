@@ -26,7 +26,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
   const { createPage } = actions
 
   const result = await graphql(`
-    query {
+    query GetCreatePagesPosts {
       posts: allMdx(filter: {fields: {draft: {eq: false}}}) {
         edges {
           node {
