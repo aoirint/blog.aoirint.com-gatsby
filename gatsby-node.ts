@@ -39,6 +39,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
                 sourceInstanceName
               }
             }
+            internal {
+              contentFilePath
+            }
           }
         }
         channels: group(field: {frontmatter: {channel: SELECT}}) {
@@ -64,10 +67,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
     .forEach(({ node }, index) => {
       const sourceInstanceName = node.parent.sourceInstanceName
       const pathPrefix = `/${sourceInstanceName}/`
+      console.log(`sourceInstanceName: ${sourceInstanceName}, slug: ${node.fields.slug}`)
 
       createPage({
         path: decodeURIComponent(`${pathPrefix}${node.fields.slug}`),
-        component: path.resolve(`./src/layouts/EntryPageLayout.tsx`),
+        component: path.resolve(`./src/layouts/EntryPageLayout.tsx`) + `?__contentFilePath=${node.internal.contentFilePath}`,
         context: {
           id: node.id,
         },
