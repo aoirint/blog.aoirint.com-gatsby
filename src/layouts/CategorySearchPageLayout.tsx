@@ -7,12 +7,9 @@ import {
   Navbar,
 } from '../components'
 
-import {
-  GetCategorySearchQuery
-} from '../gatsby-types'
 import PostListItem from '../components/PostListItem'
 
-const CategorySearchPageLayout: React.FC<PageProps<GetCategorySearchQuery>> = ({
+const CategorySearchPageLayout: React.FC<PageProps<Queries.GetCategorySearchQuery>> = ({
   pageContext,
   data,
 }) => {

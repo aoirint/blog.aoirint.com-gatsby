@@ -7,12 +7,9 @@ import {
   Navbar,
 } from '../components'
 
-import {
-  GetChannelTagSearchQuery
-} from '../gatsby-types'
 import PostListItem from '../components/PostListItem'
 
-const ChannelTagSearchPageLayout: React.FC<PageProps<GetChannelTagSearchQuery>> = ({
+const ChannelTagSearchPageLayout: React.FC<PageProps<Queries.GetChannelTagSearchQuery>> = ({
   pageContext,
   data,
 }) => {
