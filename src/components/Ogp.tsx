@@ -9,23 +9,23 @@ import React from "react"
 import { Helmet } from "react-helmet"
 
 export interface Frontmatter {
-    title: string
-    description?: string
-    date?: string
-    updated?: string
-    category?: string
-    tags?: string[]
+    title: string | null
+    description?: string | null
+    date: string | null
+    updated: string | null
+    category: string | null
+    tags: readonly (string | null)[] | null
 }
 
 export interface Fields {
-  slug?: string
+  slug: string | null
 }
 
 export interface Post {
   id: string
-  fields?: Fields
-  excerpt?: string
-  frontmatter?: Frontmatter
+  fields: Fields | null
+  excerpt: string | null
+  frontmatter: Frontmatter | null
 }
 
 export interface OgpProps {

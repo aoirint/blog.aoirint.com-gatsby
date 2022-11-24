@@ -18,19 +18,11 @@ import {
   MDXProvider,
 } from '@mdx-js/react'
 import {
-  MDXRenderer,
-  MDXRendererProps,
-} from 'gatsby-plugin-mdx'
-import {
   graphql,
   Link,
   PageProps,
 } from 'gatsby'
 import dayjs from 'dayjs'
-
-import {
-  GetMdxQuery,
-} from '../gatsby-types'
 
 import {
   Navbar,
@@ -39,7 +31,7 @@ import {
 import icon from '../images/icon.png'
 import Ogp from '../components/Ogp'
 
-const CodeBlock: React.FC<MDXRendererProps> = (props) => {
+const CodeBlock: React.FC = (props) => {
   const codeProps = props.children.props
   const codeString = codeProps.children.trim()
   const language = /language-(\w+)/.exec(codeProps.className)?.[1]
@@ -90,14 +82,12 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({
   )
 }
 
-const EntryPageLayout: React.FC<PageProps<GetMdxQuery>> = ({
-  data,
-  ...props
+const EntryPageLayout: React.FC<PageProps<Queries.GetEntryPageQuery>> = ({
+  data: { mdx },
+  children,
 }) => {
-  const mdx = data.mdx
-  const frontmatter = mdx.frontmatter
-  const rawBody = mdx.body
-  const tableOfContents = mdx.tableOfContents
+  const frontmatter = mdx?.frontmatter
+  const tableOfContents = mdx?.tableOfContents
 
   const date = frontmatter?.date != null ? dayjs(frontmatter?.date).format('YYYY-MM-DD') : ''
   const updated = frontmatter?.updated != null ? dayjs(frontmatter?.updated).format('YYYY-MM-DD') : ''
@@ -105,7 +95,7 @@ const EntryPageLayout: React.FC<PageProps<GetMdxQuery>> = ({
   return (
     <>
       <Helmet>
-        <title>{frontmatter.title} · えやみぐさ</title>
+        <title>{frontmatter?.title} · えやみぐさ</title>
         {frontmatter?.noindex ? (
           <>
           <meta name="robots" content="noindex" />
@@ -113,7 +103,9 @@ const EntryPageLayout: React.FC<PageProps<GetMdxQuery>> = ({
           </>
         ) : ''}
       </Helmet>
-      <Ogp post={mdx} />
+      {mdx != null ?
+        <Ogp post={mdx} />
+      : ''}
       <Navbar />
       <div className='section'>
         <main className='container'>
@@ -167,9 +159,11 @@ const EntryPageLayout: React.FC<PageProps<GetMdxQuery>> = ({
           <hr className='my-2' />
           <div className='mt-2'>
             <nav className='is-hidden-desktop menu'>
-              <TableOfContents
-                items={tableOfContents.items}
-              />
+              {tableOfContents != null ? 
+                <TableOfContents
+                  items={tableOfContents.items}
+                />
+              : ''}
             </nav>
             <div className='is-flex-desktop mt-4'>
               <article className='content is-rest-w300-desktop' data-label='article'>
@@ -178,11 +172,7 @@ const EntryPageLayout: React.FC<PageProps<GetMdxQuery>> = ({
                     pre: CodeBlock,
                   }}
                 >
-                  <MDXRenderer
-                    frontmatter={frontmatter}
-                  >
-                    {rawBody}
-                  </MDXRenderer>
+                  {children}
                 </MDXProvider>
               </article>
               <nav className='is-hidden-touch is-w300-desktop menu' style={{
@@ -191,9 +181,11 @@ const EntryPageLayout: React.FC<PageProps<GetMdxQuery>> = ({
                 maxHeight: 'calc(100vh - 64px)',
                 overflowY: 'auto',
               }}>
-                <TableOfContents
-                  items={tableOfContents.items}
-                />
+                {tableOfContents != null ? 
+                  <TableOfContents
+                    items={tableOfContents.items}
+                  />
+                : ''}
               </nav>
             </div>
           </div>
@@ -204,7 +196,7 @@ const EntryPageLayout: React.FC<PageProps<GetMdxQuery>> = ({
 }
 
 export const pageQuery = graphql`
-  query GetMdx(
+  query GetEntryPage(
     $id: String
   ) {
     mdx(
@@ -216,7 +208,6 @@ export const pageQuery = graphql`
       fields {
         slug
       }
-      body
       excerpt
       tableOfContents
       frontmatter {
