@@ -7,12 +7,9 @@ import {
   Navbar,
 } from '../components'
 
-import {
-  GetCategorySearchQuery
-} from '../../generated/graphql-types'
 import PostListItem from '../components/PostListItem'
 
-const CategorySearchPageLayout: React.FC<PageProps<GetCategorySearchQuery>> = ({
+const CategorySearchPageLayout: React.FC<PageProps<Queries.GetCategorySearchQuery>> = ({
   pageContext,
   data,
 }) => {
@@ -61,7 +58,9 @@ export const pageQuery = graphql`
       edges {
         node {
           id
-          slug
+          fields {
+            slug
+          }
           parent {
             ... on File {
               sourceInstanceName

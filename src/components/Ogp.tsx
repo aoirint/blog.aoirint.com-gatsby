@@ -9,19 +9,23 @@ import React from "react"
 import { Helmet } from "react-helmet"
 
 export interface Frontmatter {
-    title: string
-    description?: string
-    date?: string
-    updated?: string
-    category?: string
-    tags?: string[]
+    title: string | null
+    description?: string | null
+    date: string | null
+    updated: string | null
+    category: string | null
+    tags: readonly (string | null)[] | null
+}
+
+export interface Fields {
+  slug: string | null
 }
 
 export interface Post {
   id: string
-  slug?: string
-  excerpt?: string
-  frontmatter?: Frontmatter
+  fields: Fields | null
+  excerpt: string | null
+  frontmatter: Frontmatter | null
 }
 
 export interface OgpProps {
@@ -46,7 +50,7 @@ const Ogp: React.FC<OgpProps> = ({
   
     return (
         <Helmet>
-            <meta property="og:url" content={`https://blog.aoirint.com/entry/${post.slug}`} />
+            <meta property="og:url" content={`https://blog.aoirint.com/entry/${post.fields.slug}`} />
             <meta property="og:locale" content="ja-JP" />
             <meta property="og:type" content="article" />
             <meta property="og:title" content={`${post.frontmatter?.title} · えやみぐさ`} />

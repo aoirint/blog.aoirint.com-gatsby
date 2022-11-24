@@ -1,4 +1,5 @@
 import type { GatsbyNode } from 'gatsby'
+import { createFilePath } from 'gatsby-source-filesystem'
 import path from 'path'
 
 import dayjs from 'dayjs'
@@ -7,35 +8,49 @@ import timezone from 'dayjs/plugin/timezone'
 dayjs.extend(utc)
 dayjs.extend(timezone)
 
+export const onCreateNode: GatsbyNode['onCreateNode'] = async ({ node, actions, getNode }) => {
+  const { createNodeField } = actions
+  if (node.internal.type === 'Mdx') {
+    const slugWithLeadingSlash = createFilePath({ node, getNode, trailingSlash: true })
+    const slug = slugWithLeadingSlash.substring(1) // /path/to/ -> path/to/
+
+    createNodeField({
+      node,
+      name: 'slug',
+      value: slug
+    })
+  }
+}
+
 export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
   const result = await graphql(`
-    query {
-      posts: allMdx(
-        filter: {fields: {draft: {eq: false}}}
-      ) {
+    query GetCreatePagesPosts {
+      posts: allMdx(filter: {fields: {draft: {eq: false}}}) {
         edges {
           node {
             id
-            slug
+            fields {
+              slug
+            }
             parent {
               ... on File {
                 sourceInstanceName
               }
             }
+            internal {
+              contentFilePath
+            }
           }
         }
-
-        channels: group(field: frontmatter___channel) {
+        channels: group(field: {frontmatter: {channel: SELECT}}) {
           fieldValue
         }
-
-        categories: group(field: frontmatter___category) {
+        categories: group(field: {frontmatter: {category: SELECT}}) {
           fieldValue
         }
-
-        tags: group(field: frontmatter___tags) {
+        tags: group(field: {frontmatter: {tags: SELECT}}) {
           fieldValue
         }
       }
@@ -52,9 +67,10 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
     .forEach(({ node }, index) => {
       const sourceInstanceName = node.parent.sourceInstanceName
       const pathPrefix = `/${sourceInstanceName}/`
+
       createPage({
-        path: decodeURIComponent(`${pathPrefix}${node.slug}`),
-        component: path.resolve(`./src/layouts/EntryPageLayout.tsx`),
+        path: decodeURIComponent(`${pathPrefix}${node.fields.slug}`),
+        component: path.resolve(`./src/layouts/EntryPageLayout.tsx`) + `?__contentFilePath=${node.internal.contentFilePath}`,
         context: {
           id: node.id,
         },

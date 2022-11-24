@@ -7,14 +7,10 @@ import {
   Navbar,
 } from '../components'
 
-import {
-  GetChannelSearchQuery
-} from '../../generated/graphql-types'
-
 import PostListItem from '../components/PostListItem'
 import { ChannelInfos } from '../data'
 
-const ChannelSearchPageLayout: React.FC<PageProps<GetChannelSearchQuery>> = ({
+const ChannelSearchPageLayout: React.FC<PageProps<Queries.GetChannelSearchQuery>> = ({
   pageContext,
   data,
 }) => {
@@ -106,15 +102,16 @@ export const pageQuery = graphql`
         fields: {draft: {eq: false}}
       }
       sort: {
-        fields: [frontmatter___lastModified]
-        order: DESC
+        frontmatter: {lastModified: DESC}
       }
       limit: 10
     ) {
       edges {
         node {
           id
-          slug
+          fields {
+            slug
+          }
           parent {
             ... on File {
               sourceInstanceName
@@ -131,21 +128,21 @@ export const pageQuery = graphql`
         }
       }
     }
-
     posts: allMdx(
       filter: {
         frontmatter: {channel: {eq: $channel}}
         fields: {draft: {eq: false}}
       }
       sort: {
-        fields: [frontmatter___lastModified]
-        order: DESC
+        frontmatter: {lastModified: DESC}
       }
     ) {
       edges {
         node {
           id
-          slug
+          fields {
+            slug
+          }
           parent {
             ... on File {
               sourceInstanceName
@@ -161,13 +158,14 @@ export const pageQuery = graphql`
           }
         }
       }
-
-      categories: group(field: frontmatter___category) {
+      categories: group(field: {frontmatter: {category: SELECT}}) {
         fieldValue
         edges {
           node {
             id
-            slug
+            fields {
+              slug
+            }
             parent {
               ... on File {
                 sourceInstanceName

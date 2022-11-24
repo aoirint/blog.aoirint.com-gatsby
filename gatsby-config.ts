@@ -2,9 +2,6 @@ import type { GatsbyConfig } from 'gatsby'
 import fs from 'fs'
 import dayjs from 'dayjs'
 
-import remarkMath from 'remark-math'
-import rehypeKatex from 'rehype-katex'
-
 import { ChannelInfos } from './src/data'
 
 const commonFeedNodeSerialzier = (site, node) => {
@@ -15,11 +12,11 @@ const commonFeedNodeSerialzier = (site, node) => {
   return Object.assign({}, node.frontmatter, {
     description: node.excerpt,
     date: node.frontmatter.date,
-    url: site.siteMetadata.siteUrl + pathPrefix + node.slug,
-    guid: site.siteMetadata.siteUrl + pathPrefix + node.slug,
+    url: site.siteMetadata.siteUrl + pathPrefix + node.fields.slug,
+    guid: site.siteMetadata.siteUrl + pathPrefix + node.fields.slug,
     custom_elements: [
       {
-        "content:encoded": node.html,
+        "content:encoded": node.excerpt, // Gatsby 5 removed node.html: https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/#v3-to-v4-breaking-changes
       },
       node.frontmatter.updated ? {
         "atom:updated": dayjs(node.frontmatter.updated).toString(),
@@ -42,16 +39,17 @@ const articleFeeds = {
       .map(node => commonFeedNodeSerialzier(site, node))
   ),
   query: `
-    {
+    query GetArticleFeedPosts {
       allMdx(
         filter: {fields: {draft: {eq: false}}}
-        sort: { order: DESC, fields: [frontmatter___lastModified] }
+        sort: {frontmatter: {lastModified: DESC}}
         limit: 10
       ) {
         nodes {
           excerpt
-          html
-          slug
+          fields {
+            slug
+          }
           frontmatter {
             channel
             title
@@ -78,17 +76,19 @@ const allFeed = {
       .map(node => commonFeedNodeSerialzier(site, node))
   ),
   query: `
-    {
+    query GetAllFeedPosts {
       allMdx(
         filter: {fields: {draft: {eq: false}}}
-        sort: { order: DESC, fields: [frontmatter___lastModified] }
+        sort: {frontmatter: {lastModified: DESC}}
         limit: 10
       ) {
         nodes {
           excerpt
-          html
-          slug
+          fields {
+            slug
+          }
           frontmatter {
+            channel
             title
             date
             updated
@@ -114,16 +114,17 @@ const channelFeeds = ChannelInfos.map((channelInfo) => ({
       .map(node => commonFeedNodeSerialzier(site, node))
   ),
   query: `
-    {
+    query GetChannelFeedPosts {
       allMdx(
         filter: {fields: {draft: {eq: false}}}
-        sort: { order: DESC, fields: [frontmatter___lastModified] }
+        sort: {frontmatter: {lastModified: DESC}}
         limit: 10
       ) {
         nodes {
           excerpt
-          html
-          slug
+          fields {
+            slug
+          }
           frontmatter {
             channel
             title
@@ -161,6 +162,7 @@ const config: GatsbyConfig = {
     siteUrl: "https://blog.aoirint.com",
     title: "Eyamigusa",
   },
+  graphqlTypegen: true,
   plugins: [
     "gatsby-plugin-sass",
     "gatsby-plugin-image",
@@ -203,12 +205,12 @@ const config: GatsbyConfig = {
             },
           },
           "gatsby-remark-copy-linked-files",
-        ],
-        remarkPlugins: [
-          remarkMath,
-        ],
-        rehypePlugins: [
-          rehypeKatex,
+          {
+            resolve: "gatsby-remark-katex",
+            options: {
+              strict: `ignore`,
+            },
+          },
         ],
       },
     },
@@ -262,12 +264,6 @@ const config: GatsbyConfig = {
         "gatsby-plugin-twitter",
       ]
     )),
-    {
-      resolve: "gatsby-plugin-graphql-codegen",
-      options: {
-        fileName: "generated/graphql-types.ts",
-      },
-    },
     {
       resolve: `gatsby-plugin-feed`,
       options: {

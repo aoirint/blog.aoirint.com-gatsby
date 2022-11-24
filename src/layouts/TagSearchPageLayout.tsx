@@ -1,14 +1,11 @@
 import React from 'react'
 import { graphql, PageProps } from "gatsby"
 
-import {
-    GetTagSearchQuery
-} from '../../generated/graphql-types'
 import { Helmet } from 'react-helmet'
 import { Navbar } from '../components'
 import PostListItem from '../components/PostListItem'
 
-const TagSearchPageLayout: React.FC<PageProps<GetTagSearchQuery>> = ({
+const TagSearchPageLayout: React.FC<PageProps<Queries.GetTagSearchQuery>> = ({
     pageContext,
     data,
 }) => {
@@ -57,7 +54,9 @@ export const pageQuery = graphql`
       edges {
         node {
           id
-          slug
+          fields {
+            slug
+          }
           parent {
             ... on File {
               sourceInstanceName

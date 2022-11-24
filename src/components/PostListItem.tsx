@@ -15,9 +15,13 @@ export interface Frontmatter {
   tags?: string[]
 }
 
+export interface Fields {
+  slug?: string
+}
+
 export interface Post {
   id: string
-  slug?: string
+  fields?: Fields
   parent?: {} | Parent
   frontmatter?: Frontmatter
 }
@@ -28,7 +32,7 @@ export interface PostListItemProps {
 
 const PostListItem: React.FC<PostListItemProps> = ({
   post: {
-    slug,
+    fields,
     parent,
     frontmatter,
   },
@@ -42,7 +46,7 @@ const PostListItem: React.FC<PostListItemProps> = ({
   return (
     <div className='mb-2'>
       <div className=''>
-        <Link to={`${pathPrefix}${slug}`} data-label='title'>
+        <Link to={`${pathPrefix}${fields.slug}`} data-label='title'>
           {frontmatter?.title ? frontmatter.title : 'No title'}
         </Link>
         {date || updated ? (

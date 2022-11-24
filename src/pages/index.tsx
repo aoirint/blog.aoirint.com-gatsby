@@ -14,7 +14,7 @@ import icon from '../images/icon.png'
 import { Navbar } from '../components'
 import { ChannelInfos } from '../data'
 
-import { GetPostsQuery } from '../../generated/graphql-types'
+import { GetPostsQuery } from '../gatsby-types'
 import PostListItem from "../components/PostListItem"
 
 // markup
@@ -87,14 +87,15 @@ export const pageQuery = graphql`
         fields: {draft: {eq: false}}
       }
       sort: {
-        fields: [frontmatter___lastModified]
-        order: DESC
+        frontmatter: {lastModified: DESC}
       }
     ) {
       edges {
         node {
           id
-          slug
+          fields {
+            slug
+          }
           parent {
             ... on File {
               sourceInstanceName
@@ -110,8 +111,7 @@ export const pageQuery = graphql`
           }
         }
       }
-
-      channels: group(field: frontmatter___channel) {
+      channels: group(field: {frontmatter: {channel: SELECT}}) {
         fieldValue
         totalCount
       }

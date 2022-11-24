@@ -7,12 +7,9 @@ import {
   Navbar,
 } from '../components'
 
-import {
-  GetChannelTagSearchQuery
-} from '../../generated/graphql-types'
 import PostListItem from '../components/PostListItem'
 
-const ChannelTagSearchPageLayout: React.FC<PageProps<GetChannelTagSearchQuery>> = ({
+const ChannelTagSearchPageLayout: React.FC<PageProps<Queries.GetChannelTagSearchQuery>> = ({
   pageContext,
   data,
 }) => {
@@ -64,14 +61,15 @@ export const pageQuery = graphql`
         fields: {draft: {eq: false}}
       }
       sort: {
-        fields: [frontmatter___lastModified]
-        order: DESC
+        frontmatter: {lastModified: DESC}
       }
     ) {
       edges {
         node {
           id
-          slug
+          fields {
+            slug
+          }
           parent {
             ... on File {
               sourceInstanceName
