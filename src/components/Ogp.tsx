@@ -17,9 +17,13 @@ export interface Frontmatter {
     tags?: string[]
 }
 
+export interface Fields {
+  slug?: string
+}
+
 export interface Post {
   id: string
-  slug?: string
+  fields?: Fields
   excerpt?: string
   frontmatter?: Frontmatter
 }
@@ -46,7 +50,7 @@ const Ogp: React.FC<OgpProps> = ({
   
     return (
         <Helmet>
-            <meta property="og:url" content={`https://blog.aoirint.com/entry/${post.slug}`} />
+            <meta property="og:url" content={`https://blog.aoirint.com/entry/${post.fields.slug}`} />
             <meta property="og:locale" content="ja-JP" />
             <meta property="og:type" content="article" />
             <meta property="og:title" content={`${post.frontmatter?.title} · えやみぐさ`} />

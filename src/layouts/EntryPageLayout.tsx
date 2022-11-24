@@ -131,9 +131,9 @@ const EntryPageLayout: React.FC<PageProps<GetMdxQuery>> = ({
                 ) : ''}
               </div>
               <div className='column m-0 p-0 is-size-7 has-text-right'>
-                <a href={`https://github.com/aoirint/blog.aoirint.com-contents/edit/main/${mdx.slug}index.md`} className='mx-1'>編集</a>
-                <a href={`https://github.com/aoirint/blog.aoirint.com-contents/tree/main/${mdx.slug}index.md`} className='mx-1'>ソース</a>
-                <a href={`https://github.com/aoirint/blog.aoirint.com-contents/commits/main/${mdx.slug}index.md`} className='mx-1'>履歴</a>
+                <a href={`https://github.com/aoirint/blog.aoirint.com-contents/edit/main/${mdx.fields.slug}index.md`} className='mx-1'>編集</a>
+                <a href={`https://github.com/aoirint/blog.aoirint.com-contents/tree/main/${mdx.fields.slug}index.md`} className='mx-1'>ソース</a>
+                <a href={`https://github.com/aoirint/blog.aoirint.com-contents/commits/main/${mdx.fields.slug}index.md`} className='mx-1'>履歴</a>
               </div>
             </div>
             <div className='is-size-7' data-label='tags'>
