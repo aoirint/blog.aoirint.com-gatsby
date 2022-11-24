@@ -67,7 +67,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
     .forEach(({ node }, index) => {
       const sourceInstanceName = node.parent.sourceInstanceName
       const pathPrefix = `/${sourceInstanceName}/`
-      console.log(`sourceInstanceName: ${sourceInstanceName}, slug: ${node.fields.slug}`)
 
       createPage({
         path: decodeURIComponent(`${pathPrefix}${node.fields.slug}`),
