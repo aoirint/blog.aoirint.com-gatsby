@@ -30,7 +30,7 @@ import dayjs from 'dayjs'
 
 import {
   GetMdxQuery,
-} from '../../generated/graphql-types'
+} from '../gatsby-types'
 
 import {
   Navbar,

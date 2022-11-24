@@ -9,7 +9,7 @@ import {
 
 import {
   GetChannelTagSearchQuery
-} from '../../generated/graphql-types'
+} from '../gatsby-types'
 import PostListItem from '../components/PostListItem'
 
 const ChannelTagSearchPageLayout: React.FC<PageProps<GetChannelTagSearchQuery>> = ({

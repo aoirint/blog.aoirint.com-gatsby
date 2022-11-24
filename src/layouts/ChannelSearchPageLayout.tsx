@@ -9,7 +9,7 @@ import {
 
 import {
   GetChannelSearchQuery
-} from '../../generated/graphql-types'
+} from '../gatsby-types'
 
 import PostListItem from '../components/PostListItem'
 import { ChannelInfos } from '../data'

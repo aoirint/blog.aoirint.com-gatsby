@@ -1,5 +1,5 @@
 /node_modules
 /.cache
 /public
-/generated
+/src/gatsby-types.d.ts
 /contents/

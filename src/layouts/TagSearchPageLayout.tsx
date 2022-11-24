@@ -3,7 +3,7 @@ import { graphql, PageProps } from "gatsby"
 
 import {
     GetTagSearchQuery
-} from '../../generated/graphql-types'
+} from '../gatsby-types'
 import { Helmet } from 'react-helmet'
 import { Navbar } from '../components'
 import PostListItem from '../components/PostListItem'

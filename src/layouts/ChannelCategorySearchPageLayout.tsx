@@ -9,7 +9,7 @@ import {
 
 import {
   GetChannelCategorySearchQuery
-} from '../../generated/graphql-types'
+} from '../gatsby-types'
 import PostListItem from '../components/PostListItem'
 
 const ChannelCategorySearchPageLayout: React.FC<PageProps<GetChannelCategorySearchQuery>> = ({

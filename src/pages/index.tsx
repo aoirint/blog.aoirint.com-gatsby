@@ -14,7 +14,7 @@ import icon from '../images/icon.png'
 import { Navbar } from '../components'
 import { ChannelInfos } from '../data'
 
-import { GetPostsQuery } from '../../generated/graphql-types'
+import { GetPostsQuery } from '../gatsby-types'
 import PostListItem from "../components/PostListItem"
 
 // markup

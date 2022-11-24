@@ -9,7 +9,7 @@ import {
 
 import {
   GetCategorySearchQuery
-} from '../../generated/graphql-types'
+} from '../gatsby-types'
 import PostListItem from '../components/PostListItem'
 
 const CategorySearchPageLayout: React.FC<PageProps<GetCategorySearchQuery>> = ({
