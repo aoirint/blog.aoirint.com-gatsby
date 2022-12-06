@@ -7,6 +7,13 @@ export const ChannelInfos = [
     'topPostCount': true,
   },
   {
+    'key': 'サービス運用',
+    'description': 'サービスの公開、更新、障害報告など',
+    'indexNoIndex': false,
+    'indexCategoryIndex': true,
+    'topPostCount': true,
+  },
+  {
     'key': '作業ログ',
     'description': 'スクラップ、下書き',
     'indexNoIndex': false,
