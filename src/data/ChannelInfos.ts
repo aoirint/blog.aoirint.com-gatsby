@@ -14,20 +14,6 @@ export const ChannelInfos = [
     'topPostCount': true,
   },
   {
-    'key': '作業ログ',
-    'description': 'スクラップ、下書き',
-    'indexNoIndex': false,
-    'indexCategoryIndex': false,
-    'topPostCount': true,
-  },
-  {
-    'key': 'レポート',
-    'description': '報告、アナウンス、近況、管理情報、リリース',
-    'indexNoIndex': false,
-    'indexCategoryIndex': false,
-    'topPostCount': true,
-  },
-  {
     'key': '雑記',
     'description': '個人的な記事、趣味',
     'indexNoIndex': true,
