@@ -14,7 +14,7 @@ export const ChannelInfos = [
     'topPostCount': true,
   },
   {
-    'key': '雑記',
+    'key': 'ダイアリー',
     'description': '個人的な記事、趣味',
     'indexNoIndex': true,
     'indexCategoryIndex': false,
