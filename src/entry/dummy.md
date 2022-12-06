@@ -1,6 +1,6 @@
 ---
 title: ダミー記事
-date: '2022-02-20 16:00:00'
+date: '2022-02-20T16:00:00+09:00'
 draft: true
 noindex: false
 channel: 技術ノート
