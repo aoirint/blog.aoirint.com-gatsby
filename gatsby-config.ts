@@ -212,6 +212,11 @@ const config: GatsbyConfig = {
             },
           },
         ],
+        mdxOptions: {
+          remarkPlugins: [
+            require("remark-gfm"),
+          ],
+        },
       },
     },
     "gatsby-plugin-sharp",
