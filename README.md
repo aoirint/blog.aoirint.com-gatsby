@@ -2,8 +2,8 @@
 
 ## Dependencies
 
-- Node 18
-- npm 8
+- Node 18 (>= 18.14.2)
+- npm 9
 
 ```shell
 npm ci
