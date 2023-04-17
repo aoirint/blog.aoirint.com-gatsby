@@ -153,6 +153,17 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       updated: String
       lastModified: String
     }
+    type ChannelInfo {
+      key: String
+      description: String
+      indexNoIndex: Boolean
+      indexCategoryIndex: Boolean
+      topPostCount: Boolean
+
+    }
+    type SiteSiteMetadata {
+      channelList: [ChannelInfo]
+    }
   `)
 }
 

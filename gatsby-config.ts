@@ -1,8 +1,14 @@
 import type { GatsbyConfig } from 'gatsby'
 import fs from 'fs'
+import path from 'path'
 import dayjs from 'dayjs'
 
-import { ChannelInfos } from './src/data'
+import { loadChannelInfoList } from './src/node_utility/ChannelInfo'
+
+const contentsDir = 'contents'
+
+const channelListFile = path.join(contentsDir, 'channels.yml')
+const channelList = loadChannelInfoList(channelListFile)
 
 const commonFeedNodeSerialzier = (site, node) => {
   const parent = node.parent
@@ -106,7 +112,7 @@ const allFeed = {
   title: "えやみぐさ All RSS Feed",
 }
 
-const channelFeeds = ChannelInfos.map((channelInfo) => ({
+const channelFeeds = channelList.map((channelInfo) => ({
   serialize: ({ query: { site, allMdx} }) => (
     allMdx.nodes
       .filter(node => commonFeedNodeFilter(site, node))
@@ -161,6 +167,7 @@ const config: GatsbyConfig = {
   siteMetadata: {
     siteUrl: "https://blog.aoirint.com",
     title: "Eyamigusa",
+    'channelList': channelList,
   },
   graphqlTypegen: true,
   plugins: [
