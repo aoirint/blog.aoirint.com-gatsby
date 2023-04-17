@@ -55,6 +55,7 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@types/js-yaml": "^4.0.5",
     "gh-pages": "^4.0.0"
   }
 }
