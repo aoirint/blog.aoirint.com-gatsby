@@ -12,7 +12,6 @@ import {
 import icon from '../images/icon.png'
 
 import { Navbar } from '../components'
-import { ChannelInfos } from '../data'
 
 import { GetPostsQuery } from '../gatsby-types'
 import PostListItem from "../components/PostListItem"
@@ -20,6 +19,10 @@ import PostListItem from "../components/PostListItem"
 // markup
 const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
   const data = props.data
+
+  const site = data?.site
+  const channelList = site?.siteMetadata?.channelList ?? []
+
   return (
     <>
       <Helmet>
@@ -51,7 +54,7 @@ const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
           </h2>
           <div className="content">
             <dl>
-              {ChannelInfos.map((channelInfo, index) => {
+              {channelList.map((channelInfo, index) => {
                 const channelData = data.posts.channels.find((channelData) => channelData.fieldValue === channelInfo.key)
                 return (
                   <>
@@ -82,6 +85,18 @@ const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
 
 export const pageQuery = graphql`
   query GetPosts {
+    site {
+      siteMetadata {
+        channelList {
+          key
+          description
+          indexNoIndex
+          indexCategoryIndex
+          topPostCount
+        }
+      }
+    }
+
     posts: allMdx(
       filter: {
         fields: {draft: {eq: false}}

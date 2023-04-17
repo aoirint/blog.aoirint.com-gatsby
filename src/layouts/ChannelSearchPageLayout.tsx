@@ -8,14 +8,16 @@ import {
 } from '../components'
 
 import PostListItem from '../components/PostListItem'
-import { ChannelInfos } from '../data'
 
 const ChannelSearchPageLayout: React.FC<PageProps<Queries.GetChannelSearchQuery>> = ({
   pageContext,
   data,
 }) => {
   const channel = 'channel' in pageContext ? String(pageContext['channel']) : ''
-  const channelInfo = ChannelInfos.filter((channeInfo) => channeInfo.key === channel)?.[0]
+
+  const site = data.site
+  const channelList = site?.siteMetadata?.channelList ?? []
+  const channelInfo = channelList.filter((channeInfo) => channeInfo?.key === channel)?.[0]
 
   return (
     <>
@@ -96,6 +98,18 @@ export const pageQuery = graphql`
   query GetChannelSearch(
     $channel: String!
   ) {
+    site {
+      siteMetadata {
+        channelList {
+          key
+          description
+          indexNoIndex
+          indexCategoryIndex
+          topPostCount
+        }
+      }
+    }
+
     recentPosts: allMdx(
       filter: {
         frontmatter: {channel: {eq: $channel}}
