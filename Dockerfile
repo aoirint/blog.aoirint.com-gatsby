@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1.4
-FROM node:18
+FROM node:20
 
 RUN <<EOF
   apt-get update
