@@ -2,7 +2,7 @@
 
 ## Dependencies
 
-- Node 18 (>= 18.14.2)
+- Node 20 (< 20.7.0)
 - npm 9
 
 ```shell
