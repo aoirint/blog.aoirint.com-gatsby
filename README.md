@@ -2,8 +2,8 @@
 
 ## Dependencies
 
-- Node 20 (< 20.7.0)
-- npm 9
+- Node 20 (>= 20.7.0)
+- npm 10
 
 ```shell
 npm ci
