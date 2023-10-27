@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE_NAME: ghcr.io/aoirint/blog.aoirint.com-gatsby2
+  IMAGE_NAME: ghcr.io/aoirint/aoirint-blog-gatsby2
   IMAGE_TAG: ${{ github.event.release.tag_name != '' && github.event.release.tag_name || 'latest' }}
 
 jobs:
@@ -55,7 +55,7 @@ jobs:
           script: |
             await github.rest.actions.createWorkflowDispatch({
               owner: 'aoirint',
-              repo: 'blog.aoirint.com-deploy',
+              repo: 'aoirint-blog-deploy',
               workflow_id: 'docker-deploy.yml',
               ref: 'main',
             })

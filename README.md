@@ -1,4 +1,4 @@
-# blog.aoirint.com-gatsby
+# aoirint-blog-gatsby2
 
 ## Dependencies
 
