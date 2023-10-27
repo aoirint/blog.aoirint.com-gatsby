@@ -16,7 +16,7 @@ Create `contents` directory on the repository root.
 Then add markdown files to it.
 
 ```shell
-git clone https://github.com/aoirint/blog.aoirint.com-contents.git contents
+git clone https://github.com/aoirint/aoirint-blog-contents.git contents
 ```
 
 ### Preview
