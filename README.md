@@ -13,7 +13,7 @@ npm ci
 ### Add articles from another repository
 
 Create `contents` directory on the repository root.
-Then add markdown files to it.
+Then add markdown files to the `contents/src` directory.
 
 ```shell
 git clone https://github.com/aoirint/aoirint-blog-contents.git contents
