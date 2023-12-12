@@ -151,12 +151,12 @@ const channelFeeds = channelList.map((channelInfo) => ({
   description: channelInfo.description,
 }))
 
-const contentsPlugin = fs.existsSync('./contents/') ? [
+const contentsPlugin = fs.existsSync(contentsDir) ? [
   {
     resolve: "gatsby-source-filesystem",
     options: {
       name: "entry",
-      path: "./contents/",
+      path: contentsDir,
       ignore: [`**/\.*`], // ignore files starting with a dot
     },
     __key: "entry",
