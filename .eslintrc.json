@@ -1,13 +1,6 @@
 {
-  "extends": [
-    "react-app",
-    "plugin:import/recommended",
-    "plugin:import/warnings",
-    "prettier"
-  ],
+  "extends": ["react-app", "plugin:import/recommended", "plugin:import/warnings", "prettier"],
   "rules": {
-    "no-anonymous-exports-page-templates": "warn",
-    "limited-exports-page-templates": "warn",
     "import/order": [
       "error",
       {
