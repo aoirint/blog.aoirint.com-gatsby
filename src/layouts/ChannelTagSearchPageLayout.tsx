@@ -4,7 +4,6 @@ import Helmet from 'react-helmet'
 
 import { Navbar } from '../components'
 import PostListItem from '../components/PostListItem'
-import icon from '../images/icon.png'
 
 const ChannelTagSearchPageLayout: React.FC<PageProps<Queries.GetChannelTagSearchQuery>> = ({
   pageContext,
