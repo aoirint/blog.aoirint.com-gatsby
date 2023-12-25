@@ -14,8 +14,8 @@ const Navbar: React.FC<{}> = () => {
           <div className='has-text-weight-bold ml-2'>えやみぐさ</div>
         </Link>
 
-        <a
-          role='button'
+        <button
+          type='button'
           className={`navbar-burger ${active ? 'is-active' : ''}`}
           aria-label='menu'
           aria-expanded='false'
@@ -27,7 +27,7 @@ const Navbar: React.FC<{}> = () => {
           <span aria-hidden='true'></span>
           <span aria-hidden='true'></span>
           <span aria-hidden='true'></span>
-        </a>
+        </button>
       </div>
 
       <div id='navbarBasicExample' className={`navbar-menu ${active ? 'is-active' : ''}`}>
