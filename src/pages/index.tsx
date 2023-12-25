@@ -30,7 +30,7 @@ const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
         <div className='container'>
           <div className='columns is-vcentered'>
             <div className='column is-narrow'>
-              <img src={icon} alt='Logo image' className='image is-64x64 mr-4' />
+              <img src={icon} alt='aoirint logo' className='image is-64x64 mr-4' />
             </div>
             <div className='column'>
               <h1 className='title is-2'>えやみぐさ</h1>

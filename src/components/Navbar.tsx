@@ -10,7 +10,7 @@ const Navbar: React.FC<{}> = () => {
     <nav className='navbar has-shadow' role='navigation' aria-label='main navigation'>
       <div className='navbar-brand'>
         <Link to='/' className='navbar-item'>
-          <img src={icon} alt='Logo image' width='28' height='28' />
+          <img src={icon} alt='aoirint icon' width='28' height='28' />
           <div className='has-text-weight-bold ml-2'>えやみぐさ</div>
         </Link>
 
