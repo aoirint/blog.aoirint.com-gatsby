@@ -1,11 +1,9 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import { graphql, PageProps } from "gatsby"
+import { graphql, PageProps } from 'gatsby'
 
 import icon from '../images/icon.png'
-import {
-  Navbar,
-} from '../components'
+import { Navbar } from '../components'
 
 import PostListItem from '../components/PostListItem'
 
@@ -23,26 +21,18 @@ const ChannelSearchPageLayout: React.FC<PageProps<Queries.GetChannelSearchQuery>
     <>
       <Helmet>
         <title>チャンネル: {channel} · えやみぐさ</title>
-        {channelInfo?.indexNoIndex ? (
-          <meta name="robots" content="noindex" />
-        ) : ''}
+        {channelInfo?.indexNoIndex ? <meta name='robots' content='noindex' /> : ''}
       </Helmet>
       <Navbar />
       <section className='section'>
         <div className='container'>
-          <h1 className='title is-4 mb-4'>
-            チャンネル: {channel}
-          </h1>
+          <h1 className='title is-4 mb-4'>チャンネル: {channel}</h1>
           <div className='content'>
-            <p>
-              {channelInfo?.description}
-            </p>
+            <p>{channelInfo?.description}</p>
           </div>
           {channelInfo?.indexCategoryIndex ? (
             <>
-              <h2 className='title is-5 mb-3'>
-                最近の投稿
-              </h2>
+              <h2 className='title is-5 mb-3'>最近の投稿</h2>
               <div className='mt-4 mb-5'>
                 {data.recentPosts.edges.map(({ node }) => (
                   <div key={node.id}>
@@ -51,9 +41,7 @@ const ChannelSearchPageLayout: React.FC<PageProps<Queries.GetChannelSearchQuery>
                   </div>
                 ))}
               </div>
-              <h2 className='title is-5 mb-3'>
-                カテゴリ一覧
-              </h2>
+              <h2 className='title is-5 mb-3'>カテゴリ一覧</h2>
               <div className='columns is-multiline'>
                 {data.posts.categories.map((category) => (
                   <div key={category.fieldValue} className='column is-one-quarter'>
@@ -95,9 +83,7 @@ const ChannelSearchPageLayout: React.FC<PageProps<Queries.GetChannelSearchQuery>
 }
 
 export const pageQuery = graphql`
-  query GetChannelSearch(
-    $channel: String!
-  ) {
+  query GetChannelSearch($channel: String!) {
     site {
       siteMetadata {
         channelList {
@@ -111,13 +97,8 @@ export const pageQuery = graphql`
     }
 
     recentPosts: allMdx(
-      filter: {
-        frontmatter: {channel: {eq: $channel}}
-        fields: {draft: {eq: false}}
-      }
-      sort: {
-        frontmatter: {lastModified: DESC}
-      }
+      filter: { frontmatter: { channel: { eq: $channel } }, fields: { draft: { eq: false } } }
+      sort: { frontmatter: { lastModified: DESC } }
       limit: 10
     ) {
       edges {
@@ -143,13 +124,8 @@ export const pageQuery = graphql`
       }
     }
     posts: allMdx(
-      filter: {
-        frontmatter: {channel: {eq: $channel}}
-        fields: {draft: {eq: false}}
-      }
-      sort: {
-        frontmatter: {lastModified: DESC}
-      }
+      filter: { frontmatter: { channel: { eq: $channel } }, fields: { draft: { eq: false } } }
+      sort: { frontmatter: { lastModified: DESC } }
     ) {
       edges {
         node {
@@ -172,7 +148,7 @@ export const pageQuery = graphql`
           }
         }
       }
-      categories: group(field: {frontmatter: {category: SELECT}}) {
+      categories: group(field: { frontmatter: { category: SELECT } }) {
         fieldValue
         edges {
           node {

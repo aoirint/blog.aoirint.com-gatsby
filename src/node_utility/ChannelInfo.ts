@@ -10,10 +10,10 @@ export const ChannelInfoSchema = z.object({
   topPostCount: z.boolean(),
 })
 
-export type ChannelInfo = z.infer<typeof ChannelInfoSchema>;
+export type ChannelInfo = z.infer<typeof ChannelInfoSchema>
 
 export function loadChannelInfoList(path: string): ChannelInfo[] {
-  if (! fs.existsSync(path)) {
+  if (!fs.existsSync(path)) {
     console.warn(`Not found channels.yml at ${path}. Empty channel list will be used.`)
     return []
   }

@@ -11,13 +11,17 @@ dayjs.extend(timezone)
 export const onCreateNode: GatsbyNode['onCreateNode'] = async ({ node, actions, getNode }) => {
   const { createNodeField } = actions
   if (node.internal.type === 'Mdx') {
-    const slugWithLeadingSlash = createFilePath({ node, getNode, trailingSlash: true })
+    const slugWithLeadingSlash = createFilePath({
+      node,
+      getNode,
+      trailingSlash: true,
+    })
     const slug = slugWithLeadingSlash.substring(1) // /path/to/ -> path/to/
 
     createNodeField({
       node,
       name: 'slug',
-      value: slug
+      value: slug,
     })
   }
 }
@@ -27,7 +31,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 
   const result = await graphql(`
     query GetCreatePagesPosts {
-      posts: allMdx(filter: {fields: {draft: {eq: false}}}) {
+      posts: allMdx(filter: { fields: { draft: { eq: false } } }) {
         edges {
           node {
             id
@@ -44,13 +48,13 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
             }
           }
         }
-        channels: group(field: {frontmatter: {channel: SELECT}}) {
+        channels: group(field: { frontmatter: { channel: SELECT } }) {
           fieldValue
         }
-        categories: group(field: {frontmatter: {category: SELECT}}) {
+        categories: group(field: { frontmatter: { category: SELECT } }) {
           fieldValue
         }
-        tags: group(field: {frontmatter: {tags: SELECT}}) {
+        tags: group(field: { frontmatter: { tags: SELECT } }) {
           fieldValue
         }
       }
@@ -70,16 +74,16 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
 
       createPage({
         path: decodeURIComponent(`${pathPrefix}${node.fields.slug}`),
-        component: path.resolve(`./src/layouts/EntryPageLayout.tsx`) + `?__contentFilePath=${node.internal.contentFilePath}`,
+        component:
+          path.resolve(`./src/layouts/EntryPageLayout.tsx`) +
+          `?__contentFilePath=${node.internal.contentFilePath}`,
         context: {
           id: node.id,
         },
       })
-  })
+    })
 
-  result.data.posts.channels.forEach(({
-    fieldValue,
-  }) => {
+  result.data.posts.channels.forEach(({ fieldValue }) => {
     createPage({
       path: decodeURIComponent(`channel/${fieldValue}`),
       component: path.resolve(`./src/layouts/ChannelSearchPageLayout.tsx`),
@@ -89,12 +93,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
     })
   })
 
-  result.data.posts.channels.forEach(({
-    fieldValue: channel,
-  }) => {
-    result.data.posts.categories.forEach(({
-      fieldValue: category,
-    }) => {
+  result.data.posts.channels.forEach(({ fieldValue: channel }) => {
+    result.data.posts.categories.forEach(({ fieldValue: category }) => {
       createPage({
         path: decodeURIComponent(`channel/${channel}/category/${category}`),
         component: path.resolve(`./src/layouts/ChannelCategorySearchPageLayout.tsx`),
@@ -105,9 +105,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
       })
     })
 
-    result.data.posts.tags.forEach(({
-      fieldValue: tag,
-    }) => {
+    result.data.posts.tags.forEach(({ fieldValue: tag }) => {
       createPage({
         path: decodeURIComponent(`channel/${channel}/tags/${tag}`),
         component: path.resolve(`./src/layouts/ChannelTagSearchPageLayout.tsx`),
@@ -119,9 +117,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
     })
   })
 
-  result.data.posts.categories.forEach(({
-    fieldValue,
-  }) => {
+  result.data.posts.categories.forEach(({ fieldValue }) => {
     createPage({
       path: decodeURIComponent(`category/${fieldValue}`),
       component: path.resolve(`./src/layouts/CategorySearchPageLayout.tsx`),
@@ -131,9 +127,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ graphql, actions,
     })
   })
 
-  result.data.posts.tags.forEach(({
-    fieldValue,
-  }) => {
+  result.data.posts.tags.forEach(({ fieldValue }) => {
     createPage({
       path: decodeURIComponent(`tags/${fieldValue}`),
       component: path.resolve(`./src/layouts/TagSearchPageLayout.tsx`),
@@ -172,17 +166,24 @@ export const createResolvers: GatsbyNode['createResolvers'] = ({ createResolvers
     MdxFrontmatter: {
       date: {
         type: 'String',
-        resolve: (source) => source.date ? dayjs(source.date).tz('Asia/Tokyo').toISOString() : null
+        resolve: (source) =>
+          source.date ? dayjs(source.date).tz('Asia/Tokyo').toISOString() : null,
       },
       updated: {
         type: 'String',
-        resolve: (source) => source.updated ? dayjs(source.updated).tz('Asia/Tokyo').toISOString() : null
+        resolve: (source) =>
+          source.updated ? dayjs(source.updated).tz('Asia/Tokyo').toISOString() : null,
       },
       lastModified: {
         type: 'String',
-        resolve: (source) => source.updated ? dayjs(source.updated).tz('Asia/Tokyo').toISOString() : (source.date ? dayjs(source.date).tz('Asia/Tokyo').toISOString() : null)
-      }
-    }
+        resolve: (source) =>
+          source.updated
+            ? dayjs(source.updated).tz('Asia/Tokyo').toISOString()
+            : source.date
+              ? dayjs(source.date).tz('Asia/Tokyo').toISOString()
+              : null,
+      },
+    },
   }
   createResolvers(resolvers)
 }

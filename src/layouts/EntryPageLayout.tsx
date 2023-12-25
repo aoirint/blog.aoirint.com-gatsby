@@ -10,23 +10,14 @@ import '../styles/main.scss'
 // })
 
 import '../components/PrismCustom'
-import Highlight, { defaultProps } from "prism-react-renderer"
-
+import Highlight, { defaultProps } from 'prism-react-renderer'
 
 import vsDark from 'prism-react-renderer/themes/vsDark'
-import {
-  MDXProvider,
-} from '@mdx-js/react'
-import {
-  graphql,
-  Link,
-  PageProps,
-} from 'gatsby'
+import { MDXProvider } from '@mdx-js/react'
+import { graphql, Link, PageProps } from 'gatsby'
 import dayjs from 'dayjs'
 
-import {
-  Navbar,
-} from '../components'
+import { Navbar } from '../components'
 
 import icon from '../images/icon.png'
 import Ogp from '../components/Ogp'
@@ -61,21 +52,13 @@ interface TableOfContentsProps {
   items: TableOfContentsItem[]
 }
 
-const TableOfContents: React.FC<TableOfContentsProps> = ({
-  items
-}) => {
+const TableOfContents: React.FC<TableOfContentsProps> = ({ items }) => {
   return (
     <ul className='menu-list' data-label='tableOfContents'>
       {items?.map((item, index) => (
         <li key={index} data-label='tableOfContentsItem'>
-          <Link to={item.url}>
-            {item.title}
-          </Link>
-          {item.items != null ? (
-            <TableOfContents
-              items={item.items}
-            />
-          ) : ''}
+          <Link to={item.url}>{item.title}</Link>
+          {item.items != null ? <TableOfContents items={item.items} /> : ''}
         </li>
       ))}
     </ul>
@@ -90,7 +73,8 @@ const EntryPageLayout: React.FC<PageProps<Queries.GetEntryPageQuery>> = ({
   const tableOfContents = mdx?.tableOfContents
 
   const date = frontmatter?.date != null ? dayjs(frontmatter?.date).format('YYYY-MM-DD') : ''
-  const updated = frontmatter?.updated != null ? dayjs(frontmatter?.updated).format('YYYY-MM-DD') : ''
+  const updated =
+    frontmatter?.updated != null ? dayjs(frontmatter?.updated).format('YYYY-MM-DD') : ''
 
   return (
     <>
@@ -98,14 +82,14 @@ const EntryPageLayout: React.FC<PageProps<Queries.GetEntryPageQuery>> = ({
         <title>{frontmatter?.title} · えやみぐさ</title>
         {frontmatter?.noindex ? (
           <>
-          <meta name="robots" content="noindex" />
-          <meta name="referrer" content="no-referrer" />
+            <meta name='robots' content='noindex' />
+            <meta name='referrer' content='no-referrer' />
           </>
-        ) : ''}
+        ) : (
+          ''
+        )}
       </Helmet>
-      {mdx != null ?
-        <Ogp post={mdx} />
-      : ''}
+      {mdx != null ? <Ogp post={mdx} /> : ''}
       <Navbar />
       <div className='section'>
         <main className='container'>
@@ -113,44 +97,72 @@ const EntryPageLayout: React.FC<PageProps<Queries.GetEntryPageQuery>> = ({
             <div className='columns m-0'>
               <div className='column m-0 p-0 is-size-7' data-label='dateString'>
                 {date || updated ? (
-                    <>
-                      [
-                      <span data-label='dateCreated'>{date}</span>
-                      {date && updated ? ' / ' : ''}
-                      <span data-label='dateUpdated'>{updated}</span>
-                      ]
-                    </>
-                ) : ''}
+                  <>
+                    [<span data-label='dateCreated'>{date}</span>
+                    {date && updated ? ' / ' : ''}
+                    <span data-label='dateUpdated'>{updated}</span>]
+                  </>
+                ) : (
+                  ''
+                )}
               </div>
               <div className='column m-0 p-0 is-size-7 has-text-right'>
-                <a href={`https://github.com/aoirint/blog.aoirint.com-contents/edit/main/src/${mdx.fields.slug}index.md`} className='mx-1'>編集</a>
-                <a href={`https://github.com/aoirint/blog.aoirint.com-contents/tree/main/src/${mdx.fields.slug}index.md`} className='mx-1'>ソース</a>
-                <a href={`https://github.com/aoirint/blog.aoirint.com-contents/commits/main/src/${mdx.fields.slug}index.md`} className='mx-1'>履歴</a>
+                <a
+                  href={`https://github.com/aoirint/blog.aoirint.com-contents/edit/main/src/${mdx.fields.slug}index.md`}
+                  className='mx-1'
+                >
+                  編集
+                </a>
+                <a
+                  href={`https://github.com/aoirint/blog.aoirint.com-contents/tree/main/src/${mdx.fields.slug}index.md`}
+                  className='mx-1'
+                >
+                  ソース
+                </a>
+                <a
+                  href={`https://github.com/aoirint/blog.aoirint.com-contents/commits/main/src/${mdx.fields.slug}index.md`}
+                  className='mx-1'
+                >
+                  履歴
+                </a>
               </div>
             </div>
             <div className='is-size-7' data-label='tags'>
               {frontmatter?.channel != null ? (
                 <>
-                  <Link to={`/channel/${frontmatter?.channel}/`} className='mr-2' data-label='channel'>
+                  <Link
+                    to={`/channel/${frontmatter?.channel}/`}
+                    className='mr-2'
+                    data-label='channel'
+                  >
                     {frontmatter?.channel}
                   </Link>
-                  <span className='mr-2'>
-                    |
-                  </span>
+                  <span className='mr-2'>|</span>
                 </>
-              ) : ''}
+              ) : (
+                ''
+              )}
               {frontmatter?.category != null ? (
                 <>
-                  <Link to={`/channel/${frontmatter?.channel}/category/${frontmatter?.category}/`} className='mr-2' data-label='category'>
+                  <Link
+                    to={`/channel/${frontmatter?.channel}/category/${frontmatter?.category}/`}
+                    className='mr-2'
+                    data-label='category'
+                  >
                     {frontmatter?.category}
                   </Link>
-                  <span className='mr-2'>
-                    |
-                  </span>
+                  <span className='mr-2'>|</span>
                 </>
-              ) : ''}
+              ) : (
+                ''
+              )}
               {frontmatter?.tags?.map((tag) => (
-                <Link key={tag} to={`/channel/${frontmatter?.channel}/tags/${tag}/`} className='mr-2' data-label='tag'>
+                <Link
+                  key={tag}
+                  to={`/channel/${frontmatter?.channel}/tags/${tag}/`}
+                  className='mr-2'
+                  data-label='tag'
+                >
                   {tag}
                 </Link>
               ))}
@@ -159,11 +171,7 @@ const EntryPageLayout: React.FC<PageProps<Queries.GetEntryPageQuery>> = ({
           <hr className='my-2' />
           <div className='mt-2'>
             <nav className='is-hidden-desktop menu'>
-              {tableOfContents != null ? 
-                <TableOfContents
-                  items={tableOfContents.items}
-                />
-              : ''}
+              {tableOfContents != null ? <TableOfContents items={tableOfContents.items} /> : ''}
             </nav>
             <div className='is-flex-desktop mt-4'>
               <article className='content is-rest-w300-desktop' data-label='article'>
@@ -175,17 +183,16 @@ const EntryPageLayout: React.FC<PageProps<Queries.GetEntryPageQuery>> = ({
                   {children}
                 </MDXProvider>
               </article>
-              <nav className='is-hidden-touch is-w300-desktop menu' style={{
-                position: 'sticky',
-                top: '64px',
-                maxHeight: 'calc(100vh - 64px)',
-                overflowY: 'auto',
-              }}>
-                {tableOfContents != null ? 
-                  <TableOfContents
-                    items={tableOfContents.items}
-                  />
-                : ''}
+              <nav
+                className='is-hidden-touch is-w300-desktop menu'
+                style={{
+                  position: 'sticky',
+                  top: '64px',
+                  maxHeight: 'calc(100vh - 64px)',
+                  overflowY: 'auto',
+                }}
+              >
+                {tableOfContents != null ? <TableOfContents items={tableOfContents.items} /> : ''}
               </nav>
             </div>
           </div>
@@ -196,14 +203,8 @@ const EntryPageLayout: React.FC<PageProps<Queries.GetEntryPageQuery>> = ({
 }
 
 export const pageQuery = graphql`
-  query GetEntryPage(
-    $id: String
-  ) {
-    mdx(
-      id: {
-        eq: $id
-      }
-    ) {
+  query GetEntryPage($id: String) {
+    mdx(id: { eq: $id }) {
       id
       fields {
         slug

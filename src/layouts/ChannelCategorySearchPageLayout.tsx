@@ -1,38 +1,33 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import { graphql, PageProps } from "gatsby"
+import { graphql, PageProps } from 'gatsby'
 
 import icon from '../images/icon.png'
-import {
-  Navbar,
-} from '../components'
+import { Navbar } from '../components'
 
 import PostListItem from '../components/PostListItem'
 
-const ChannelCategorySearchPageLayout: React.FC<PageProps<Queries.GetChannelCategorySearchQuery>> = ({
-  pageContext,
-  data,
-}) => {
+const ChannelCategorySearchPageLayout: React.FC<
+  PageProps<Queries.GetChannelCategorySearchQuery>
+> = ({ pageContext, data }) => {
   const channel = 'channel' in pageContext ? String(pageContext['channel']) : ''
   const category = 'category' in pageContext ? String(pageContext['category']) : ''
 
   return (
     <>
       <Helmet>
-        <title>{channel}/category/{category} · えやみぐさ</title>
-        <meta name="robots" content="noindex" />
+        <title>
+          {channel}/category/{category} · えやみぐさ
+        </title>
+        <meta name='robots' content='noindex' />
       </Helmet>
       <Navbar />
       <section className='section'>
         <div className='container'>
           <h1 className='title is-6 mb-4'>
-            <a href={`/channel/${channel}/`}>
-              チャンネル: {channel}
-            </a>
+            <a href={`/channel/${channel}/`}>チャンネル: {channel}</a>
           </h1>
-          <h2 className='title is-4 mb-4'>
-            カテゴリ: {category}
-          </h2>
+          <h2 className='title is-4 mb-4'>カテゴリ: {category}</h2>
           <ul>
             {data.posts.edges.map(({ node }) => (
               <div key={node.id}>
@@ -48,21 +43,13 @@ const ChannelCategorySearchPageLayout: React.FC<PageProps<Queries.GetChannelCate
 }
 
 export const pageQuery = graphql`
-  query GetChannelCategorySearch(
-    $channel: String!
-    $category: String!
-  ) {
+  query GetChannelCategorySearch($channel: String!, $category: String!) {
     posts: allMdx(
       filter: {
-        frontmatter: {
-          channel: {eq: $channel}
-          category: {eq: $category}
-        }
-        fields: {draft: {eq: false}}
+        frontmatter: { channel: { eq: $channel }, category: { eq: $category } }
+        fields: { draft: { eq: false } }
       }
-      sort: {
-        frontmatter: {lastModified: DESC}
-      }
+      sort: { frontmatter: { lastModified: DESC } }
     ) {
       edges {
         node {

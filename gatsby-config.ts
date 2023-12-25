@@ -22,11 +22,13 @@ const commonFeedNodeSerialzier = (site, node) => {
     guid: site.siteMetadata.siteUrl + pathPrefix + node.fields.slug,
     custom_elements: [
       {
-        "content:encoded": node.excerpt, // Gatsby 5 removed node.html: https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/#v3-to-v4-breaking-changes
+        'content:encoded': node.excerpt, // Gatsby 5 removed node.html: https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/#v3-to-v4-breaking-changes
       },
-      node.frontmatter.updated ? {
-        "atom:updated": dayjs(node.frontmatter.updated).toString(),
-      } : {},
+      node.frontmatter.updated
+        ? {
+            'atom:updated': dayjs(node.frontmatter.updated).toString(),
+          }
+        : {},
     ],
   })
 }
@@ -38,12 +40,14 @@ const commonFeedNodeFilter = (site, node) => {
 }
 
 const articleFeeds = {
-  serialize: ({ query: { site, allMdx} }) => (
+  serialize: ({ query: { site, allMdx } }) =>
     allMdx.nodes
-      .filter(node => commonFeedNodeFilter(site, node))
-      .filter(node => node.frontmatter.channel === '技術ノート' || node.frontmatter.channel === 'レポート')
-      .map(node => commonFeedNodeSerialzier(site, node))
-  ),
+      .filter((node) => commonFeedNodeFilter(site, node))
+      .filter(
+        (node) =>
+          node.frontmatter.channel === '技術ノート' || node.frontmatter.channel === 'レポート',
+      )
+      .map((node) => commonFeedNodeSerialzier(site, node)),
   query: `
     query GetArticleFeedPosts {
       allMdx(
@@ -76,11 +80,10 @@ const articleFeeds = {
 }
 
 const allFeed = {
-  serialize: ({ query: { site, allMdx} }) => (
+  serialize: ({ query: { site, allMdx } }) =>
     allMdx.nodes
-      .filter(node => commonFeedNodeFilter(site, node))
-      .map(node => commonFeedNodeSerialzier(site, node))
-  ),
+      .filter((node) => commonFeedNodeFilter(site, node))
+      .map((node) => commonFeedNodeSerialzier(site, node)),
   query: `
     query GetAllFeedPosts {
       allMdx(
@@ -108,17 +111,16 @@ const allFeed = {
       }
     }
   `,
-  output: "/rss/all.xml",
-  title: "えやみぐさ All RSS Feed",
+  output: '/rss/all.xml',
+  title: 'えやみぐさ All RSS Feed',
 }
 
 const channelFeeds = channelList.map((channelInfo) => ({
-  serialize: ({ query: { site, allMdx} }) => (
+  serialize: ({ query: { site, allMdx } }) =>
     allMdx.nodes
-      .filter(node => commonFeedNodeFilter(site, node))
-      .filter(node => node.frontmatter.channel === channelInfo.key)
-      .map(node => commonFeedNodeSerialzier(site, node))
-  ),
+      .filter((node) => commonFeedNodeFilter(site, node))
+      .filter((node) => node.frontmatter.channel === channelInfo.key)
+      .map((node) => commonFeedNodeSerialzier(site, node)),
   query: `
     query GetChannelFeedPosts {
       allMdx(
@@ -151,32 +153,34 @@ const channelFeeds = channelList.map((channelInfo) => ({
   description: channelInfo.description,
 }))
 
-const contentsPlugin = fs.existsSync(contentsDir) ? [
-  {
-    resolve: "gatsby-source-filesystem",
-    options: {
-      name: "entry",
-      path: contentsDir,
-      ignore: [`**/\.*`], // ignore files starting with a dot
-    },
-    __key: "entry",
-  }
-] : []
+const contentsPlugin = fs.existsSync(contentsDir)
+  ? [
+      {
+        resolve: 'gatsby-source-filesystem',
+        options: {
+          name: 'entry',
+          path: contentsDir,
+          ignore: [`**/\.*`], // ignore files starting with a dot
+        },
+        __key: 'entry',
+      },
+    ]
+  : []
 
 const config: GatsbyConfig = {
   siteMetadata: {
-    siteUrl: "https://blog.aoirint.com",
-    title: "Eyamigusa",
-    'channelList': channelList,
+    siteUrl: 'https://blog.aoirint.com',
+    title: 'Eyamigusa',
+    channelList: channelList,
   },
   graphqlTypegen: true,
   plugins: [
-    "gatsby-plugin-sass",
-    "gatsby-plugin-image",
-    "gatsby-plugin-react-helmet",
-    "gatsby-plugin-sitemap",
+    'gatsby-plugin-sass',
+    'gatsby-plugin-image',
+    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-sitemap',
     {
-      resolve: "gatsby-plugin-manifest",
+      resolve: 'gatsby-plugin-manifest',
       options: {
         name: 'えやみぐさ',
         short_name: 'えやみぐさ',
@@ -184,67 +188,61 @@ const config: GatsbyConfig = {
         background_color: '#9079ad',
         theme_color: '#9079ad',
         display: 'standalone',
-        icon: "src/images/icon.png",
+        icon: 'src/images/icon.png',
       },
     },
     {
-      resolve: "gatsby-plugin-offline",
-      options: {
-      },
+      resolve: 'gatsby-plugin-offline',
+      options: {},
     },
     {
-      resolve: "gatsby-plugin-mdx",
+      resolve: 'gatsby-plugin-mdx',
       options: {
         // defaultLayouts: {
         //   default: require.resolve("./src/components/MdxLayout.tsx"),
         // },
-        extensions: [
-          '.mdx',
-          '.md',
-        ],
+        extensions: ['.mdx', '.md'],
         gatsbyRemarkPlugins: [
-          "gatsby-remark-autolink-headers",
+          'gatsby-remark-autolink-headers',
           // "gatsby-remark-relative-images",
           {
-            resolve: "gatsby-remark-images",
+            resolve: 'gatsby-remark-images',
             options: {
               maxWidth: 650,
             },
           },
-          "gatsby-remark-copy-linked-files",
+          'gatsby-remark-copy-linked-files',
           {
-            resolve: "gatsby-remark-katex",
+            resolve: 'gatsby-remark-katex',
             options: {
               strict: `ignore`,
             },
           },
         ],
         mdxOptions: {
-          remarkPlugins: [
-            require("remark-gfm"),
-          ],
+          remarkPlugins: [require('remark-gfm')],
         },
       },
     },
-    "gatsby-plugin-sharp",
-    "gatsby-transformer-sharp",
+    'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: "pages",
-        path: "./src/pages/",
+        name: 'pages',
+        path: './src/pages/',
         ignore: [`**/\.*`], // ignore files starting with a dot
       },
-      __key: "pages",
+      __key: 'pages',
     },
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: "entry",
-        path: "./src/entry/",
+        name: 'entry',
+        path: './src/entry/',
         ignore: [`**/\.*`], // ignore files starting with a dot
       },
-      __key: "entry",
+      __key: 'entry',
     },
     ...contentsPlugin,
     {
@@ -256,11 +254,9 @@ const config: GatsbyConfig = {
       },
     },
     {
-      resolve: "gatsby-plugin-google-gtag",
+      resolve: 'gatsby-plugin-google-gtag',
       options: {
-        trackingIds: [
-          "G-33TXF7WL2L",
-        ],
+        trackingIds: ['G-33TXF7WL2L'],
         pluginConfig: {
           head: true,
           respectDNT: true,
@@ -268,14 +264,7 @@ const config: GatsbyConfig = {
       },
     },
     // workaround: fail to auto reload if enabled
-    ...(process.env.NODE_ENV !== 'production' ? (
-      [
-      ]
-    ) : (
-      [
-        "gatsby-plugin-twitter",
-      ]
-    )),
+    ...(process.env.NODE_ENV !== 'production' ? [] : ['gatsby-plugin-twitter']),
     {
       resolve: `gatsby-plugin-feed`,
       options: {
@@ -291,11 +280,7 @@ const config: GatsbyConfig = {
             }
           }
         `,
-        feeds: [
-          articleFeeds,
-          allFeed,
-          ...channelFeeds,
-        ],
+        feeds: [articleFeeds, allFeed, ...channelFeeds],
       },
     },
   ],

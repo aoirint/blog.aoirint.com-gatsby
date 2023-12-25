@@ -30,18 +30,13 @@ export interface PostListItemProps {
   post: Post
 }
 
-const PostListItem: React.FC<PostListItemProps> = ({
-  post: {
-    fields,
-    parent,
-    frontmatter,
-  },
-}) => {
+const PostListItem: React.FC<PostListItemProps> = ({ post: { fields, parent, frontmatter } }) => {
   const sourceInstanceName = 'sourceInstanceName' in parent ? parent.sourceInstanceName : 'pages'
   const pathPrefix = sourceInstanceName !== 'pages' ? `/${sourceInstanceName}/` : '/'
 
   const date = frontmatter?.date != null ? dayjs(frontmatter?.date).format('YYYY-MM-DD') : ''
-  const updated = frontmatter?.updated != null ? dayjs(frontmatter?.updated).format('YYYY-MM-DD') : ''
+  const updated =
+    frontmatter?.updated != null ? dayjs(frontmatter?.updated).format('YYYY-MM-DD') : ''
 
   return (
     <div className='mb-2'>
@@ -51,36 +46,45 @@ const PostListItem: React.FC<PostListItemProps> = ({
         </Link>
         {date || updated ? (
           <div className='is-size-7' data-label='dateString'>
-            [
-            <span data-label='dateCreated'>{date}</span>
+            [<span data-label='dateCreated'>{date}</span>
             {date && updated ? ' / ' : ''}
-            <span data-label='dateUpdated'>{updated}</span>
-            ]
+            <span data-label='dateUpdated'>{updated}</span>]
           </div>
-        ) : ''}
+        ) : (
+          ''
+        )}
         <div className='is-size-7' data-label='tags'>
           {frontmatter?.channel != null ? (
             <>
               <Link to={`/channel/${frontmatter?.channel}/`} className='mr-2' data-label='channel'>
                 {frontmatter?.channel}
               </Link>
-              <span className='mr-2'>
-                |
-              </span>
+              <span className='mr-2'>|</span>
             </>
-          ) : ''}
+          ) : (
+            ''
+          )}
           {frontmatter?.category != null ? (
             <>
-              <Link to={`/channel/${frontmatter?.channel}/category/${frontmatter?.category}/`} className='mr-2' data-label='category'>
+              <Link
+                to={`/channel/${frontmatter?.channel}/category/${frontmatter?.category}/`}
+                className='mr-2'
+                data-label='category'
+              >
                 {frontmatter?.category}
               </Link>
-              <span className='mr-2'>
-                |
-              </span>
+              <span className='mr-2'>|</span>
             </>
-          ) : ''}
+          ) : (
+            ''
+          )}
           {frontmatter?.tags?.map((tag) => (
-            <Link key={tag} to={`/channel/${frontmatter?.channel}/tags/${tag}/`} className='mr-2' data-label='tag'>
+            <Link
+              key={tag}
+              to={`/channel/${frontmatter?.channel}/tags/${tag}/`}
+              className='mr-2'
+              data-label='tag'
+            >
               {tag}
             </Link>
           ))}

@@ -1,20 +1,17 @@
-import * as React from "react"
+import * as React from 'react'
 import Helmet from 'react-helmet'
 import '../styles/main.scss'
 
 import dayjs from 'dayjs'
 
-import {
-  graphql,
-  PageProps,
-} from 'gatsby'
+import { graphql, PageProps } from 'gatsby'
 
 import icon from '../images/icon.png'
 
 import { Navbar } from '../components'
 
 import { GetPostsQuery } from '../gatsby-types'
-import PostListItem from "../components/PostListItem"
+import PostListItem from '../components/PostListItem'
 
 // markup
 const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
@@ -27,41 +24,36 @@ const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
     <>
       <Helmet>
         <title>えやみぐさ</title>
-        <script async src="https://cse.google.com/cse.js?cx=4b57e8a4ef2a8c489"></script>
+        <script async src='https://cse.google.com/cse.js?cx=4b57e8a4ef2a8c489'></script>
       </Helmet>
       <Navbar />
       <section className='section'>
         <div className='container'>
           <div className='columns is-vcentered'>
             <div className='column is-narrow'>
-              <img src={icon} alt="Logo image" className='image is-64x64 mr-4' />
+              <img src={icon} alt='Logo image' className='image is-64x64 mr-4' />
             </div>
             <div className='column'>
-              <h1 className='title is-2'>
-                えやみぐさ
-              </h1>
-              <p className='subtitle is-5'>
-                技術ノートとか
-              </p>
+              <h1 className='title is-2'>えやみぐさ</h1>
+              <p className='subtitle is-5'>技術ノートとか</p>
             </div>
           </div>
-          <h2 className='title is-5 mb-3'>
-            Search
-          </h2>
-          <div className="gcse-search"></div>
-          <h2 className='title is-5 mb-3'>
-            チャンネル
-          </h2>
-          <div className="content">
+          <h2 className='title is-5 mb-3'>Search</h2>
+          <div className='gcse-search'></div>
+          <h2 className='title is-5 mb-3'>チャンネル</h2>
+          <div className='content'>
             <dl>
               {channelList.map((channelInfo, index) => {
-                const channelData = data.posts.channels.find((channelData) => channelData.fieldValue === channelInfo.key)
+                const channelData = data.posts.channels.find(
+                  (channelData) => channelData.fieldValue === channelInfo.key,
+                )
                 return (
                   <>
                     <dt className={index > 0 ? 'mt-4' : ''}>
                       {channelData?.totalCount > 0 ? (
                         <a href={`/channel/${channelInfo.key}/`}>
-                          {channelInfo.key} {channelInfo.topPostCount ? `(${channelData?.totalCount})` : ''}
+                          {channelInfo.key}{' '}
+                          {channelInfo.topPostCount ? `(${channelData?.totalCount})` : ''}
                         </a>
                       ) : (
                         <>
@@ -69,9 +61,7 @@ const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
                         </>
                       )}
                     </dt>
-                    <dd>
-                      {channelInfo.description}
-                    </dd>
+                    <dd>{channelInfo.description}</dd>
                   </>
                 )
               })}
@@ -98,12 +88,8 @@ export const pageQuery = graphql`
     }
 
     posts: allMdx(
-      filter: {
-        fields: {draft: {eq: false}}
-      }
-      sort: {
-        frontmatter: {lastModified: DESC}
-      }
+      filter: { fields: { draft: { eq: false } } }
+      sort: { frontmatter: { lastModified: DESC } }
     ) {
       edges {
         node {
@@ -126,7 +112,7 @@ export const pageQuery = graphql`
           }
         }
       }
-      channels: group(field: {frontmatter: {channel: SELECT}}) {
+      channels: group(field: { frontmatter: { channel: SELECT } }) {
         fieldValue
         totalCount
       }
