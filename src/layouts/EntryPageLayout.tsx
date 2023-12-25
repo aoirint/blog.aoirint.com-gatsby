@@ -1,21 +1,13 @@
-import React from 'react'
-import Helmet from 'react-helmet'
+import '../components/PrismCustom'
 import '../styles/main.scss'
 
-// import Prism from 'prismjs'
-// import 'prismjs/plugins/custom-class/prism-custom-class'
-// Prism.plugins.customClass.prefix('prism--')
-// Prism.plugins.customClass.map({
-//   number: 'prism--number',
-// })
-
-import '../components/PrismCustom'
-import Highlight, { defaultProps } from 'prism-react-renderer'
-
-import vsDark from 'prism-react-renderer/themes/vsDark'
 import { MDXProvider } from '@mdx-js/react'
-import { graphql, Link, PageProps } from 'gatsby'
 import dayjs from 'dayjs'
+import { graphql, Link, PageProps } from 'gatsby'
+import Highlight, { defaultProps } from 'prism-react-renderer'
+import vsDark from 'prism-react-renderer/themes/vsDark'
+import React from 'react'
+import Helmet from 'react-helmet'
 
 import { Navbar } from '../components'
 

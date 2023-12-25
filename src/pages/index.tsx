@@ -1,14 +1,10 @@
+import { graphql, PageProps } from 'gatsby'
 import * as React from 'react'
 import Helmet from 'react-helmet'
 import '../styles/main.scss'
 
-import dayjs from 'dayjs'
-
-import { graphql, PageProps } from 'gatsby'
-
 import { Navbar } from '../components'
 
-import PostListItem from '../components/PostListItem'
 import { GetPostsQuery } from '../gatsby-types'
 import icon from '../images/icon.png'
 
