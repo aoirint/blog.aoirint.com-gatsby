@@ -1,10 +1,10 @@
+import { Box, Container, Toolbar, CssBaseline } from '@mui/material'
 import { graphql, PageProps } from 'gatsby'
 import * as React from 'react'
 import Helmet from 'react-helmet'
 import '../styles/main.scss'
 
-import { Navbar } from '../components'
-
+import Navbar from '../components/nav_bar_mui'
 import { GetPostsQuery } from '../gatsby-types'
 import icon from '../images/icon.png'
 
@@ -21,7 +21,19 @@ const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {
         <title>えやみぐさ</title>
         <script async src='https://cse.google.com/cse.js?cx=4b57e8a4ef2a8c489'></script>
       </Helmet>
-      <Navbar />
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          width: '100%',
+        }}
+      >
+        <CssBaseline />
+        <Navbar />
+        <Container component='main' sx={{ m: 4, width: '100%' }}>
+          <Toolbar />
+        </Container>
+      </Box>
       <section className='section'>
         <div className='container'>
           <div className='columns is-vcentered'>
