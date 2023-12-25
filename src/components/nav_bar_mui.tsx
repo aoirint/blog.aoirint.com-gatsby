@@ -53,7 +53,7 @@ function NavBarLinkItem({ navItem }: { navItem: NavItem }): JSX.Element {
         key={navItem.text}
         href={navItem.href}
         rel={navItem.isMe ? 'me' : undefined}
-        LinkComponent={GatsbyLink}
+        LinkComponent={({ href, ...rest }) => <GatsbyLink to={href} {...rest} />}
         sx={{
           textTransform: 'none',
           color: '#fff',
@@ -72,7 +72,7 @@ function NavDrawerLinkItem({ navItem }: { navItem: NavItem }): JSX.Element {
         key={navItem.text}
         href={navItem.href}
         rel={navItem.isMe ? 'me' : undefined}
-        LinkComponent={GatsbyLink}
+        LinkComponent={({ href, ...rest }) => <GatsbyLink to={href} {...rest} />}
         sx={{ textAlign: 'center' }}
       >
         <ListItemText primary={navItem.text} />
