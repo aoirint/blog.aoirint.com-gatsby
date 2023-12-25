@@ -160,7 +160,7 @@ const contentsPlugin = fs.existsSync(contentsDir)
         options: {
           name: 'entry',
           path: contentsDir,
-          ignore: [`**/\.*`], // ignore files starting with a dot
+          ignore: [`**/.*`], // ignore files starting with a dot
         },
         __key: 'entry',
       },
@@ -231,7 +231,7 @@ const config: GatsbyConfig = {
       options: {
         name: 'pages',
         path: './src/pages/',
-        ignore: [`**/\.*`], // ignore files starting with a dot
+        ignore: [`**/.*`], // ignore files starting with a dot
       },
       __key: 'pages',
     },
@@ -240,7 +240,7 @@ const config: GatsbyConfig = {
       options: {
         name: 'entry',
         path: './src/entry/',
-        ignore: [`**/\.*`], // ignore files starting with a dot
+        ignore: [`**/.*`], // ignore files starting with a dot
       },
       __key: 'entry',
     },
