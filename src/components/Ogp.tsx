@@ -1,12 +1,12 @@
 import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'
-dayjs.extend(utc)
-dayjs.extend(timezone)
-dayjs.tz.setDefault('Asia/Tokyo')
+import utc from 'dayjs/plugin/utc'
 
 import React from 'react'
 import { Helmet } from 'react-helmet'
+dayjs.extend(utc)
+dayjs.extend(timezone)
+dayjs.tz.setDefault('Asia/Tokyo')
 
 export interface Frontmatter {
   title: string | null

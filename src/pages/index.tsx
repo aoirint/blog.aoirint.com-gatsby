@@ -6,12 +6,11 @@ import dayjs from 'dayjs'
 
 import { graphql, PageProps } from 'gatsby'
 
-import icon from '../images/icon.png'
-
 import { Navbar } from '../components'
 
-import { GetPostsQuery } from '../gatsby-types'
 import PostListItem from '../components/PostListItem'
+import { GetPostsQuery } from '../gatsby-types'
+import icon from '../images/icon.png'
 
 // markup
 const IndexPage: React.FC<PageProps<GetPostsQuery>> = (props) => {

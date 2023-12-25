@@ -1,7 +1,7 @@
-import type { GatsbyConfig } from 'gatsby'
 import fs from 'fs'
 import path from 'path'
 import dayjs from 'dayjs'
+import type { GatsbyConfig } from 'gatsby'
 
 import { loadChannelInfoList } from './src/node_utility/ChannelInfo'
 

@@ -1,10 +1,10 @@
-import type { GatsbyNode } from 'gatsby'
-import { createFilePath } from 'gatsby-source-filesystem'
 import path from 'path'
 
 import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'
+import utc from 'dayjs/plugin/utc'
+import type { GatsbyNode } from 'gatsby'
+import { createFilePath } from 'gatsby-source-filesystem'
 dayjs.extend(utc)
 dayjs.extend(timezone)
 

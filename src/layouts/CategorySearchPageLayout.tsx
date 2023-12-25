@@ -1,11 +1,10 @@
+import { graphql, PageProps } from 'gatsby'
 import React from 'react'
 import Helmet from 'react-helmet'
-import { graphql, PageProps } from 'gatsby'
 
-import icon from '../images/icon.png'
 import { Navbar } from '../components'
-
 import PostListItem from '../components/PostListItem'
+import icon from '../images/icon.png'
 
 const CategorySearchPageLayout: React.FC<PageProps<Queries.GetCategorySearchQuery>> = ({
   pageContext,

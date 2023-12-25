@@ -19,8 +19,8 @@ import dayjs from 'dayjs'
 
 import { Navbar } from '../components'
 
-import icon from '../images/icon.png'
 import Ogp from '../components/Ogp'
+import icon from '../images/icon.png'
 
 const CodeBlock: React.FC = (props) => {
   const codeProps = props.children.props

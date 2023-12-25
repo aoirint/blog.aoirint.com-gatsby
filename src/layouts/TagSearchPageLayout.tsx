@@ -1,5 +1,5 @@
-import React from 'react'
 import { graphql, PageProps } from 'gatsby'
+import React from 'react'
 
 import { Helmet } from 'react-helmet'
 import { Navbar } from '../components'
